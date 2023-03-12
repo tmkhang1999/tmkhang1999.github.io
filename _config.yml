@@ -1,0 +1,11 @@
+title: Khang Tran - Portfolio
+author: Khang Tran
+email: khangtm99@gmail.com
+description: Khang Tran - Portfolio; Python, Software Engineering, Machine Learning, AI, Data Science, Computer Vision, Web
+url: "https://tmkhang1999.github.io/"
+github_username:  tmkhang1999
+
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap

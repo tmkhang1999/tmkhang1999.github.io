@@ -1,0 +1,183 @@
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.pagination {
+  margin-bottom: 30px;
+}
+
+.navbar {
+    background-color:white;
+    height: 50pt;
+}
+.nav-item{
+  font-size: 14pt;
+}
+
+.card {
+  transition: all 0.3s;
+}
+.card:hover {
+  transform: scale(1.055);
+}
+
+.card-img-top {
+  width: 70px;
+  margin-top: 15%;
+  margin-bottom: 5%;
+}
+
+.blogs .card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
+}
+.blogs .card-body {
+  height: 120pt;
+  overflow: auto;
+}
+.blogs .card {
+  margin-bottom: 8%;
+}
+
+.pj .card-body{
+  height: 200pt;
+  overflow: auto;
+}
+
+.footer-bottom{
+  width: 100%;
+	padding: 25px 0;
+	text-align: center;
+  background-color: white;
+}
+
+.btn-linkedin {
+    background: #007bb6;
+    border-color: #007bb6;
+}
+
+.btn-github {
+    background: #23282D;
+    border-color: #23282D;
+}
+
+.btn-email {
+    background: #1DA1F2;
+    border-color: #1DA1F2;
+}
+
+.link_button {
+  text-align:center;
+  vertical-align: bottom;
+  position: flex;
+  bottom: 10pt;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+.link-style{
+  cursor: pointer;
+}
+
+.fabicon {
+  text-decoration: none;
+}
+.fabicon i {
+  transition: all 0.3s;
+}
+
+.fabicon:hover i {
+  transform: scale(1.2);
+  color: #007bb6;
+}
+
+.isotope-item {
+    z-index: 2;
+}
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+.isotope,
+.isotope .isotope-item {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    transition-property: height, width;
+}
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    transition-property: transform, opacity;
+}
+.img-des {
+  font-size: 10pt;
+  text-align: center;
+}
+.link-text {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.intro {
+  border-right: solid 3px black;
+  white-space: nowrap;
+  overflow: hidden;
+  color: black;
+  margin: 0 0;
+}
+
+.menu a {
+  font-size: x-large;
+  margin-right: 5px;
+  margin-left: 5px;
+  color:#081D2E;
+  text-decoration:none;
+}
+
+.menu a.current {
+    font-weight: bold;
+}
+
+.pj .link_button{
+  position: relative;
+  height: 30pt
+}
+
+/* Animation */
+.intro {
+  animation: animated-text 4s steps(29, end) 1s 1 normal both,
+             animated-cursor 600ms steps(29,end) infinite;
+}
+
+/* text animation */
+
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 350px;}
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor{
+  from{border-right-color: black;}
+  to{border-right-color: transparent;}
+}
+
