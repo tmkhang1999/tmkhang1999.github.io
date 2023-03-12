@@ -1,0 +1,16 @@
+current directory: /Users/lindachen/Documents/Side_Projects/lindachen.github.io/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+/Users/lindachen/.rvm/rubies/ruby-2.7.0/bin/ruby -I /Users/lindachen/.rvm/rubies/ruby-2.7.0/lib/ruby/2.7.0 -r ./siteconf20210718-89851-lmkeo4.rb extconf.rb
+creating Makefile
+
+current directory: /Users/lindachen/Documents/Side_Projects/lindachen.github.io/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+make "DESTDIR=" clean
+
+current directory: /Users/lindachen/Documents/Side_Projects/lindachen.github.io/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+make "DESTDIR="
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.bundle
+
+current directory: /Users/lindachen/Documents/Side_Projects/lindachen.github.io/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.6.0/ext/ruby_http_parser
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 ruby_http_parser.bundle ./.gem.20210718-89851-14k7dat
