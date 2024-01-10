@@ -9,6 +9,7 @@ Images from: [Unsplash](https://unsplash.com/)
 
 All static icons from: [Flaticon](https://www.flaticon.com/free-icon/)
 
+* <a href="https://www.flaticon.com/free-icons/vehicles" title="vehicles icons">Vehicles icons created by Flat Icons - Flaticon</a>
 * Khao manee cat icons created by <a href="https://www.flaticon.com/free-icons/khao-manee-cat" title="khao manee cat icons">MrHamster - Flaticon</a>
 * Flu icons created by <a href="https://www.flaticon.com/free-icons/flu" title="flu icons">flatart_icons - Flaticon</a>
 * Natural disaster icons created by <a href="https://www.flaticon.com/free-icons/natural-disaster" title="Natural disaster icons">Freepik - Flaticon</a>
