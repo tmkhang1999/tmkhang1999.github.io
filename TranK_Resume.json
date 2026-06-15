@@ -1,0 +1,308 @@
+{
+    "personal_information": {
+        "name": "MINH KHANG TRAN",
+        "address": "Paris, France",
+        "mobile": "+33 768453668",
+        "email": "khangtm99@gmail.com",
+        "links": {
+            "linkedin": "https://www.linkedin.com/in/khangtm99/",
+            "portfolio": "https://tmkhang1999.github.io/",
+            "github": "https://github.com/tmkhang1999"
+        }
+    },
+    "skills": {
+        "languages": [
+            "Python (primary)",
+            "Java",
+            "Go"
+        ],
+        "frameworks": [
+            "LangChain (RAG, CoT, MCP, Function Calling)",
+            "LangGraph",
+            "Tensorflow",
+            "PyTorch",
+            "Scikit-learn",
+            "Flask",
+            "FastAPI"
+        ],
+        "tools": [
+            "SQL (MySQL, PostgreSQL, MongoDB)",
+            "Kubernetes",
+            "Triton Server",
+            "MinIO",
+            "Git",
+            "Docker"
+        ],
+        "specialisation": [
+            "VLM",
+            "LLM",
+            "Diffusion",
+            "CNN",
+            "Transformers",
+            "VAE",
+            "GAN",
+            "Compression",
+            "Software Development"
+        ],
+        "spoken_languages": [
+            {
+                "language": "Vietnamese",
+                "proficiency": "native"
+            },
+            {
+                "language": "English",
+                "proficiency": "proficient"
+            }
+        ]
+    },
+    "working_experience": [
+        {
+            "role": "Master Thesis Intern",
+            "institution_or_company": {
+                "name": "University of Amsterdam",
+                "link": null
+            },
+            "supervisors": [
+                {
+                    "name": "Prof. Dr. Theo Gevers",
+                    "link": "https://staff.fnwi.uva.nl/th.gevers/"
+                },
+                {
+                    "name": "Dr. Sezer Karaoglu",
+                    "link": "https://www.linkedin.com/in/sezer-karaoglu-1650a01a/"
+                }
+            ],
+            "location": "Amsterdam, Netherlands",
+            "project_title": "Physically-Constrained Colorful Intrinsic Image Decomposition for Indoor Environments",
+            "duration": "Jan 2026 - Present",
+            "details": [
+                "Investigating Real Estate Image Enhancement via Intrinsic Image Decomposition (IID) through an industry collaboration (3DUniversum) bridging academic research and commercial application."
+            ]
+        },
+        {
+            "role": "Machine Learning Intern",
+            "institution_or_company": {
+                "name": "DXOMark camera quality testing, scores and reviews",
+                "link": "https://www.dxomark.com/"
+            },
+            "supervisors": [
+                {
+                    "name": "Sira Ferradans",
+                    "link": "https://www.linkedin.com/in/sira-ferradans/"
+                }
+            ],
+            "project_title": "MLLMs for Image Quality Evaluation",
+            "location": "Paris, France",
+            "duration": "Jun 2025 - Aug 2025",
+            "paper": {
+                "title": "Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment",
+                "link": "https://library.imaging.org/ei/articles/38/12/GENAI-179"
+            },
+            "details": [
+                "Studied the performance of Vision-Language Models (VLMs) - DeQA-Score for Image Quality Assessment (IQA) on public (KonIQ, SPAQ, KADID) and internal datasets.",
+                "Adapted model outputs to align with DXOMARK’s Just-Objectionable-Difference (JOD) evaluation standards.",
+                "Investigated inference strategies (cropped face/eye, prompt variations, distortion sensitivity tests) to optimize quality prediction on the metrics - SRCC, PLCC, MAE.",
+                "Designed and developed fine-tuning approaches (regression, vision-only, LoRA) to improve accuracy and capture separate sub-feature quality scores (contrast, texture, and noise).",
+                "Published the paper 'Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment' and received the Best Student Paper award at IS&T Electronic Imaging 2026."
+            ]
+        },
+        {
+            "role": "AI Engineer - Full-time",
+            "institution_or_company": {
+                "name": "Vitex Software JSC",
+                "link": "https://vitex.asia/"
+            },
+            "project_title": "PlanZ - AI Powered Event Assistant",
+            "project_link": "https://planz.ai",
+            "location": "Hanoi, VN (Remote)",
+            "duration": "Oct 2023 - Dec 2024",
+            "details": [
+                "Developed an event-planning multi-agents system using LangGraph, LangChain, FastAPI, PostgreSQL, and integrated various LLM APIs.",
+                "Applied Chain of Thought (CoT) and Agent-based Prompting techniques via LangGraph to implement workflows that assist event feature suggestions and schedule generation.",
+                "Utilized Few-Shot Prompting along with the Vector Database to generate SQL queries based on the user's requests, facilitating users to check events in database through a chatbot interface."
+            ]
+        },
+        {
+            "role": "AI Engineer - Full-time",
+            "institution_or_company": {
+                "name": "VHT, Viettel Group",
+                "link": "https://viettelhightech.vn/"
+            },
+            "supervisors": [
+                {
+                    "name": "BangLV",
+                    "link": "https://www.linkedin.com/in/van-bang-le-aba45068/"
+                }
+            ],
+            "project_title": "Video Surveillance System",
+            "location": "Hanoi, VN",
+            "duration": "May 2023 - Aug 2023",
+            "details": [
+                "Established a scalable Kubernetes cluster for internal network deployment, streamlining application management.",
+                "Enhanced AI model inference efficiency by integrating Triton Server, configuring advanced options like load repository from S3, dynamic batching, concurrent model execution, and load/unload model on the fly.",
+                "Refactored Controller Block for scalability, and developed Service Discovery/Management Server to check available services and store metadata information, enabling seamless communication and efficient storage of AI models."
+            ]
+        },
+        {
+            "role": "AI Engineer - Intern",
+            "institution_or_company": {
+                "name": "Pionero JSC",
+                "link": "https://www.pionero.io/ja/"
+            },
+            "supervisors": [
+                {
+                    "name": "Huy Van",
+                    "link": "https://www.linkedin.com/in/vanhuyz/"
+                }
+            ],
+            "project_title": "Facial Recognition Attendance System",
+            "location": "Hanoi, VN",
+            "duration": "Jun 2021 - Dec 2021",
+            "details": [
+                "Developed a Face Recognition pipeline with a 10-member scrum team into existing cameras, reducing expenses of buying timekeepers and cutting 70% of employees' waiting time for attendance check-in.",
+                "Achieved an 88% recall and 89% precision on internal data by utilizing YOLOv5 with resized frames of 512 and confidence threshold of 0.8 for Face Detection.",
+                "Utilized the pre-trained model FaceNet for feature extraction and developed a fully-connected neural network model with Softmax Regression for Face Classification, resulting in a 77% recall and 97.5% precision with probability of 80%."
+            ]
+        }
+    ],
+    "research_experience": [
+        {
+            "role": "Student Researcher",
+            "mentors": [
+                {
+                    "name": "Prof. Damien Muselet",
+                    "link": "https://scholar.google.fr/citations?user=TyNSxjQAAAAJ&hl=fr",
+                    "title": "Assistant Professor in University of Jean Monnet"
+                }
+            ],
+            "project_title": "HyRES: Residual-Enhanced Hybrid Image Compression",
+            "project_link": "https://github.com/tmkhang1999/HyRES-Residual-Enhanced-Hybrid-Image-Compression",
+            "location": "Saint-Étienne, France",
+            "duration": "Jan 2025 - May 2025",
+            "details": [
+                "Design a pipeline that leverages the speed of JPEG compression and the perceptual quality of deep learning, achieving higher quality than traditional JPEG and faster performance than fully neural compression methods.",
+                "Achieved a compact model with only 10.14M parameters and an end-to-end encode-decode time of just 0.762s.",
+                "At 0.6 bpp, the model reached 31.97 PSNR compared to 29.585 for traditional JPEG."
+            ]
+        },
+        {
+            "role": "Research Assistant",
+            "mentors": [
+                {
+                    "name": "Dr. Thang Nguyen",
+                    "link": "https://www.linkedin.com/in/thang-nguyen-67119a28/",
+                    "title": "Senior Research Scientist in FPT Software AI center"
+                }
+            ],
+            "project_title": "TextMAE Image Compression",
+            "project_link": "https://github.com/tmkhang1999/TextMAE-Image-Compression",
+            "location": "Hanoi, VN",
+            "duration": "Sep 2023 - Mar 2024",
+            "details": [
+                "Developed a novel masking algorithm, leveraging Divide and Merge and Laplacian techniques to enhance patch importance scoring, resulting in improved video compression performance.",
+                "Enhanced image reconstruction quality by integrating Stable Diffusion with text prompts generated via BLIP, leading to significant improvements in PSNR and MS SSIM metrics.",
+                "Refined research methodologies by evaluating percentile masking vs random masking, demonstrating that random masking improves model robustness while percentile masking is better suited for inference and product deployment."
+            ]
+        },
+        {
+            "role": "Student Research Assistant",
+            "mentors": [
+                {
+                    "name": "Dr. Thanh-Hai Tran",
+                    "link": "https://scholar.google.com.vn/citations?user=RmM94TIAAAAJ&hl=en",
+                    "title": "Lecturer/Researcher (MICA-HUST)"
+                }
+            ],
+            "project_title": "Polyp Segmentation",
+            "project_link": null,
+            "location": "Hanoi, VN (Remote)",
+            "duration": "Oct 2021 - Mar 2022",
+            "details": [
+                "Prepared, controlled quality, and mined polyp datasets (Kvasir-SEG, CVC-ClinincDB, and ETIS-Larib).",
+                "Retrained Transfuse a 'Parallel Reverse Attention Network' model by using Swin Transformer Blocks instead of vision transformers (ViT), improving mDice from 0.733 to 0.77 and mIoU from 0.659 to 0.7 on ETIS dataset."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "MSc. Computational Color and Spectral Imaging (COSI)",
+            "semesters": [
+                "1st semester: Norwegian University of Science and Technology, Norway",
+                "2nd semester: Jean Monnet University, France",
+                "3rd semester: University of Eastern Finland, Finland"
+            ],
+            "admission_ranking": "1/198 (Consortium scholarship)",
+            "location": "Norway, France, Finland",
+            "duration": "Aug 2024 - Sep 2026",
+            "relevant_courses": [
+                "Advanced image processing (B)",
+                "Deep Learning and Applications (B)",
+                "3D models in Computer Vision (C)",
+                "Light matter interaction and materials appearance (B)",
+                "Machine Learning Fundamentals (B)",
+                "From statistics to data mining (B)"
+            ]
+        },
+        {
+            "degree": "BSc. Computer Science",
+            "institution": "State University of New York at Oswego",
+            "gpa": {
+                "overall_gpa": "3.81/4.0 (Summa Cum Laude)",
+                "major_gpa": "3.82/4.0"
+            },
+            "location": "Oswego, NY, USA",
+            "duration": "Jan 2019 - Dec 2022",
+            "awards": [
+                "Destination Oswego Scholarship",
+                "Merit Scholarship",
+                "President's list (Spring 2019, Spring 2021, Fall 2022)",
+                "Dean's list (Fall 2019, Fall 2020, Spring 2022)"
+            ]
+        }
+    ],
+    "certificates": [
+        {
+            "name": "Machine Learning Specialization",
+            "link": "https://www.coursera.org/account/accomplishments/specialization/certificate/K6E2EDDZJ378"
+        },
+        {
+            "name": "Coursera - IBM Data Science Specialization",
+            "link": "https://www.coursera.org/account/accomplishments/specialization/certificate/7M9SRQFRSX3S"
+        },
+        {
+            "name": "Udacity Data Scientist Nanodegree",
+            "link": "https://graduation.udacity.com/confirm/e/47a51ae0-5a56-11ed-ad3b-c3b4eafa7648"
+        }
+    ],
+    "side_projects": [
+        {
+            "title": "3D Multi-View Stereo Reconstruction",
+            "project_link": "https://github.com/tmkhang1999/3D-Multi-View-Stereo-Reconstruction",
+            "technologies_or_tools": [
+                "pycolmap",
+                "OpenCV SGBM",
+                "Open3D"
+            ],
+            "duration": "Jan 2025 - May 2025",
+            "details": [
+                "Built a multi-view 3D reconstruction pipeline using ETH3D (large-scale outdoor) and Middlebury Chess (controlled indoor) datasets",
+                "Analyzed reconstruction quality, focusing on the impact of low-texture areas, occlusions, and dataset properties"
+            ]
+        },
+        {
+            "title": "Vehicle Management System",
+            "project_link": "https://github.com/tmkhang1999/YOLOv8-DeepSORT-PaddleOCR-Supervision-Vehicle-Management-System",
+            "technologies_or_tools": [
+                "YOLOv8",
+                "DeepSort",
+                "Paddle OCR",
+                "Supervision"
+            ],
+            "duration": "Sep 2023 - Oct 2023",
+            "details": [
+                "Conducted a thorough literature review, analyzing 10 relevant papers to explore speed estimation from 2D frames.",
+                "Integrated and implemented cutting-edge algorithms to achieve real-time vehicle detection/classification, tracking for vehicle counting, speed estimation on 2D frames, and license plate detection/recognition."
+            ]
+        }
+    ]
+}

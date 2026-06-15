@@ -1,112 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link rel="apple-touch-icon" sizes="180x180" href="favicons/wolf.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="favicons/wolf.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="favicons/wolf.png">
-		<link rel="manifest" href="favicons/site.webmanifest">
-		<link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
-		<meta name="theme-color" content="#ffffff">
+<head>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/wolf.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/wolf.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/wolf.png">
+  <link rel="manifest" href="favicons/site.webmanifest">
+  <meta name="theme-color" content="#0f172a">
 
-		<script src="https://kit.fontawesome.com/fa08c37f04.js" crossorigin="anonymous"></script>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110543961-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-		  	function gtag(){dataLayer.push(arguments);}
-		  	gtag('js', new Date());
-		  	gtag('config', 'UA-110543961-1');
-		</script>
+  <script src="https://kit.fontawesome.com/fa08c37f04.js" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110543961-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-110543961-1');
+  </script>
 
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Khang Tran — Blog posts on data science, machine learning, and AI">
+  <meta name="author" content="Khang Tran">
 
-		<meta name="description" content="Linda Chen - Portfolio">
-		<meta name="keywords" content="software development, Data Structure, Algorithms, backend, C++, API, data science, machine learning, TensorFlow, NLP, AI, python">
-		<meta name="author" content="Khang Tran">
+  <title>Khang Tran | Blogs</title>
 
-		<title>Khang Tran - Blogs</title>
+  <link href="css/bootstrap.min.css?v=1.1" rel="stylesheet">
+  <link href="css/styles.css?v=2.0" rel="stylesheet">
 
-		<link href="css/bootstrap.min.css?v=1.1" rel="stylesheet">
-		<link href="css/styles.css?v=1.1" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+</head>
 
-		<script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
-		<script src="js/jquery.isotope.js" type="text/javascript"></script>
-		<script src="js/filter.js" type="text/javascript"></script>
-		<script src="js/bootstrap.bundle.min.js"></script>
-	</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar fixed-top site-navbar">
+    <div class="container d-flex justify-content-between align-items-center h-100">
+      <a href="/" class="site-nav-brand">kt.</a>
+      <div class="site-nav-links">
+        <a href="/index.html" class="site-nav-link">Projects</a>
+        <a href="/blogs.html" class="site-nav-link active">Blogs</a>
+        <a href="/about.html" class="site-nav-link">About</a>
+      </div>
+    </div>
+  </nav>
 
-	<body>
-		<nav class="navbar navbar-expand-lg popover-header"></nav>
+  <div class="container" style="padding-top: 90px; padding-bottom: 60px;">
+    <p class="section-label">Blog Posts</p>
 
-		<div class="container">
-			<div class="container" align="center">
-				<h1>Khang Tran</h1>
+    <div class="row">
 
-				<div align="center">
-					<br>
-					<a class="fabicon" href="https://github.com/tmkhang1999" style="color: #081D2E;">
-						<i class="fab fa-github-square" style="font-size:40px; "></i>
-					</a>
-					<a class="fabicon" href="https://medium.com/@khangtm99" style="color: #081D2E;">
-						<i class="fab fa-medium" style = "font-size:40px; padding-left: 40px;"></i>
-					</a>
-					<a class="fabicon" href="https://www.linkedin.com/in/khangtm99/" style="color: #081D2E;">
-						<i class="fab fa-linkedin" style = "font-size:40px; padding-left: 40px;"></i>
-					</a>
-				</div>
-				<br>
-			</div>
+      <div class="blogs col-lg-4 col-md-5 col-sm-7">
+        <div class="card">
+          <a href="https://medium.com/@khangtm99/2022-nyc-airbnb-analytics-9055288b1de9" target="_blank" rel="noopener">
+            <img class="card-img-top" src="images/blogs/NYC.jpg" alt="NYC Airbnb">
+          </a>
+          <div class="card-body d-flex flex-column">
+            <h4 class="card-title text-center">Uncovering the 2022 NYC Airbnb Market</h4>
+            <p class="card-subtitle text-center" style="color: #64748b; font-size: 0.85rem;">
+              Insights into Popularity, Pricing, and Tourist Behavior
+            </p>
+          </div>
+        </div>
+      </div>
 
-			<div class="menu" align="center">
-				<center>
-					<a href="/" filter="*">Projects</a>
-					<i style = "padding-left: 40px;"></i>
-					<a href="/blogs.html" filter=".blogs" class="menu current">Blogs</a>
-					<i style = "padding-left: 40px;"></i>
-					<a href="/about.html">About</a>
-				</center>
-			</div>
+      <div class="blogs col-lg-4 col-md-5 col-sm-7">
+        <div class="card">
+          <a href="https://medium.com/@khangtm99/exploring-starbuckss-customer-behaviors-for-deeper-insights-823da0505e89" target="_blank" rel="noopener">
+            <img class="card-img-top" src="images/blogs/Starbucks.jpg" alt="Starbucks">
+          </a>
+          <div class="card-body d-flex flex-column">
+            <h4 class="card-title text-center">Exploring Starbucks's Customer Behaviors</h4>
+            <p class="card-subtitle text-center" style="color: #64748b; font-size: 0.85rem;">
+              Deeper understanding of customer behavior in relation to offer completion
+            </p>
+          </div>
+        </div>
+      </div>
 
-			<br>
+    </div>
+  </div>
 
-			<div class="projectContainer row">	
-				<div class="blogs col-lg-4 col-md-5 col-sm-7 blog-posts">
-					<div class="card">
-						<a href="https://medium.com/@khangtm99/2022-nyc-airbnb-analytics-9055288b1de9">
-							<img class="card-img-top" src="images/blogs/NYC.jpg" alt="NYC">
-						</a>
-						<div class="card-body d-flex flex-column">
-							<center>
-								<h4 class="card-title">Uncovering the 2022 NYC Airbnb Market</h4>
-								<p class="card-subtitle text-muted mx-auto">Insights into Popularity, Pricing, and Tourist Behavior</p>
-							</center>
-						</div>
-					</div>
-				</div>
+  <div class="footer-bottom">
+    <p class="m-0 text-center text-muted" style="font-size: 0.82rem;">
+      Minh Khang Tran &nbsp;·&nbsp;
+      <a class="link-text" href="https://github.com/tmkhang1999" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
+      <a class="link-text" href="https://www.linkedin.com/in/khangtm99/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+    <p class="m-0 text-center text-muted" style="font-size: 0.78rem; margin-top: 4px !important;">
+      &copy; <script>document.write(new Date().getFullYear())</script>
+    </p>
+  </div>
 
-				<div class="blogs col-lg-4 col-md-5 col-sm-7 blog-posts">
-					<div class="card">
-						<a href="https://medium.com/@khangtm99/exploring-starbuckss-customer-behaviors-for-deeper-insights-823da0505e89">
-							<img class="card-img-top" src="images/blogs/Starbucks.jpg" alt="Starbucks">
-						</a>
-						<div class="card-body d-flex flex-column">
-							<center>
-								<h4 class="card-title">Exploring Starbucks’s Customer Behaviors</h4>
-
-								<p class="card-subtitle text-muted mx-auto">Deeper understanding of customer behavior in relation to offer completion</p>
-							</center>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</body>
-
-	<br>
-
-	<div class="footer-bottom">
-		<p class="m-0 text-center text-muted"><a> Template by </a> <a class="link-text text-muted" href="https://gsurma.github.io/">Greg Surma</a>
-		<p class="m-0 text-center text-muted"> Made by Khang while playing <img class="carousel-control-next-icon" src="favicons/basketball.png"> ▪ <a>© </a> <script>document.write(new Date().getFullYear())</script></p>
-	</div>
+</body>
 </html>

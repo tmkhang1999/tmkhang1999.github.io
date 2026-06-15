@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3",
+      "runtimeArgs": ["-m", "http.server", "4321"],
+      "port": 4321
+    }
+  ]
+}
