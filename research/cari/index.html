@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="apple-touch-icon" sizes="180x180" href="../../favicons/wolf.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicons/wolf.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicons/wolf.png">
+  <meta name="theme-color" content="#0f172a">
+
+  <script src="https://kit.fontawesome.com/fa08c37f04.js" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CARI — Coloured Illumination Constancy in Intrinsic Image Decomposition via Cross-Render Albedo Invariance">
+  <meta name="author" content="Khang Tran">
+
+  <title>CARI | Khang Tran</title>
+
+  <link href="../../css/bootstrap.min.css?v=1.1" rel="stylesheet">
+  <link href="../../css/styles.css?v=2.1" rel="stylesheet">
+
+  <style>
+    /* ── Page layout ───────────────────────────── */
+    .cari-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 90px 24px 80px;
+    }
+
+    /* ── Title block ───────────────────────────── */
+    .paper-venue {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #a78bfa;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .paper-title {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 800;
+      color: #f8fafc;
+      line-height: 1.25;
+      margin-bottom: 28px;
+    }
+
+    .paper-authors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      margin-bottom: 12px;
+    }
+
+    .paper-author {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .paper-author strong {
+      color: #f1f5f9;
+    }
+
+    .paper-author:hover {
+      color: #38bdf8;
+    }
+
+    .author-num {
+      font-size: 0.65rem;
+      color: #a78bfa;
+      vertical-align: super;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .affiliations {
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+    }
+
+    .affil-item {
+      font-size: 0.82rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .affil-num {
+      font-size: 0.65rem;
+      color: #a78bfa;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Action buttons ────────────────────────── */
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 52px;
+    }
+
+    .paper-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none !important;
+      transition: all 0.22s ease;
+      border: 1.5px solid;
+    }
+
+    .paper-btn.primary {
+      background: rgba(167,139,250,0.14);
+      border-color: rgba(167,139,250,0.35);
+      color: #c4b5fd !important;
+    }
+
+    .paper-btn.primary:hover {
+      background: rgba(167,139,250,0.24);
+      border-color: rgba(167,139,250,0.55);
+    }
+
+    .paper-btn.secondary {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+      color: #94a3b8 !important;
+    }
+
+    .paper-btn.secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      color: #cbd5e1 !important;
+    }
+
+    /* ── Teaser ─────────────────────────────────── */
+    .teaser-wrap {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 32px 24px;
+      margin-bottom: 52px;
+      overflow: hidden;
+    }
+
+    .teaser-img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .teaser-caption {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-top: 20px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* ── Figures (real thesis diagrams on white) ─── */
+    .cari-figure {
+      margin: 24px 0 8px;
+    }
+
+    .cari-figure img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      background: #ffffff;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .fig-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 12px;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .fig-caption strong { color: #94a3b8; font-style: normal; }
+
+    /* ── Section styling ─────────────────────────── */
+    .cari-section {
+      margin-bottom: 52px;
+    }
+
+    .cari-section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(56,189,248,0.15);
+    }
+
+    .cari-text {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.78;
+    }
+
+    .cari-text strong {
+      color: #f1f5f9;
+    }
+
+    /* ── Highlight box ──────────────────────────── */
+    .insight-box {
+      background: rgba(167,139,250,0.06);
+      border: 1px solid rgba(167,139,250,0.18);
+      border-left: 3px solid #a78bfa;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 20px 0;
+      font-size: 0.93rem;
+      color: #c4b5fd;
+      line-height: 1.65;
+    }
+
+    /* ── Method grid ─────────────────────────────── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .method-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .method-card-icon {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .method-card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 6px;
+    }
+
+    .method-card-text {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    /* ── Results ─────────────────────────────────── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .result-stat {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .result-value {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #a78bfa;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .result-label {
+      font-size: 0.78rem;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* ── BibTeX ──────────────────────────────────── */
+    .bibtex-block {
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 20px 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre;
+      position: relative;
+    }
+
+    .bibtex-key { color: #38bdf8; }
+    .bibtex-val { color: #a78bfa; }
+    .bibtex-brace { color: #64748b; }
+
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: #94a3b8;
+    }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 640px) {
+      .method-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .paper-links { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 400px) {
+      .results-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Divider ─────────────────────────────────── */
+    .cari-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 52px 0;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top site-navbar">
+    <div class="container d-flex justify-content-between align-items-center h-100">
+      <a href="/" class="site-nav-brand">kt.</a>
+      <div class="site-nav-links">
+        <a href="/index.html" class="site-nav-link">Projects</a>
+        <a href="/research.html" class="site-nav-link active">Research</a>
+        <a href="/blogs.html" class="site-nav-link">Blogs</a>
+        <a href="/about.html" class="site-nav-link">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="cari-page">
+
+    <!-- ── Title Block ─────────────────────────────── -->
+    <div class="paper-venue">
+      <i class="fas fa-graduation-cap" style="font-size:0.8rem;"></i>
+      Master's Thesis &nbsp;·&nbsp; University of Amsterdam &nbsp;·&nbsp; 2026
+    </div>
+
+    <h1 class="paper-title">
+      Coloured Illumination Constancy in Intrinsic Image Decomposition via Cross-Render Albedo Invariance
+    </h1>
+
+    <div class="paper-authors">
+      <span class="paper-author">
+        <strong>Minh Khang Tran</strong><span class="author-num">1,2</span>
+      </span>
+      <a href="https://staff.fnwi.uva.nl/th.gevers/" class="paper-author" target="_blank" rel="noopener">
+        Theo Gevers<span class="author-num">1</span>
+      </a>
+      <a href="https://www.linkedin.com/in/sezer-karaoglu-1650a01a/" class="paper-author" target="_blank" rel="noopener">
+        Sezer Karaoglu<span class="author-num">1</span>
+      </a>
+    </div>
+
+    <div class="affiliations">
+      <span class="affil-item"><span class="affil-num">1</span> University of Amsterdam</span>
+      <span class="affil-item"><span class="affil-num">2</span> 3DUniversum (industry partner)</span>
+    </div>
+
+    <div class="paper-links">
+      <a href="https://github.com/tmkhang1999/CARI" class="paper-btn primary" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i> Code
+      </a>
+      <span class="paper-btn secondary" style="cursor:default; opacity:0.6;">
+        <i class="fas fa-file-pdf"></i> Paper (coming soon)
+      </span>
+    </div>
+
+    <!-- ── Teaser ──────────────────────────────────── -->
+    <div class="teaser-wrap">
+      <img src="../../images/research/cari-decomposition.jpg" alt="CARI intrinsic decomposition of an indoor scene into albedo, diffuse shading, and diffuse image" class="teaser-img">
+      <p class="teaser-caption">
+        <strong>CARI in action.</strong> An indoor real-estate photograph is decomposed into a clean albedo layer (material colour),
+        a diffuse-shading layer (illumination), and the recovered diffuse image — with the colour of the light source
+        correctly absorbed into shading rather than bleeding into the albedo.
+      </p>
+    </div>
+
+    <!-- ── Abstract ────────────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">Abstract</p>
+      <p class="cari-text">
+        Intrinsic image decomposition (IID) separates a photograph into an albedo layer — the surface material colour independent of lighting — and a shading layer that encodes the illumination effects. Existing learning-based methods assume achromatic or white-balanced illumination and apply grayscale shading models that cannot absorb the hue of a coloured light source. When a scene is lit by warm incandescent lamps or spectrally skewed LEDs, the residual illuminant colour bleeds into the recovered albedo, making the same physical surface appear to have different material colours under different lighting.
+      </p>
+      <p class="cari-text" style="margin-top: 14px;">
+        We introduce <strong>CARI</strong> (Cross-render Albedo invariance), a physics-grounded training strategy: if two calibrated images depict the same surface material under different illuminants, their estimated albedo maps must be identical. By sampling such pairs from raw, unwhite-balanced captures and enforcing this invariance during training, we teach a <strong>DINOv2-L/14 + DPT</strong> network to separate illuminant hue from material colour — at zero additional inference cost.
+      </p>
+      <p class="cari-text" style="margin-top: 14px;">
+        CARI also identifies a systematic flaw in the prevailing chroma-cast evaluation metric — that desaturating the albedo artificially deflates the score — and decomposes it into two complementary measures: <strong>Cast<sub>rel</sub></strong> (illuminant invariance) and <strong>Chroma<sub>fid</sub></strong> (colour fidelity). With only 18.5 M trainable parameters — approximately <strong>70× fewer</strong> than diffusion-based baselines — and roughly <strong>5× faster</strong> inference, CARI delivers competitive results on MID, ARAP, MAW, and IIW benchmarks.
+      </p>
+    </div>
+
+    <hr class="cari-divider">
+
+    <!-- ── Problem ─────────────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">Problem</p>
+      <p class="cari-text">
+        Real-world scenes are rarely lit by a single white light source. Interiors combine warm lamps, cool skylights, and coloured LEDs. When a photograph is captured without white-balancing, these coloured illuminants tint the scene. A grayscale shading model cannot "explain" the hue component of this tint — so the colour residual is incorrectly absorbed by the albedo layer.
+      </p>
+
+      <div class="insight-box">
+        <strong>Key problem:</strong> Under a warm orange lamp, the same white wall should have albedo (1, 1, 1). Under a cool blue skylight, it should still have albedo (1, 1, 1). Traditional IID recovers different albedo values in each case — the illuminant hue bleeds through.
+      </div>
+
+      <p class="cari-text" style="margin-top: 14px;">
+        This makes IID-derived albedo maps unreliable for downstream applications such as real estate photography relighting, AR material editing, and appearance normalisation for visual search — the core use-case motivating this thesis in collaboration with 3DUniversum.
+      </p>
+    </div>
+
+    <hr class="cari-divider">
+
+    <!-- ── Method ──────────────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">Method</p>
+      <p class="cari-text">
+        CARI introduces a training-time constraint that enforces cross-render albedo invariance — the idea that the same surface material must produce the same albedo estimate regardless of the illuminant it is imaged under. The constraint is derived directly from the physics of image formation and requires no ground-truth albedo labels.
+      </p>
+
+      <div class="cari-figure">
+        <img src="../../images/research/cari-crossrender.jpg" alt="Cross-render invariance: two forward passes on the same scene under warm and cool light are constrained to produce identical albedo">
+        <p class="fig-caption">
+          <strong>The cross-render constraint.</strong> The same scene is captured under warm and cool light and passed through shared weights.
+          An invariance loss forces the two albedo estimates to match (A₁ = A₂), while an explanation loss lets the shading layers absorb the colour cast.
+        </p>
+      </div>
+
+      <div class="method-grid">
+        <div class="method-card">
+          <div class="method-card-icon">🔒</div>
+          <div class="method-card-title">Frozen DINOv2-L/14 Encoder</div>
+          <div class="method-card-text">
+            We freeze the DINOv2 backbone to preserve its rich, scene-level features. Only the DPT decoder (18.5 M params) is trained — making CARI extremely parameter-efficient.
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-card-icon">⚗️</div>
+          <div class="method-card-title">Physics-Typed Skip Connections</div>
+          <div class="method-card-text">
+            RGB features are routed to the albedo head; luminance-only features to the shading head. This inductive bias aligns the model with the physics of colour image formation.
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-card-icon">🔄</div>
+          <div class="method-card-title">Cross-Render Albedo Invariance</div>
+          <div class="method-card-text">
+            During training, pairs of raw unwhite-balanced images of the same scene are sampled. A consistency loss enforces that both images produce the same albedo output.
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-card-icon">🧮</div>
+          <div class="method-card-title">Analytic Residual</div>
+          <div class="method-card-text">
+            The shading layer is computed analytically from the predicted albedo rather than from a separate head — reducing degrees of freedom and enforcing the albedo–shading relationship.
+          </div>
+        </div>
+      </div>
+
+      <div class="cari-figure" style="margin-top: 32px;">
+        <img src="../../images/research/cari-architecture.jpg" alt="CARI architecture: frozen DINOv2-L/14 encoder, DPT decoder, and physics-typed albedo and shading heads with an analytic residual">
+        <p class="fig-caption">
+          <strong>Model architecture.</strong> A frozen DINOv2-L/14 encoder feeds a DPT decoder that branches into a colour-fed albedo head
+          and a luminance-fed shading head. The residual R = (I − A⊙S<sub>d</sub>)₊ is analytic — no extra head — keeping the trained decoder at just 18.5 M parameters.
+        </p>
+      </div>
+    </div>
+
+    <hr class="cari-divider">
+
+    <!-- ── New Metric ──────────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">New Evaluation Framework</p>
+      <p class="cari-text">
+        The existing chroma-cast metric for IID evaluation has a critical flaw: a model can achieve a near-zero chroma-cast score simply by desaturating its albedo output — sacrificing colour fidelity to game the metric. We identify and document this loophole through controlled experiments.
+      </p>
+
+      <div class="insight-box">
+        We decompose the chroma-cast metric into two orthogonal components:
+        <br><br>
+        • <strong>Cast<sub>rel</sub></strong> — measures illuminant invariance: does the same surface produce the same albedo under different lights?
+        <br>
+        • <strong>Chroma<sub>fid</sub></strong> — measures colour fidelity: does the albedo preserve the true material colour?
+        <br><br>
+        A good model must score well on both. This framework exposes desaturation-gaming in prior work.
+      </div>
+    </div>
+
+    <hr class="cari-divider">
+
+    <!-- ── Results ─────────────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">Results</p>
+      <p class="cari-text" style="margin-bottom: 20px;">
+        CARI achieves competitive results on standard IID benchmarks (MID, ARAP, MAW, IIW) while being dramatically more efficient than recent diffusion-based approaches.
+      </p>
+
+      <div class="results-grid">
+        <div class="result-stat">
+          <div class="result-value">70×</div>
+          <div class="result-label">fewer trained parameters vs. diffusion baselines</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-value">~5×</div>
+          <div class="result-label">faster inference than diffusion-based IID</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-value">0.941</div>
+          <div class="result-label">Chroma<sub>fid</sub> — colour fidelity score</div>
+        </div>
+      </div>
+
+      <p class="cari-text" style="margin-top: 20px;">
+        The model is evaluated on the <strong>MID</strong>, <strong>ARAP</strong>, <strong>MAW</strong>, and <strong>IIW</strong> benchmarks, demonstrating that physics-grounded training constraints can match or exceed the performance of heavily overparameterised generative models — at a fraction of the cost.
+      </p>
+    </div>
+
+    <hr class="cari-divider">
+
+    <!-- ── BibTeX ──────────────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">BibTeX</p>
+      <div style="position:relative;">
+        <div class="bibtex-block" id="bibtex-content"><span class="bibtex-brace">@mastersthesis{</span><span class="bibtex-key">tran2026cari</span><span class="bibtex-brace">,</span>
+  <span class="bibtex-key">author</span>    = <span class="bibtex-brace">{</span><span class="bibtex-val">Tran, Minh Khang</span><span class="bibtex-brace">},</span>
+  <span class="bibtex-key">title</span>     = <span class="bibtex-brace">{{</span><span class="bibtex-val">Coloured Illumination Constancy in Intrinsic Image
+               Decomposition via Cross-Render Albedo Invariance</span><span class="bibtex-brace">}},</span>
+  <span class="bibtex-key">school</span>    = <span class="bibtex-brace">{</span><span class="bibtex-val">University of Amsterdam</span><span class="bibtex-brace">},</span>
+  <span class="bibtex-key">year</span>      = <span class="bibtex-brace">{</span><span class="bibtex-val">2026</span><span class="bibtex-brace">},</span>
+  <span class="bibtex-key">month</span>     = <span class="bibtex-brace">{</span><span class="bibtex-val">September</span><span class="bibtex-brace">},</span>
+  <span class="bibtex-key">note</span>      = <span class="bibtex-brace">{</span><span class="bibtex-val">Erasmus Mundus COSI Programme.
+               Supervisors: Theo Gevers, Sezer Karaoglu.
+               Industry partner: 3DUniversum.</span><span class="bibtex-brace">}},</span>
+<span class="bibtex-brace">}</span></div>
+        <button class="copy-btn" onclick="copyBib()">Copy</button>
+      </div>
+    </div>
+
+    <hr class="cari-divider">
+
+    <!-- ── Acknowledgements ────────────────────────── -->
+    <div class="cari-section">
+      <p class="cari-section-title">Acknowledgements</p>
+      <p class="cari-text">
+        This thesis was conducted at the <a href="https://www.uva.nl/en" class="link-text" target="_blank" rel="noopener">University of Amsterdam</a> under the Erasmus Mundus Joint Master's programme in Computational Colour and Spectral Imaging (COSI). I am grateful to
+        <a href="https://staff.fnwi.uva.nl/th.gevers/" class="link-text" target="_blank" rel="noopener">Prof. Dr. Theo Gevers</a> and
+        <a href="https://www.linkedin.com/in/sezer-karaoglu-1650a01a/" class="link-text" target="_blank" rel="noopener">Dr. Sezer Karaoglu</a>
+        for their supervision and to 3DUniversum for providing real-estate image data and domain context.
+        The COSI consortium scholarship made this research possible.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer style="text-align:center; padding: 32px 16px; color: #334155; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.04);">
+    <a href="/research.html" class="link-text" style="font-size:0.8rem;">← All Research</a>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    Minh Khang Tran &copy; 2026
+  </footer>
+
+  <script>
+    function copyBib() {
+      const raw = `@mastersthesis{tran2026cari,
+  author    = {Tran, Minh Khang},
+  title     = {{Coloured Illumination Constancy in Intrinsic Image
+               Decomposition via Cross-Render Albedo Invariance}},
+  school    = {University of Amsterdam},
+  year      = {2026},
+  month     = {September},
+  note      = {Erasmus Mundus COSI Programme.
+               Supervisors: Theo Gevers, Sezer Karaoglu.
+               Industry partner: 3DUniversum.},
+}`;
+      navigator.clipboard.writeText(raw).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
