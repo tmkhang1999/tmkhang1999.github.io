@@ -353,6 +353,52 @@
       border-top: 1px solid rgba(255,255,255,0.06);
       margin: 52px 0;
     }
+
+    /* ── Results table ─────────────────────────── */
+    .results-table-wrap { margin: 34px 0 10px; }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .results-table th {
+      text-align: right;
+      padding: 10px 12px;
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 0.8rem;
+      border-bottom: 1px solid #334155;
+      white-space: nowrap;
+    }
+
+    .results-table th:first-child,
+    .results-table td:first-child { text-align: left; }
+
+    .results-table td {
+      text-align: right;
+      padding: 11px 12px;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      white-space: nowrap;
+    }
+
+    .results-table tbody tr:last-child td { border-bottom: none; }
+
+    .results-table .row-ours td {
+      background: rgba(56, 189, 248, 0.07);
+      color: #e2e8f0;
+    }
+
+    .results-table .row-ours td:first-child { color: #38bdf8; }
+    .results-table td.best { color: #38bdf8; font-weight: 700; }
+
+    @media (max-width: 640px) {
+      .results-table-wrap { overflow-x: auto; }
+      .results-table { min-width: 520px; }
+    }
   </style>
 
   <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
@@ -414,11 +460,10 @@
 
     <!-- ── Teaser ──────────────────────────────────── -->
     <div class="teaser-wrap">
-      <img src="../../images/research/cari-decomposition.jpg" alt="CARI intrinsic decomposition of an indoor scene into albedo, diffuse shading, and diffuse image" class="teaser-img">
+      <img src="../../images/research/cari-hero.jpg" alt="Split view: a real indoor photograph under warm light on the left, our predicted albedo with the illuminant removed on the right" class="teaser-img">
       <p class="teaser-caption">
-        <strong>CARI in action.</strong> An indoor real-estate photograph is decomposed into a clean albedo layer (material colour),
-        a diffuse-shading layer (illumination), and the recovered diffuse image — with the colour of the light source
-        correctly absorbed into shading rather than bleeding into the albedo.
+        <strong>Our result.</strong> A real indoor photograph (left) and the albedo our model predicts for it (right).
+        The warm cast of the lamp is gone from the wall and floor, but the material colours are not washed out with it.
       </p>
     </div>
 
@@ -432,7 +477,7 @@
         We introduce <strong>CARI</strong> (Cross-render Albedo invariance), a physics-grounded training strategy: if two calibrated images depict the same surface material under different illuminants, their estimated albedo maps must be identical. By sampling such pairs from raw, unwhite-balanced captures and enforcing this invariance during training, we teach a <strong>DINOv2-L/14 + DPT</strong> network to separate illuminant hue from material colour — at zero additional inference cost.
       </p>
       <p class="cari-text" style="margin-top: 14px;">
-        CARI also identifies a systematic flaw in the prevailing chroma-cast evaluation metric — that desaturating the albedo artificially deflates the score — and decomposes it into two complementary measures: <strong>Cast<sub>rel</sub></strong> (illuminant invariance) and <strong>Chroma<sub>fid</sub></strong> (colour fidelity). With only 18.5 M trainable parameters — approximately <strong>70× fewer</strong> than diffusion-based baselines — and roughly <strong>5× faster</strong> inference, CARI delivers competitive results on MID, ARAP, MAW, and IIW benchmarks.
+        CARI also identifies a systematic flaw in the prevailing chroma-cast evaluation metric — that desaturating the albedo artificially deflates the score — and decomposes it into two complementary measures: <strong>Cast<sub>rel</sub></strong> (illuminant invariance) and <strong>Chroma<sub>fid</sub></strong> (colour fidelity). With only 18.5 M trainable parameters — approximately <strong>70× fewer</strong> than diffusion-based baselines — and roughly <strong>5× faster</strong> inference, CARI is the only model in our comparison that is simultaneously the most stable in lightness and the best calibrated in colour on MIDIntrinsics, and we report where it trails as well.
       </p>
     </div>
 
@@ -471,6 +516,15 @@
         </p>
       </div>
 
+      <div class="cari-figure">
+        <img src="../../images/research/cari-decomposition.jpg" alt="A real indoor photograph decomposed by our model into albedo, diffuse shading and an analytic residual">
+        <p class="fig-caption">
+          <strong>What the model outputs.</strong> One forward pass gives the albedo and the coloured diffuse
+          shading; the residual is then computed analytically, so specular highlights and clipped light sources
+          are accounted for without a third head.
+        </p>
+      </div>
+
       <div class="method-grid">
         <div class="method-card">
           <div class="method-card-icon">🔒</div>
@@ -481,9 +535,9 @@
         </div>
         <div class="method-card">
           <div class="method-card-icon">⚗️</div>
-          <div class="method-card-title">Physics-Typed Skip Connections</div>
+          <div class="method-card-title">A Colour Path, Made Safe</div>
           <div class="method-card-text">
-            RGB features are routed to the albedo head; luminance-only features to the shading head. This inductive bias aligns the model with the physics of colour image formation.
+            DINOv2 is trained to ignore lighting, so its tokens also discard the material colour the albedo needs. A full-resolution RGB skip feeds that colour back into the albedo head. On its own the skip is a liability, since illuminant hue flows straight down it; it is only safe <em>because</em> the invariance loss closes that route.
           </div>
         </div>
         <div class="method-card">
@@ -497,7 +551,7 @@
           <div class="method-card-icon">🧮</div>
           <div class="method-card-title">Analytic Residual</div>
           <div class="method-card-text">
-            The shading layer is computed analytically from the predicted albedo rather than from a separate head — reducing degrees of freedom and enforcing the albedo–shading relationship.
+            Albedo and shading each have a head; the non-diffuse residual does not. It follows from them as R&nbsp;=&nbsp;(I&nbsp;&minus;&nbsp;A&nbsp;&odot;&nbsp;S<sub>d</sub>)<sub>+</sub>, so highlights and clipped light sources are captured with no extra parameters and reconstruction holds by construction.
           </div>
         </div>
       </div>
@@ -505,8 +559,8 @@
       <div class="cari-figure" style="margin-top: 32px;">
         <img src="../../images/research/cari-architecture.jpg" alt="CARI architecture: frozen DINOv2-L/14 encoder, DPT decoder, and physics-typed albedo and shading heads with an analytic residual">
         <p class="fig-caption">
-          <strong>Model architecture.</strong> A frozen DINOv2-L/14 encoder feeds a DPT decoder that branches into a colour-fed albedo head
-          and a luminance-fed shading head. The residual R = (I − A⊙S<sub>d</sub>)₊ is analytic — no extra head — keeping the trained decoder at just 18.5 M parameters.
+          <strong>Model architecture.</strong> A frozen DINOv2-L/14 encoder feeds a DPT decoder that branches into an albedo head and a shading head. The albedo head additionally receives the
+          gamma-encoded input as a full-resolution RGB skip, which is what restores material colour &mdash; and what the invariance loss has to keep honest. The residual R = (I &minus; A&odot;S<sub>d</sub>)<sub>+</sub> is analytic, so there is no third head and the trained decoder stays at 18.5&nbsp;M parameters.
         </p>
       </div>
     </div>
@@ -536,27 +590,95 @@
     <!-- ── Results ─────────────────────────────────── -->
     <div class="cari-section">
       <p class="cari-section-title">Results</p>
-      <p class="cari-text" style="margin-bottom: 20px;">
-        CARI achieves competitive results on standard IID benchmarks (MID, ARAP, MAW, IIW) while being dramatically more efficient than recent diffusion-based approaches.
+      <p class="cari-text" style="margin-bottom: 22px;">
+        The headline result is a conjunction, not a clean sweep, and it is more interesting that way.
+        On the held-out MIDIntrinsics test split our model is the most stable in lightness and the best
+        calibrated in colour, but it is <em>not</em> the most hue-stable method in the comparison.
+        That gap is the point: the two methods that beat us on stability do it partly by discarding colour.
       </p>
 
-      <div class="results-grid">
+      <div class="cari-figure">
+        <img src="../../images/research/cari-chroma-fidelity.jpg" alt="Albedo predictions on two MID scenes compared with pseudo-ground-truth: our model retains the reference colour while CRefNet and a colour-path-off ablation are visibly desaturated">
+        <p class="fig-caption">
+          <strong>Why a low chroma-cast score can be misleading.</strong> Next to the pseudo-ground-truth albedo,
+          the two predictions with the lowest pooled chroma cast — our own colour-path-off ablation and CRefNet —
+          are visibly drained of colour. A prediction cannot drift in a dimension it has thrown away.
+          This is the observation that motivated splitting the metric in two.
+        </p>
+      </div>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>C<sub>mat</sub> &darr;</th>
+              <th>Chroma<sub>err</sub> &darr;</th>
+              <th>Cast<sub>rel</sub> &darr;</th>
+              <th>Chroma<sub>fid</sub> (&rarr;1)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-ours">
+              <td><strong>Ours (full model)</strong></td>
+              <td class="best">0.130</td><td class="best">0.121</td><td>0.421</td><td>0.941</td>
+            </tr>
+            <tr>
+              <td>Marigold-App</td>
+              <td>0.193</td><td>0.195</td><td class="best">0.355</td><td>0.728</td>
+            </tr>
+            <tr>
+              <td>Marigold-Light</td>
+              <td>0.546</td><td>0.154</td><td>0.392</td><td>1.148</td>
+            </tr>
+            <tr>
+              <td>CRefNet</td>
+              <td>0.151</td><td>0.201</td><td class="best">0.355</td><td>0.484</td>
+            </tr>
+            <tr>
+              <td>Ordinal Shading</td>
+              <td>0.252</td><td>0.148</td><td>0.549</td><td>0.924</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fig-caption" style="margin-top: 14px;">
+          <strong>MIDIntrinsics, 30-scene held-out test split.</strong>
+          C<sub>mat</sub> is lightness stability across illuminants and Cast<sub>rel</sub> is hue stability
+          (both lower is better). Chroma<sub>err</sub> is distance from the pseudo-ground-truth material colour.
+          Chroma<sub>fid</sub> is the share of reference colour spread a model retains: below 1 is greyed-out,
+          above 1 is over-saturated. CRefNet keeps under half.
+        </p>
+      </div>
+
+      <div class="cari-figure">
+        <img src="../../images/research/cari-tradeoff.jpg" alt="Scatter plot of cross-light hue drift against colour calibration error for five models">
+        <p class="fig-caption">
+          <strong>The trade-off, plotted.</strong> Lower is better on both axes. CRefNet and Marigold-App drift
+          less than we do, but sit far higher in calibration error. There is no single winner here, which is
+          exactly why we report both axes instead of one combined number.
+        </p>
+      </div>
+
+      <div class="results-grid" style="margin-top: 34px;">
         <div class="result-stat">
-          <div class="result-value">70×</div>
-          <div class="result-label">fewer trained parameters vs. diffusion baselines</div>
+          <div class="result-value">18.5<span style="font-size:0.55em;"> M</span></div>
+          <div class="result-label">trainable parameters &mdash; about 70&times; fewer than Marigold, 3.6&times; fewer than CRefNet</div>
         </div>
         <div class="result-stat">
-          <div class="result-value">~5×</div>
-          <div class="result-label">faster inference than diffusion-based IID</div>
+          <div class="result-value">~5&times;</div>
+          <div class="result-label">faster than Marigold at inference; about 3&times; faster than CRefNet</div>
         </div>
         <div class="result-stat">
           <div class="result-value">0.941</div>
-          <div class="result-label">Chroma<sub>fid</sub> — colour fidelity score</div>
+          <div class="result-label">of the reference colour spread retained, against CRefNet&rsquo;s 0.484</div>
         </div>
       </div>
 
-      <p class="cari-text" style="margin-top: 20px;">
-        The model is evaluated on the <strong>MID</strong>, <strong>ARAP</strong>, <strong>MAW</strong>, and <strong>IIW</strong> benchmarks, demonstrating that physics-grounded training constraints can match or exceed the performance of heavily overparameterised generative models — at a fraction of the cost.
+      <p class="cari-text" style="margin-top: 24px;">
+        The honest summary: our model is the only one in this comparison that is simultaneously best on
+        lightness stability and best on colour calibration, while staying within a fifth of the most
+        hue-stable method &mdash; and it does that with a frozen encoder and a decoder small enough to train
+        on one GPU. Benchmarks on ARAP, MAW and IIW are reported in the thesis.
       </p>
     </div>
 
