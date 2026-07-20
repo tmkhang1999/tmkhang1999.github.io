@@ -766,3 +766,186 @@ hr {
     gap: 3px;
   }
 }
+
+/* ── Research Items (thaoshibe style) ─────── */
+.research-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.research-item {
+  display: flex;
+  gap: 28px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+  align-items: flex-start;
+}
+
+.research-item:last-child {
+  border-bottom: none;
+}
+
+.research-thumb {
+  flex-shrink: 0;
+  width: 232px;
+  height: 142px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 1.45rem;
+  letter-spacing: -1px;
+  color: rgba(255,255,255,0.75);
+  background: #0b1220;
+  text-decoration: none !important;
+}
+
+.research-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+a.research-thumb:hover img {
+  transform: scale(1.06);
+}
+
+.research-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.research-award {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.77rem;
+  color: #fbbf24;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.research-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 6px;
+  text-decoration: none !important;
+  display: block;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+}
+
+.research-title:hover {
+  color: #38bdf8;
+}
+
+.research-tagline {
+  font-size: 0.83rem;
+  color: #64748b;
+  font-style: italic;
+  margin-bottom: 9px;
+}
+
+.research-authors {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.research-authors strong {
+  color: #e2e8f0;
+}
+
+.research-venue-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.venue-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+}
+
+.venue-badge.thesis {
+  background: rgba(167,139,250,0.12);
+  border: 1px solid rgba(167,139,250,0.28);
+  color: #a78bfa;
+}
+
+.venue-badge.conference {
+  background: rgba(56,189,248,0.09);
+  border: 1px solid rgba(56,189,248,0.22);
+  color: #38bdf8;
+}
+
+.venue-badge.research {
+  background: rgba(251,191,36,0.09);
+  border: 1px solid rgba(251,191,36,0.2);
+  color: #fbbf24;
+}
+
+.venue-badge.award {
+  background: rgba(251,191,36,0.13);
+  border: 1px solid rgba(251,191,36,0.32);
+  color: #fbbf24;
+}
+
+.research-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.research-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  color: #94a3b8 !important;
+  text-decoration: none !important;
+  font-size: 0.76rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.research-link:hover {
+  background: rgba(56,189,248,0.08);
+  border-color: rgba(56,189,248,0.28);
+  color: #38bdf8 !important;
+}
+
+.research-link i {
+  font-size: 0.68rem;
+}
+
+@media (max-width: 640px) {
+  .research-item {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .research-thumb {
+    width: 100%;
+    height: 148px;
+  }
+}
