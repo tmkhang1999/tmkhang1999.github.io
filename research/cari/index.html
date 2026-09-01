@@ -394,6 +394,13 @@
 
     .results-table .row-ours td:first-child { color: #38bdf8; }
     .results-table td.best { color: #38bdf8; font-weight: 700; }
+    .results-table .th-sub {
+      display: block;
+      font-size: 0.82em;
+      font-weight: 400;
+      color: #64748b;
+      margin-top: 3px;
+    }
     .results-table .ci {
       display: block;
       font-size: 0.68em;
@@ -1155,26 +1162,125 @@
         (MAW), dense reference albedo (ARAP) and relative reflectance judgements (IIW).
       </p>
 
-      <div class="results-grid">
-        <div class="result-stat">
-          <div class="result-value">3.98</div>
-          <div class="result-label">MAW ΔE<sub>00</sub> ↓<br>measured colour</div>
-        </div>
-        <div class="result-stat">
-          <div class="result-value">0.215</div>
-          <div class="result-label">ARAP mn-RMSE ↓<br>dense albedo</div>
-        </div>
-        <div class="result-stat">
-          <div class="result-value">0.264</div>
-          <div class="result-label">IIW WHDR ↓<br>relative reflectance</div>
-        </div>
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>MAW ΔE<sub>00</sub> ↓<br><span class="th-sub">measured colour</span></th>
+              <th>ARAP mn-RMSE ↓<br><span class="th-sub">dense albedo</span></th>
+              <th>IIW WHDR ↓<br><span class="th-sub">relative reflectance</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-ours">
+              <td>Ours (full)</td>
+              <td>3.981</td>
+              <td class="best">0.2150</td>
+              <td>0.264</td>
+            </tr>
+            <tr class="row-ours">
+              <td>Ours (base CARI)</td>
+              <td>4.155</td>
+              <td>0.2259</td>
+              <td>0.286</td>
+            </tr>
+            <tr>
+              <td>CRefNet</td>
+              <td>3.970</td>
+              <td>0.2916</td>
+              <td class="best">0.168<sup>†</sup></td>
+            </tr>
+            <tr>
+              <td>Marigold-App</td>
+              <td class="best">3.775</td>
+              <td>0.2529</td>
+              <td>0.193</td>
+            </tr>
+            <tr>
+              <td>Marigold-Light</td>
+              <td>4.214</td>
+              <td class="dim">0.6187</td>
+              <td>0.215</td>
+            </tr>
+            <tr>
+              <td>Ordinal Shading</td>
+              <td class="dim">6.884</td>
+              <td>—</td>
+              <td>0.257</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
-        Competitive with the local baselines across all three. CARI buys cross-light constancy without
-        paying for it in conventional accuracy — though trade-offs remain, and WHDR in particular
-        rewards relative lightness ordering and is blind to colour by construction, so it cannot
-        validate the constancy claim either way.
+        All rows run locally through one harness. We lead dense albedo accuracy (ARAP) and sit
+        within 0.2 ΔE of the best measured-colour score, so constancy is not being bought with
+        accuracy. We do not lead IIW — and <sup>†</sup>CRefNet is trained on the IIW training
+        split, so its WHDR is not zero-shot and is not comparable to ours. WHDR also reduces
+        albedo to a lightness ordering before scoring, making it blind to colour by construction:
+        it cannot validate or refute the constancy claim either way. Ordinal Shading has no local
+        ARAP row; the thesis reports its published figure separately rather than mixing protocols.
+      </p>
+
+      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">What it costs to run</h3>
+      <p class="cari-text">
+        The constraint is applied during training, so the deployed model is an ordinary
+        single-pass regressor.
+      </p>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Trained (M)</th>
+              <th>Total (M)</th>
+              <th>s / image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-ours">
+              <td>Ours (full)</td>
+              <td class="best">18.5</td>
+              <td>322.9</td>
+              <td class="best">0.148</td>
+            </tr>
+            <tr>
+              <td>CRefNet</td>
+              <td>66.6</td>
+              <td class="best">66.6</td>
+              <td>0.447</td>
+            </tr>
+            <tr>
+              <td>Ordinal Shading</td>
+              <td>~337</td>
+              <td>~337</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Marigold-App</td>
+              <td class="dim">~1290</td>
+              <td class="dim">1290</td>
+              <td>0.805</td>
+            </tr>
+            <tr>
+              <td>Marigold-Light</td>
+              <td class="dim">~1290</td>
+              <td class="dim">1290</td>
+              <td class="dim">0.982</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
+        Roughly <strong>70× fewer trained weights</strong> than the diffusion baselines and 3.6×
+        fewer than CRefNet, at 3–6.6× the speed. To be precise about what this does and does not
+        claim: the saving is in <em>weights that had to be trained</em>, because the DINOv2-L
+        backbone stays frozen. On <em>total</em> parameters we are not the small model — CRefNet
+        is 4.8× smaller. Timings are measured on one GPU at 512×512 through the same interface,
+        with Marigold at its recommended four denoising steps.
       </p>
     </section>
 
