@@ -538,6 +538,50 @@
     }
     .caveat-box strong { color: #fbbf24; }
 
+    /* Numbered contributions, stated up front under the abstract */
+    .contrib-heading {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin: 38px 0 4px;
+    }
+    .contrib-numbered {
+      list-style: none;
+      counter-reset: contrib;
+      padding: 0;
+      margin: 0;
+    }
+    .contrib-numbered li {
+      counter-increment: contrib;
+      position: relative;
+      padding: 16px 0 16px 46px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.45);
+      color: #cbd5e1;
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+    .contrib-numbered li:last-child { border-bottom: none; }
+    .contrib-numbered li::before {
+      content: counter(contrib);
+      position: absolute;
+      left: 0;
+      top: 17px;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      background: rgba(56, 189, 248, 0.09);
+      color: #38bdf8;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contrib-numbered strong { color: #f1f5f9; }
+
     /* Contribution list */
     .contrib-list { list-style: none; padding: 0; margin: 22px 0 0; }
     .contrib-list li {
@@ -691,6 +735,34 @@
         We separate invariance from fidelity, and the correction reverses the ranking of our own
         ablation.
       </p>
+
+      <h3 class="contrib-heading">Contributions</h3>
+      <ol class="contrib-numbered">
+        <li>
+          <strong>A training signal that comes from photographs, not priors.</strong>
+          Constancy is usually pursued by adding a regulariser and hoping it generalises. CARI
+          instead supplies the missing <em>evidence</em>: pairs of real photographs of one scene
+          under different lamps, with the albedo required to agree across the pair. The pairing
+          is a training-time constraint only — deployment is one image, one forward pass,
+          18.5M trainable parameters, 0.148&nbsp;s at 512×512.
+        </li>
+        <li>
+          <strong>A demonstration that the field's constancy metric is gameable, and a fix.</strong>
+          The standard chroma-cast score pools chromaticity across materials before taking its
+          variance, so a model scores better by desaturating — a fully grey albedo is perfectly
+          invariant. We split it into a scale-normalised invariance term and a fidelity term
+          anchored on reference chroma. The correction is not self-serving: applying it
+          <em>reversed the ranking of our own ablation</em>, and it is why this page reports that
+          two baselines beat us on invariance.
+        </li>
+        <li>
+          <strong>An evaluation that scores both axes at once.</strong>
+          Judged on stability alone, the most desaturated model wins; judged on accuracy alone,
+          cross-light drift is invisible. Scoring both together on four benchmarks shows where
+          the real trade-off sits — our model gives up some invariance to keep 94% of the
+          reference colour, while the two methods that lead invariance keep 48% and 73%.
+        </li>
+      </ol>
     </section>
 
     <div class="cari-divider"></div>
@@ -941,8 +1013,10 @@
       <p class="cari-text">
         Held-out MIDIntrinsics split, 30 scenes. All methods run through the identical evaluation
         harness, on raw un-white-balanced input. Bracketed ranges are 95% percentile-bootstrap
-        confidence intervals over scenes; <code>Chroma_fid</code> carries no interval in the thesis
-        table, so none is invented here.
+        intervals over scenes, showing scene-to-scene spread; <code>Chroma_fid</code> carries no
+        interval in the thesis table, so none is invented here. These are marginal intervals — the
+        method comparisons are <em>paired</em> (same scenes), and significance is established by a
+        paired bootstrap, not by whether these brackets overlap.
       </p>
 
       <div class="results-table-wrap">
@@ -1008,19 +1082,25 @@
              alt="Scatter plot of chroma drift against chroma error, with 95% bootstrap confidence intervals on both axes. CRefNet and Marigold-App sit at the lowest drift but with large chroma error and small bubbles indicating collapsed colour. Our models sit at moderate drift with the lowest chroma error and near-reference colour spread.">
         <p class="fig-caption">
           <strong>Where the trade-off actually sits.</strong> Bubble area is proportional to the
-          fraction of the reference chroma spread that survives; error bars are the same 95%
-          percentile-bootstrap intervals over scenes reported in the thesis, so the gaps that
-          matter are the ones the intervals don't overlap on.
+          fraction of the reference chroma spread that survives. Error bars are 95%
+          percentile-bootstrap intervals over scenes — they show how much each score varies from
+          scene to scene, which is large here. They are <em>not</em> a significance test: because
+          every method is scored on the same scenes, the comparisons are paired, and a paired
+          bootstrap resolves differences that these marginal intervals leave looking ambiguous.
+          The significance claims below come from that paired test.
         </p>
       </div>
 
       <div class="caveat-box">
-        <strong>We do not win invariance, and we should not claim to.</strong>
-        CRefNet and Marigold-App reach a lower Cast<sub>rel</sub> than we do (0.355 vs 0.421). But they
-        get there while retaining 48% and 73% of the reference chroma spread — their albedo is
-        substantially greyer than the scene. Our contribution is the balance: the best colour
-        calibration and the best luminance stability in this comparison, at 94% of the reference chroma
-        spread preserved.
+        <strong>Read the two columns together — that is the whole point.</strong>
+        We do <em>not</em> win invariance, and we should not claim to: CRefNet and Marigold-App reach
+        a lower Cast<sub>rel</sub> than we do (0.355 vs 0.421). But they get there while retaining
+        48% and 73% of the reference chroma spread, so their albedo is substantially greyer than the
+        scene actually is — a prediction cannot drift in a colour dimension it has already thrown
+        away. Our model has the <strong>best colour calibration</strong> (Chroma<sub>err</sub>
+        0.121, every external method significantly worse under the paired test) and the
+        <strong>best lightness stability</strong> (C<sub>mat</sub> 0.130), while keeping 94% of the
+        reference chroma spread. That conjunction — not any single column — is the result.
       </div>
 
       <div class="cari-figure">
