@@ -394,6 +394,13 @@
 
     .results-table .row-ours td:first-child { color: #38bdf8; }
     .results-table td.best { color: #38bdf8; font-weight: 700; }
+    .results-table .ci {
+      display: block;
+      font-size: 0.68em;
+      font-weight: 400;
+      color: #64748b;
+      margin-top: 2px;
+    }
 
     @media (max-width: 640px) {
       .results-table-wrap { overflow-x: auto; }
@@ -932,7 +939,9 @@
       <h2 class="cari-section-title">Stability and fidelity, scored together</h2>
       <p class="cari-text">
         Held-out MIDIntrinsics split, 30 scenes. All methods run through the identical evaluation
-        harness, on raw un-white-balanced input.
+        harness, on raw un-white-balanced input. Bracketed ranges are 95% percentile-bootstrap
+        confidence intervals over scenes; <code>Chroma_fid</code> carries no interval in the thesis
+        table, so none is invented here.
       </p>
 
       <div class="results-table-wrap">
@@ -949,44 +958,44 @@
           <tbody>
             <tr class="row-ours">
               <td>Ours (full)</td>
-              <td class="best">0.130</td>
-              <td class="best">0.121</td>
-              <td>0.421</td>
+              <td class="best">0.130<span class="ci">[.117–.144]</span></td>
+              <td class="best">0.121<span class="ci">[.102–.143]</span></td>
+              <td>0.421<span class="ci">[.357–.485]</span></td>
               <td>0.941</td>
             </tr>
             <tr class="row-ours">
               <td>Ours (base CARI)</td>
-              <td>0.157</td>
-              <td>0.129</td>
-              <td>0.425</td>
+              <td>0.157<span class="ci">[.141–.174]</span></td>
+              <td>0.129<span class="ci">[.109–.150]</span></td>
+              <td>0.425<span class="ci">[.360–.491]</span></td>
               <td class="best">0.999</td>
             </tr>
             <tr>
               <td>CRefNet</td>
-              <td>0.151</td>
-              <td>0.201</td>
-              <td class="best">0.355</td>
+              <td>0.151<span class="ci">[.138–.164]</span></td>
+              <td>0.201<span class="ci">[.165–.241]</span></td>
+              <td class="best">0.355<span class="ci">[.309–.406]</span></td>
               <td class="dim">0.484</td>
             </tr>
             <tr>
               <td>Marigold-App</td>
-              <td>0.193</td>
-              <td>0.195</td>
-              <td class="best">0.355</td>
+              <td>0.193<span class="ci">[.173–.214]</span></td>
+              <td>0.195<span class="ci">[.152–.245]</span></td>
+              <td class="best">0.355<span class="ci">[.309–.406]</span></td>
               <td class="dim">0.728</td>
             </tr>
             <tr>
               <td>Marigold-Light</td>
-              <td class="dim">0.546</td>
-              <td>0.154</td>
-              <td>0.392</td>
+              <td class="dim">0.546<span class="ci">[.462–.645]</span></td>
+              <td>0.154<span class="ci">[.124–.187]</span></td>
+              <td>0.392<span class="ci">[.333–.459]</span></td>
               <td>1.148</td>
             </tr>
             <tr>
               <td>Ordinal Shading</td>
-              <td>0.252</td>
-              <td>0.148</td>
-              <td class="dim">0.549</td>
+              <td>0.252<span class="ci">[.229–.279]</span></td>
+              <td>0.148<span class="ci">[.130–.166]</span></td>
+              <td class="dim">0.549<span class="ci">[.463–.637]</span></td>
               <td>0.924</td>
             </tr>
           </tbody>
@@ -995,10 +1004,12 @@
 
       <div class="cari-figure" style="margin-top:34px;">
         <img src="../../images/research/cari-tradeoff.jpg"
-             alt="Scatter plot of chroma drift against chroma error. CRefNet and Marigold-App sit at the lowest drift but with large chroma error and small bubbles indicating collapsed colour. Our models sit at moderate drift with the lowest chroma error and near-reference colour spread.">
+             alt="Scatter plot of chroma drift against chroma error, with 95% bootstrap confidence intervals on both axes. CRefNet and Marigold-App sit at the lowest drift but with large chroma error and small bubbles indicating collapsed colour. Our models sit at moderate drift with the lowest chroma error and near-reference colour spread.">
         <p class="fig-caption">
-          <strong>Where the trade-off actually sits.</strong> Bubble size is the fraction of the
-          reference chroma spread that survives.
+          <strong>Where the trade-off actually sits.</strong> Bubble area is proportional to the
+          fraction of the reference chroma spread that survives; error bars are the same 95%
+          percentile-bootstrap intervals over scenes reported in the thesis, so the gaps that
+          matter are the ones the intervals don't overlap on.
         </p>
       </div>
 
