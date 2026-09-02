@@ -623,6 +623,151 @@
 
     .result-value .unit { font-size: 0.62em; color: #64748b; font-weight: 600; }
     .results-table td.dim { color: #64748b; }
+
+    /* ══════════════════════════════════════════════════════════════════
+       LIGHT THEME (2026-09-02)
+
+       Academic project pages are white-backed: IntrinsicImageDiffusion,
+       ColorfulShading, RGB->X and Nerfies all compute to rgb(255,255,255).
+       Two practical reasons beyond convention: every figure on this page is
+       already a white-background thesis crop or LaTeX render, which on a dark
+       ground needed a white card and read as a double frame; and the same
+       figures are reused in the GitHub README, which is white.
+
+       The site navbar stays dark and fixed -- a dark header over a light
+       article is a normal pattern and keeps the page recognisably part of the
+       portfolio.
+       ══════════════════════════════════════════════════════════════════ */
+
+    body { background: #ffffff !important; }
+
+    .cari-page {
+      max-width: 1000px;
+      padding: 104px 24px 96px;
+      color: #1f2937;
+    }
+
+    /* Title block: centred, the way every reference page does it */
+    .paper-venue,
+    .paper-title,
+    .paper-authors,
+    .affiliations,
+    .paper-links { justify-content: center; text-align: center; }
+    .paper-venue  { display: flex; color: #6d28d9; }
+    .paper-title  { color: #111827; font-size: clamp(1.6rem, 4vw, 2.3rem); }
+    .paper-author { color: #374151; }
+    .paper-author strong { color: #111827; }
+    .paper-author:hover  { color: #1d4ed8; }
+    .author-num   { color: #6d28d9; }
+    .affil-item   { color: #6b7280; }
+    .affil-num    { color: #6d28d9; }
+
+    .paper-btn.primary {
+      background: #111827; border-color: #111827; color: #ffffff !important;
+    }
+    .paper-btn.primary:hover { background: #1f2937; border-color: #1f2937; }
+    .paper-btn.secondary {
+      background: #f3f4f6; border-color: #d1d5db; color: #374151 !important;
+    }
+    .paper-btn.secondary:hover { background: #e5e7eb; color: #111827 !important; }
+
+    /* Section rail */
+    .cari-toc {
+      background: linear-gradient(180deg, rgba(255,255,255,0.97) 60%, rgba(255,255,255,0));
+      justify-content: center;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .cari-toc a { color: #6b7280; }
+    .cari-toc a:hover { color: #1d4ed8; background: #eff6ff; }
+
+    /* Headings: plain and dark, not uppercase-blue-on-rule */
+    .cari-section-title {
+      color: #111827;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    .sec-eyebrow { color: #6d28d9; }
+    .cari-text   { color: #374151; font-size: 1rem; }
+    .cari-text strong { color: #111827; }
+    .cari-divider { border-top: 1px solid #e5e7eb; background: none; height: 0; }
+
+    /* Figures sit flush on the page -- no card, since they are already white */
+    .teaser-wrap {
+      background: none; border: none; padding: 0; margin-bottom: 44px;
+    }
+    .cari-figure img {
+      background: none;
+      padding: 0;
+      border: 1px solid #e5e7eb;
+    }
+    .fig-caption, .teaser-caption { color: #6b7280; }
+    .fig-caption strong { color: #374151; }
+    .fig-row img { background: none; border-color: #e5e7eb; }
+
+    /* Boxes */
+    .insight-box {
+      background: #f5f3ff; border-color: #ddd6fe;
+      border-left-color: #7c3aed; color: #4c1d95;
+    }
+    .insight-box strong { color: #5b21b6 !important; }
+    .caveat-box {
+      background: #fffbeb; border-color: #fde68a; color: #451a03;
+    }
+    .caveat-box strong { color: #b45309; }
+
+    .eq {
+      background: #f9fafb; border-color: #e5e7eb; color: #1f2937;
+    }
+    .eq .eq-name { color: #1d4ed8; }
+    .eq var { color: #111827; }
+    .eq .op { color: #6b7280; }
+    .eq-note { color: #6b7280; }
+
+    .metric-card {
+      background: #f9fafb; border-color: #e5e7eb; border-left-color: #1d4ed8;
+    }
+    .metric-card.fidelity { border-left-color: #b45309; }
+    .metric-name { color: #111827; }
+    .metric-name .arrow { color: #9ca3af; }
+    .metric-role { color: #1d4ed8; }
+    .metric-card.fidelity .metric-role { color: #b45309; }
+    .metric-desc { color: #4b5563; }
+
+    /* Stat tiles */
+    .result-stat { background: #f9fafb; border-color: #e5e7eb; }
+    .result-value { color: #4c1d95; }
+    .result-label { color: #6b7280; }
+    .result-value .unit { color: #9ca3af; }
+
+    /* Tables */
+    .results-table th { color: #6b7280; border-bottom-color: #d1d5db; }
+    .results-table .th-sub { color: #9ca3af; }
+    .results-table td { color: #374151; border-bottom-color: #f3f4f6; }
+    .results-table .row-ours td { background: #eff6ff; color: #1f2937; }
+    .results-table .row-ours td:first-child { color: #1d4ed8; }
+    .results-table td.best { color: #1d4ed8; }
+    .results-table td.dim { color: #9ca3af; }
+    .results-table .ci { color: #9ca3af; }
+
+    /* Contributions */
+    .contrib-heading { color: #6d28d9; }
+    .contrib-numbered li { color: #374151; border-bottom-color: #f3f4f6; }
+    .contrib-numbered li::before {
+      border-color: #bfdbfe; background: #eff6ff; color: #1d4ed8;
+    }
+    .contrib-numbered strong { color: #111827; }
+    .contrib-list li { color: #374151; }
+    .contrib-list li::before { background: #1d4ed8; }
+    .contrib-list strong { color: #111827; }
+
+    /* BibTeX stays a dark code block -- code reads better inverted */
+    .cari-footer { color: #6b7280; border-top-color: #e5e7eb; }
+    .cari-footer a { color: #1d4ed8; }
   </style>
 
   <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
@@ -1337,6 +1482,11 @@
              alt="Three failure crops: a hard shadow boundary retained as a material edge in the albedo, an unstable reflective surface, and a region where fine texture has been flattened away.">
         <p class="fig-caption">
           <strong>Three failure modes, each pointing at a different fix.</strong>
+          The middle panel is a cross-illuminant variation map, warm where the recovered albedo
+          moves most as the lamp changes: the instability lands squarely on the metal lid, the
+          glass, and the mirror ball, and not on the diffuse surfaces around them. It is a
+          localisation aid rather than a calibrated measurement — the colour scale is relative,
+          so read where it is warm, not how warm.
         </p>
       </div>
 
