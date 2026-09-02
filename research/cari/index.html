@@ -768,6 +768,24 @@
     /* BibTeX stays a dark code block -- code reads better inverted */
     .cari-footer { color: #6b7280; border-top-color: #e5e7eb; }
     .cari-footer a { color: #1d4ed8; }
+
+    /* Figures break out wider than the text column.
+
+       Text wants ~65-75 characters per line, which is the 1000px column. Wide
+       multi-panel figures do not: the all-methods matrix is 9 columns on a
+       ~3400px canvas, and at the text width its labels rendered around 7px.
+       Letting figures span 1240px lifts every one of them by ~30% and costs the
+       prose nothing. Falls back to full width once the viewport is narrower
+       than the breakout. */
+    @media (min-width: 1300px) {
+      .cari-figure,
+      .teaser-wrap,
+      .results-table-wrap {
+        width: 1240px;
+        margin-left: calc(50% - 620px);
+        margin-right: calc(50% - 620px);
+      }
+    }
   </style>
 
   <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
@@ -1308,10 +1326,26 @@
 
       <div class="cari-figure">
         <img src="../../images/research/cari-qualitative.jpg"
-             alt="Grid comparing input, ground-truth albedo, and predictions from our model, CRefNet, Marigold-App, Marigold-Light and Ordinal Shading across three lighting conditions of the same scene.">
+             alt="Grid comparing input, ground-truth albedo, and predictions from all seven methods across three lighting conditions of the same scene. Two regions are tracked with coloured boxes across every panel: a mirror-finish calibration sphere in red, and a dark jacket in blue.">
         <p class="fig-caption">
-          <strong>Held-out scene, three lamp settings.</strong> The methods differ in how much lamp
-          colour leaks into the material and how much genuine colour variation they keep.
+          <strong>Held-out scene, three lamp settings, all seven methods.</strong> Two regions are
+          boxed and tracked across every panel — a mirror-finish sphere (red) and a dark jacket
+          (blue) — both fixed in the scene, so any change between panels is the model's, not the
+          camera's. At this size the boxes are too small to read; zoomed below.
+        </p>
+      </div>
+
+      <div class="cari-figure">
+        <img src="../../images/research/cari-qualitative-crops.jpg"
+             alt="Full-resolution zoom of the mirror sphere and dark jacket regions, one row per method, one column per lamp setting. Ours, Ordinal Shading and CD-IID keep the sphere's reflection detail across all three lights; CRefNet, Marigold-App and RGB-to-X blow it out to flat white; Marigold-Light swings from near-black to grey to blown white.">
+        <p class="fig-caption">
+          <strong>The same two regions, at a size where the difference is legible.</strong>
+          The sphere is the sharper evidence: Ours, Ordinal Shading, and CD-IID keep its
+          reflection detail across all three lights, while CRefNet, Marigold-App, and RGB→X blow
+          it out to flat white, and Marigold-Light swings from near-black to grey to blown
+          white — the least stable prediction on a non-diffuse surface in this comparison. The
+          jacket is more equivocal: ours holds a consistent dark navy, and CD-IID is comparably
+          stable there, which is the same story the numbers already told.
         </p>
       </div>
 
