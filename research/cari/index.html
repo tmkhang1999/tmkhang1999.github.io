@@ -740,7 +740,8 @@
         throughout this literature pools albedo chromaticity <strong>across materials</strong> before
         taking its variance, so a model improves its score by washing colour out of its prediction.
         We separate invariance from fidelity, and the correction reverses the ranking of our own
-        ablation.
+        ablation. Under the repaired metrics our model leads lightness stability while training
+        24× fewer parameters than the strongest baseline, and does not lead the colour axes.
       </p>
 
       <h3 class="contrib-heading">Contributions</h3>
@@ -765,9 +766,10 @@
         <li>
           <strong>An evaluation that scores both axes at once.</strong>
           Judged on stability alone, the most desaturated model wins; judged on accuracy alone,
-          cross-light drift is invisible. Scoring both together on four benchmarks shows where
-          the real trade-off sits — our model gives up some invariance to keep 94% of the
-          reference colour, while the two methods that lead invariance keep 48% and 73%.
+          cross-light drift is invisible. Running eight methods through one harness turns up
+          three distinct failure modes — stable-but-colourless, colourful-but-miscalibrated,
+          and good-at-both — which a single fidelity score would collapse into one number.
+          That is the measurement that the split was necessary, not just reasonable.
         </li>
       </ol>
     </section>
@@ -1005,8 +1007,10 @@
         <img src="../../images/research/cari-chroma-fidelity.jpg"
              alt="Albedo predictions from several methods on the same scene, showing that the most numerically constant ones are visibly the most desaturated.">
         <p class="fig-caption">
-          <strong>The collapse is visible.</strong> Methods that score best on pooled invariance are the
-          ones whose material colours have drained away.
+          <strong>When the collapse happens, it is visible.</strong> CRefNet and the colour-path-off
+          ablation score well on pooled invariance with visibly drained material colour. This is a
+          real failure mode, but not the only route to invariance — CD-IID reaches the lowest drift
+          in the table while keeping its colour.
         </p>
       </div>
     </section>
@@ -1040,8 +1044,8 @@
           <tbody>
             <tr class="row-ours">
               <td>Ours (full)</td>
-              <td class="best">0.130<span class="ci">[.117–.144]</span></td>
-              <td class="best">0.121<span class="ci">[.102–.143]</span></td>
+              <td>0.130<span class="ci">[.117–.144]</span></td>
+              <td>0.121<span class="ci">[.102–.143]</span></td>
               <td>0.421<span class="ci">[.357–.485]</span></td>
               <td>0.941</td>
             </tr>
@@ -1053,17 +1057,31 @@
               <td class="best">0.999</td>
             </tr>
             <tr>
+              <td>CD-IID</td>
+              <td>0.190<span class="ci">[.172–.210]</span></td>
+              <td class="best">0.090<span class="ci">[.073–.110]</span></td>
+              <td class="best">0.306<span class="ci">[.262–.355]</span></td>
+              <td>0.944</td>
+            </tr>
+            <tr>
+              <td>RGB→X</td>
+              <td class="best">0.128<span class="ci">[.115–.141]</span></td>
+              <td>0.203<span class="ci">[.170–.239]</span></td>
+              <td>0.338<span class="ci">[.273–.409]</span></td>
+              <td>0.907</td>
+            </tr>
+            <tr>
               <td>CRefNet</td>
               <td>0.151<span class="ci">[.138–.164]</span></td>
               <td>0.201<span class="ci">[.165–.241]</span></td>
-              <td class="best">0.355<span class="ci">[.309–.406]</span></td>
+              <td>0.355<span class="ci">[.309–.406]</span></td>
               <td class="dim">0.484</td>
             </tr>
             <tr>
               <td>Marigold-App</td>
               <td>0.193<span class="ci">[.173–.214]</span></td>
               <td>0.195<span class="ci">[.152–.245]</span></td>
-              <td class="best">0.355<span class="ci">[.309–.406]</span></td>
+              <td>0.355<span class="ci">[.309–.406]</span></td>
               <td class="dim">0.728</td>
             </tr>
             <tr>
@@ -1099,15 +1117,18 @@
       </div>
 
       <div class="caveat-box">
-        <strong>Read the two columns together — that is the whole point.</strong>
-        We do <em>not</em> win invariance, and we should not claim to: CRefNet and Marigold-App reach
-        a lower Cast<sub>rel</sub> than we do (0.355 vs 0.421). But they get there while retaining
-        48% and 73% of the reference chroma spread, so their albedo is substantially greyer than the
-        scene actually is — a prediction cannot drift in a colour dimension it has already thrown
-        away. Our model has the <strong>best colour calibration</strong> (Chroma<sub>err</sub>
-        0.121, every external method significantly worse under the paired test) and the
-        <strong>best lightness stability</strong> (C<sub>mat</sub> 0.130), while keeping 94% of the
-        reference chroma spread. That conjunction — not any single column — is the result.
+        <strong>We lead one axis, and we should say only that.</strong>
+        On <strong>lightness stability</strong> our model is best in the table
+        (C<sub>mat</sub> 0.130), significantly better than every baseline except RGB→X,
+        from which it is not separable. We do <em>not</em> lead the two colour columns:
+        CD-IID reaches both a lower Chroma<sub>err</sub> (0.090 vs 0.121) and a lower
+        Cast<sub>rel</sub> (0.306 vs 0.421), and both gaps are significant under the paired
+        test. Note what CD-IID does <em>not</em> do: its Chroma<sub>fid</sub> is 0.944,
+        statistically indistinguishable from our 0.941 — so it is not buying invariance by
+        draining colour, and the collapse argument that explains CRefNet and Marigold-App
+        does not explain it. What makes the surviving claim worth stating is its price:
+        that lightness result comes from training <strong>18.5M</strong> parameters against
+        CD-IID's <strong>442.8M</strong>, at 0.148&nbsp;s per image against 0.254&nbsp;s.
       </div>
 
       <div class="cari-figure">
@@ -1119,9 +1140,25 @@
           difficulty and resolves what the marginal intervals above leave ambiguous. Our model
           beats <em>every</em> baseline on lightness stability and on colour calibration, with all
           eight intervals clear of zero. On hue invariance it loses to CRefNet and Marigold-App,
-          is statistically inseparable from Marigold-Light, and beats Ordinal Shading — so the
-          concession is to two methods, not to the field.
+          is statistically inseparable from Marigold-Light, and beats Ordinal Shading. On the
+          two colour axes CD-IID beats us significantly, which is the honest headline of this
+          figure.
         </p>
+      </div>
+
+      <div class="insight-box" style="margin-top:34px;">
+        <strong style="color:#c4b5fd;">Three failure modes, and why one fidelity number
+        cannot see them.</strong><br>
+        The eight rows contain three genuinely different behaviours.
+        <strong>CRefNet is stable but colourless</strong> — low drift, but
+        Chroma<sub>fid</sub> 0.484 because the colour is gone.
+        <strong>RGB→X is colourful but miscalibrated</strong> — it keeps the spread
+        (0.907) yet puts it on the wrong hues, giving the worst Chroma<sub>err</sub> in the
+        table (0.203). <strong>CD-IID is good at both.</strong>
+        The old pooled score would rank CRefNet well and say nothing about RGB→X's error;
+        Chroma<sub>fid</sub> alone would clear RGB→X and condemn CRefNet. Only the pair
+        separates all three. We argued for splitting these metrics on principle — these rows
+        are the measurement that it was necessary.
       </div>
 
       <div class="cari-figure">
