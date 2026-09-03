@@ -624,166 +624,198 @@
     .result-value .unit { font-size: 0.62em; color: #64748b; font-weight: 600; }
     .results-table td.dim { color: #64748b; }
 
+
     /* ══════════════════════════════════════════════════════════════════
-       LIGHT THEME (2026-09-02)
-
-       Academic project pages are white-backed: IntrinsicImageDiffusion,
-       ColorfulShading, RGB->X and Nerfies all compute to rgb(255,255,255).
-       Two practical reasons beyond convention: every figure on this page is
-       already a white-background thesis crop or LaTeX render, which on a dark
-       ground needed a white card and read as a double frame; and the same
-       figures are reused in the GitHub README, which is white.
-
-       The site navbar stays dark and fixed -- a dark header over a light
-       article is a normal pattern and keeps the page recognisably part of the
-       portfolio.
+       Palette sampled directly from ndming.github.io/publications/gs2m/
+       (light + dark screenshots, pixel-picked, not guessed):
+         bg light #FBFBFE · bg dark #1A1C1E
+         accent (author links / buttons) #BCDAF2, deepened to #2C5C7A on light
+         venue badge amber #FEB67B, deepened to #B5651D on light
+       GS-2M's own hero has no site nav (it's a bespoke single-paper app);
+       ours keeps the portfolio's shared navbar for site consistency and
+       restyles everything below it to match GS-2M's system.
        ══════════════════════════════════════════════════════════════════ */
-
-    body { background: #ffffff !important; }
-
-    .cari-page {
-      max-width: 1000px;
-      padding: 104px 24px 96px;
-      color: #1f2937;
+    :root {
+      --bg: #fbfbfe;
+      --fg: #1a1c1e;
+      --muted: #6b7280;
+      --line: #e4e7eb;
+      --card: #f4f6f8;
+      --accent: #2c5c7a;
+      --accent-bg: #dbeafb;
+      --amber: #b5651d;
+      --good: #2c5c7a;
+      --warn: #b5651d;
+    }
+    :root[data-theme="dark"] {
+      --bg: #1a1c1e;
+      --fg: #eef1f4;
+      --muted: #9aa4ad;
+      --line: #34383c;
+      --card: #232629;
+      --accent: #bcdaf2;
+      --accent-bg: #26333c;
+      --amber: #feb67b;
+      --good: #bcdaf2;
+      --warn: #feb67b;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1a1c1e; --fg: #eef1f4; --muted: #9aa4ad; --line: #34383c;
+        --card: #232629; --accent: #bcdaf2; --accent-bg: #26333c;
+        --amber: #feb67b; --good: #bcdaf2; --warn: #feb67b;
+      }
     }
 
-    /* Title block: centred, the way every reference page does it */
-    .paper-venue,
-    .paper-title,
-    .paper-authors,
-    .affiliations,
-    .paper-links { justify-content: center; text-align: center; }
-    .paper-venue  { display: flex; color: #6d28d9; }
-    .paper-title  { color: #111827; font-size: clamp(1.6rem, 4vw, 2.3rem); }
-    .paper-author { color: #374151; }
-    .paper-author strong { color: #111827; }
-    .paper-author:hover  { color: #1d4ed8; }
-    .author-num   { color: #6d28d9; }
-    .affil-item   { color: #6b7280; }
-    .affil-num    { color: #6d28d9; }
+    body { background: var(--bg); color: var(--fg); transition: background .2s ease, color .2s ease; }
 
-    .paper-btn.primary {
-      background: #111827; border-color: #111827; color: #ffffff !important;
-    }
-    .paper-btn.primary:hover { background: #1f2937; border-color: #1f2937; }
-    .paper-btn.secondary {
-      background: #f3f4f6; border-color: #d1d5db; color: #374151 !important;
-    }
-    .paper-btn.secondary:hover { background: #e5e7eb; color: #111827 !important; }
+    .cari-page { max-width: 980px; padding: 96px 24px 80px; color: var(--fg); }
 
-    /* Section rail */
+    /* theme toggle, top-right of the hero (GS-2M's sun/moon icon) */
+    .theme-toggle {
+      position: fixed; top: 70px; right: 24px; z-index: 45;
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--card); color: var(--fg);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 0.9rem;
+    }
+    .theme-toggle:hover { border-color: var(--accent); }
+
+    /* Hero: centred, matching GS-2M's title/author/affiliation/venue stack */
+    .paper-venue { display: none; }
+    .hero-venue {
+      text-align: center; font-weight: 700; color: var(--amber);
+      font-size: 0.92rem; margin: 6px 0 24px;
+    }
+    .paper-title {
+      color: var(--fg); text-align: center; font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 700; line-height: 1.25; margin-bottom: 28px;
+    }
+    .paper-authors { justify-content: center; text-align: center; margin-bottom: 6px; }
+    .paper-author { color: var(--accent) !important; font-size: 1.02rem; }
+    .paper-author strong { color: var(--accent) !important; font-weight: 600; }
+    .author-num { color: var(--muted); }
+    .affiliations { justify-content: center; margin-bottom: 4px; }
+    .affil-item { color: var(--muted); }
+    .affil-num { color: var(--muted); }
+
+    .paper-links { justify-content: center; margin-bottom: 48px; }
+    .paper-btn {
+      background: var(--accent-bg); border: 1px solid transparent; color: var(--accent) !important;
+      border-radius: 999px; font-weight: 600;
+    }
+    .paper-btn:hover { filter: brightness(0.97); }
+    :root[data-theme="dark"] .paper-btn:hover,
+    @media (prefers-color-scheme: dark) { .paper-btn:hover { filter: brightness(1.08); } }
+
     .cari-toc {
-      background: linear-gradient(180deg, rgba(255,255,255,0.97) 60%, rgba(255,255,255,0));
-      justify-content: center;
-      border-bottom: 1px solid #f3f4f6;
+      background: linear-gradient(180deg, var(--bg) 60%, transparent);
+      border-bottom: 1px solid var(--line);
     }
-    .cari-toc a { color: #6b7280; }
-    .cari-toc a:hover { color: #1d4ed8; background: #eff6ff; }
+    .cari-toc a { color: var(--muted); }
+    .cari-toc a:hover { color: var(--accent); background: var(--accent-bg); }
 
-    /* Headings: plain and dark, not uppercase-blue-on-rule */
-    .cari-section-title {
-      color: #111827;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-transform: none;
-      letter-spacing: -0.01em;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 12px;
-      margin-bottom: 20px;
+    .cari-section-title { color: var(--fg); border-bottom-color: var(--line); }
+    .sec-eyebrow { color: var(--amber); }
+    .cari-text { color: var(--fg); opacity: 0.88; }
+    .cari-text strong { color: var(--fg); opacity: 1; }
+    .cari-divider { border-top-color: var(--line); }
+
+    .cari-figure img { border-color: var(--line); }
+    .fig-caption, .teaser-caption { color: var(--muted); }
+    .fig-caption strong { color: var(--fg); }
+
+    .insight-box { background: var(--accent-bg); border-color: var(--line); border-left-color: var(--accent); color: var(--fg); }
+    .insight-box strong { color: var(--accent) !important; }
+    .caveat-box { background: var(--card); border-color: var(--line); color: var(--fg); border-left: 3px solid var(--amber); }
+    .caveat-box strong { color: var(--amber); }
+
+    .eq { background: var(--card); border-color: var(--line); color: var(--fg); }
+    .eq .eq-name { color: var(--accent); }
+    .eq var { color: var(--fg); }
+    .eq .op { color: var(--muted); }
+    .eq-note { color: var(--muted); }
+
+    .metric-card { background: var(--card); border-color: var(--line); border-left-color: var(--accent); }
+    .metric-card.fidelity { border-left-color: var(--amber); }
+    .metric-name { color: var(--fg); }
+    .metric-role { color: var(--accent); }
+    .metric-card.fidelity .metric-role { color: var(--amber); }
+    .metric-desc { color: var(--muted); }
+
+    .result-stat { background: var(--card); border-color: var(--line); }
+    .result-value { color: var(--accent); }
+    .result-label { color: var(--muted); }
+
+    .results-table th { color: var(--muted); border-bottom-color: var(--line); }
+    .results-table .th-sub { color: var(--muted); opacity: 0.7; }
+    .results-table td { color: var(--fg); border-bottom-color: var(--line); }
+    .results-table .row-ours td { background: var(--accent-bg); }
+    .results-table .row-ours td:first-child { color: var(--accent); }
+    .results-table td.best { color: var(--accent); font-weight: 700; }
+    .results-table td.dim { color: var(--muted); }
+    .results-table .ci { color: var(--muted); }
+
+    /* GS-2M's exact 1st/2nd/3rd/Rest legend, under every ranked table */
+    .rank-legend {
+      display: flex; justify-content: center; gap: 22px; margin: 14px 0 8px;
+      font-size: 0.82rem; color: var(--muted);
     }
-    .sec-eyebrow { color: #6d28d9; }
-    .cari-text   { color: #374151; font-size: 1rem; }
-    .cari-text strong { color: #111827; }
-    .cari-divider { border-top: 1px solid #e5e7eb; background: none; height: 0; }
+    .rank-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .rank-legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .rank-legend .r1 i { background: var(--accent); }
+    .rank-legend .r2 i { background: var(--accent); opacity: 0.6; }
+    .rank-legend .r3 i { background: var(--accent); opacity: 0.32; }
+    .rank-legend .r4 i { background: var(--muted); opacity: 0.4; }
 
-    /* Figures sit flush on the page -- no card, since they are already white */
-    .teaser-wrap {
-      background: none; border: none; padding: 0; margin-bottom: 44px;
+    .contrib-heading { color: var(--amber); }
+    .contrib-numbered li { color: var(--fg); border-bottom-color: var(--line); }
+    .contrib-numbered li::before { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+    .contrib-numbered strong { color: var(--fg); }
+
+    .cari-footer { color: var(--muted); border-top-color: var(--line); }
+    .cari-footer a { color: var(--accent); }
+
+    /* ── Comparison widget: GS-2M's "Ours vs. baseline, cycle scenes" pattern,
+       rebuilt with static images since our output is 2D albedo, not a live
+       3D mesh -- there is nothing to render, so a flip + arrows over real
+       precomputed frames is the honest equivalent. ── */
+    .compare-widget { margin: 28px 0; }
+    .compare-tabs {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+      border: 1px solid var(--line); border-radius: 999px; padding: 4px;
+      width: fit-content; margin: 0 auto 18px;
+      background: var(--card);
     }
-    .cari-figure img {
-      background: none;
-      padding: 0;
-      border: 1px solid #e5e7eb;
-      /* Cap on HEIGHT, not just width. Every figure was width:100% of the
-         column, so a near-square figure (cari-qualitative-crops is 0.89:1)
-         rendered over 1000px tall and swallowed a full viewport, while a wide
-         strip like the teaser (3.4:1) sat at a sensible 278px. Capping the
-         height lets tall figures shrink instead of dominating; wide ones are
-         unaffected because they never reach the cap. */
-      max-height: 560px;
-      width: auto;
-      max-width: 100%;
-      margin: 0 auto;
+    .compare-tabs button {
+      border: none; background: none; padding: 7px 16px; border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; color: var(--muted); cursor: pointer;
     }
-
-    /* One exemption. The detail-zoom figure exists precisely so the tracked
-       regions are legible; the 560px cap put it back at 0.37x, which undoes
-       its only reason to exist. It is inherently portrait (7 methods x 3
-       lights, two regions side by side), so it gets a taller cap. */
-    .cari-figure.detail-zoom img { max-height: 820px; }
-    .fig-caption, .teaser-caption { color: #6b7280; }
-    .fig-caption strong { color: #374151; }
-    .fig-row img { background: none; border-color: #e5e7eb; }
-
-    /* Boxes */
-    .insight-box {
-      background: #f5f3ff; border-color: #ddd6fe;
-      border-left-color: #7c3aed; color: #4c1d95;
+    .compare-tabs button.active { background: var(--accent-bg); color: var(--accent); }
+    .compare-stage {
+      position: relative; border: 1px solid var(--line); border-radius: 12px;
+      overflow: hidden; background: var(--card);
     }
-    .insight-box strong { color: #5b21b6 !important; }
-    .caveat-box {
-      background: #fffbeb; border-color: #fde68a; color: #451a03;
+    .compare-stage img { display: block; width: 100%; height: auto; }
+    .compare-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; color: var(--fg);
     }
-    .caveat-box strong { color: #b45309; }
-
-    .eq {
-      background: #f9fafb; border-color: #e5e7eb; color: #1f2937;
+    :root[data-theme="dark"] .compare-nav { background: rgba(26,28,30,0.85); }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .compare-nav { background: rgba(26,28,30,0.85); }
     }
-    .eq .eq-name { color: #1d4ed8; }
-    .eq var { color: #111827; }
-    .eq .op { color: #6b7280; }
-    .eq-note { color: #6b7280; }
-
-    .metric-card {
-      background: #f9fafb; border-color: #e5e7eb; border-left-color: #1d4ed8;
+    .compare-nav.prev { left: 14px; }
+    .compare-nav.next { right: 14px; }
+    .compare-caption {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-top: 10px; font-size: 0.85rem; color: var(--muted);
     }
-    .metric-card.fidelity { border-left-color: #b45309; }
-    .metric-name { color: #111827; }
-    .metric-name .arrow { color: #9ca3af; }
-    .metric-role { color: #1d4ed8; }
-    .metric-card.fidelity .metric-role { color: #b45309; }
-    .metric-desc { color: #4b5563; }
+    .compare-caption strong { color: var(--fg); }
 
-    /* Stat tiles */
-    .result-stat { background: #f9fafb; border-color: #e5e7eb; }
-    .result-value { color: #4c1d95; }
-    .result-label { color: #6b7280; }
-    .result-value .unit { color: #9ca3af; }
-
-    /* Tables */
-    .results-table th { color: #6b7280; border-bottom-color: #d1d5db; }
-    .results-table .th-sub { color: #9ca3af; }
-    .results-table td { color: #374151; border-bottom-color: #f3f4f6; }
-    .results-table .row-ours td { background: #eff6ff; color: #1f2937; }
-    .results-table .row-ours td:first-child { color: #1d4ed8; }
-    .results-table td.best { color: #1d4ed8; }
-    .results-table td.dim { color: #9ca3af; }
-    .results-table .ci { color: #9ca3af; }
-
-    /* Contributions */
-    .contrib-heading { color: #6d28d9; }
-    .contrib-numbered li { color: #374151; border-bottom-color: #f3f4f6; }
-    .contrib-numbered li::before {
-      border-color: #bfdbfe; background: #eff6ff; color: #1d4ed8;
-    }
-    .contrib-numbered strong { color: #111827; }
-    .contrib-list li { color: #374151; }
-    .contrib-list li::before { background: #1d4ed8; }
-    .contrib-list strong { color: #111827; }
-
-    /* BibTeX stays a dark code block -- code reads better inverted */
-    .cari-footer { color: #6b7280; border-top-color: #e5e7eb; }
-    .cari-footer a { color: #1d4ed8; }
 
     /* Figures break out wider than the text column.
 
@@ -826,10 +858,11 @@
   <div class="cari-page">
 
     <!-- ── Title Block ─────────────────────────────── -->
-    <div class="paper-venue">
-      <i class="fas fa-graduation-cap" style="font-size:0.8rem;"></i>
-      Master's Thesis &nbsp;·&nbsp; COSI / NTNU &nbsp;·&nbsp; 2026
-    </div>
+    <button class="theme-toggle" id="themeToggle" title="Toggle light / dark" aria-label="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="hero-venue">Master's Thesis &nbsp;·&nbsp; COSI / NTNU &nbsp;·&nbsp; 2026</div>
 
     <h1 class="paper-title">
       Coloured Illumination Constancy in Intrinsic Image Decomposition
@@ -1267,6 +1300,11 @@
           </tbody>
         </table>
       </div>
+      <div class="rank-legend">
+        <span class="r1"><i></i>Best in column</span>
+        <span class="r4"><i></i>Not leading</span>
+      </div>
+
 
       <div class="cari-figure" style="margin-top:34px;">
         <img src="../../images/research/cari-tradeoff.jpg"
@@ -1343,6 +1381,25 @@
           blown white. The jacket separates less: CD-IID is as stable there as we are — the same
           story the numbers tell.
         </p>
+      </div>
+
+      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Try it yourself</h3>
+      <p class="cari-text">
+        Pick a baseline, flip between it and Ours, step through four held-out scenes. All nine
+        images per scene are real predictions from the checkpoints above — nothing here is staged.
+      </p>
+
+      <div class="compare-widget" id="compareWidget">
+        <div class="compare-tabs" id="compareTabs"></div>
+        <div class="compare-stage">
+          <button class="compare-nav prev" id="cmpPrev" aria-label="Previous scene">&#8249;</button>
+          <img id="cmpImg" src="" alt="Comparison view">
+          <button class="compare-nav next" id="cmpNext" aria-label="Next scene">&#8250;</button>
+        </div>
+        <div class="compare-caption">
+          <span id="cmpSceneLabel"></span>
+          <span><strong id="cmpModelLabel"></strong></span>
+        </div>
       </div>
 
       <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Does CARI cause the gain?</h3>
@@ -1424,6 +1481,11 @@
           </tbody>
         </table>
       </div>
+      <div class="rank-legend">
+        <span class="r1"><i></i>Best in column</span>
+        <span class="r4"><i></i>Not leading</span>
+      </div>
+
 
       <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
         All rows run locally through one harness. We lead dense albedo accuracy and sit within
@@ -1483,6 +1545,11 @@
           </tbody>
         </table>
       </div>
+      <div class="rank-legend">
+        <span class="r1"><i></i>Best in column</span>
+        <span class="r4"><i></i>Not leading</span>
+      </div>
+
 
       <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
         Roughly <strong>70× fewer trained weights</strong> than the diffusion baselines, at 3–6.6×
@@ -1574,6 +1641,68 @@
   </div>
 
   <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const icon = btn.querySelector('i');
+      const stored = localStorage.getItem('cari-theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function apply(theme) {
+        if (theme) root.setAttribute('data-theme', theme);
+        else root.removeAttribute('data-theme');
+        const isDark = theme ? theme === 'dark' : systemDark;
+        icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      }
+      apply(stored);
+      btn.addEventListener('click', function () {
+        const current = root.getAttribute('data-theme') || (systemDark ? 'dark' : 'light');
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('cari-theme', next);
+        apply(next);
+      });
+    })();
+
+    (function () {
+      const tabsEl = document.getElementById('compareTabs');
+      const imgEl = document.getElementById('cmpImg');
+      const sceneLbl = document.getElementById('cmpSceneLabel');
+      const modelLbl = document.getElementById('cmpModelLabel');
+      const base = '../../images/research/compare/';
+      let manifest = null, sceneIdx = 0, model = 'Ours';
+
+      function render() {
+        if (!manifest) return;
+        const row = manifest.scenes[sceneIdx];
+        imgEl.src = base + row[model];
+        sceneLbl.textContent = `${row.scene}  ·  scene ${sceneIdx + 1} of ${manifest.scenes.length}`;
+        modelLbl.textContent = model;
+        [...tabsEl.children].forEach(b => b.classList.toggle('active', b.dataset.model === model));
+      }
+
+      fetch(base + 'manifest.json').then(r => r.json()).then(m => {
+        manifest = m;
+        tabsEl.innerHTML = m.models.map(name =>
+          `<button data-model="${name}">${name}</button>`).join('');
+        [...tabsEl.children].forEach(b => b.addEventListener('click', () => {
+          model = b.dataset.model; render();
+        }));
+        render();
+      }).catch(() => {
+        document.getElementById('compareWidget').style.display = 'none';
+      });
+
+      document.getElementById('cmpPrev').addEventListener('click', () => {
+        if (!manifest) return;
+        sceneIdx = (sceneIdx - 1 + manifest.scenes.length) % manifest.scenes.length;
+        render();
+      });
+      document.getElementById('cmpNext').addEventListener('click', () => {
+        if (!manifest) return;
+        sceneIdx = (sceneIdx + 1) % manifest.scenes.length;
+        render();
+      });
+    })();
+
     function copyBibtex(btn) {
       const text = document.getElementById('bibtex-src').innerText;
       navigator.clipboard.writeText(text).then(function () {
