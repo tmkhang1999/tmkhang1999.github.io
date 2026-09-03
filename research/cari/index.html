@@ -704,7 +704,23 @@
       background: none;
       padding: 0;
       border: 1px solid #e5e7eb;
+      /* Cap on HEIGHT, not just width. Every figure was width:100% of the
+         column, so a near-square figure (cari-qualitative-crops is 0.89:1)
+         rendered over 1000px tall and swallowed a full viewport, while a wide
+         strip like the teaser (3.4:1) sat at a sensible 278px. Capping the
+         height lets tall figures shrink instead of dominating; wide ones are
+         unaffected because they never reach the cap. */
+      max-height: 560px;
+      width: auto;
+      max-width: 100%;
+      margin: 0 auto;
     }
+
+    /* One exemption. The detail-zoom figure exists precisely so the tracked
+       regions are legible; the 560px cap put it back at 0.37x, which undoes
+       its only reason to exist. It is inherently portrait (7 methods x 3
+       lights, two regions side by side), so it gets a taller cap. */
+    .cari-figure.detail-zoom img { max-height: 820px; }
     .fig-caption, .teaser-caption { color: #6b7280; }
     .fig-caption strong { color: #374151; }
     .fig-row img { background: none; border-color: #e5e7eb; }
@@ -899,12 +915,10 @@
         image through a single forward pass.
       </p>
       <p class="cari-text">
-        Evaluating the claim required repairing how it is measured. The chroma-cast score used
-        throughout this literature pools albedo chromaticity <strong>across materials</strong> before
-        taking its variance, so a model improves its score by washing colour out of its prediction.
-        We separate invariance from fidelity, and the correction reverses the ranking of our own
-        ablation. Under the repaired metrics our model leads lightness stability while training
-        24× fewer parameters than the strongest baseline, and does not lead the colour axes.
+        Evaluating that claim meant first repairing how it is measured, because the field's
+        constancy score rewards a model for discarding colour. Under the repaired metrics our
+        model leads lightness stability while training 24× fewer parameters than the strongest
+        baseline — and does not lead the colour axes.
       </p>
 
       <h3 class="contrib-heading">Contributions</h3>
@@ -919,12 +933,11 @@
         </li>
         <li>
           <strong>A demonstration that the field's constancy metric is gameable, and a fix.</strong>
-          The standard chroma-cast score pools chromaticity across materials before taking its
-          variance, so a model scores better by desaturating — a fully grey albedo is perfectly
-          invariant. We split it into a scale-normalised invariance term and a fidelity term
-          anchored on reference chroma. The correction is not self-serving: applying it
-          <em>reversed the ranking of our own ablation</em>, and it is why this page reports that
-          two baselines beat us on invariance.
+          The standard score pools chromaticity across materials before taking its variance, so a
+          model improves it by desaturating — a fully grey albedo is perfectly invariant. We split
+          it into a scale-normalised invariance term and a fidelity term anchored on reference
+          chroma. The correction is not self-serving: applying it <em>reversed the ranking of our
+          own ablation</em>, and it is why this page reports baselines beating us.
         </li>
         <li>
           <strong>An evaluation that scores both axes at once.</strong>
@@ -1116,16 +1129,6 @@
         quantity the task exists to recover.
       </div>
 
-      <div class="cari-figure">
-        <img src="../../images/research/cari-metric.jpg"
-             alt="One scene under three lamp settings. Columns: input, ground-truth albedo, our prediction, and CRefNet's prediction. CRefNet's albedo is visibly drained of colour compared to the ground truth.">
-        <p class="fig-caption">
-          <strong>Invariance won the wrong way.</strong> One scene under three lamp settings. CRefNet's
-          albedo barely moves across the row — but compare it with the ground truth and the reason is
-          clear: there is far less colour left in it to move.
-        </p>
-      </div>
-
       <p class="cari-text">
         So we score two questions separately, and require a method to answer both.
       </p>
@@ -1298,14 +1301,10 @@
         <img src="../../images/research/cari-paired.jpg"
              alt="Three panels of paired differences with 95% bootstrap intervals. On lightness stability and colour calibration our model beats all four baselines with intervals clear of zero. On hue invariance CRefNet and Marigold-App beat us significantly, Marigold-Light is not separable, and we beat Ordinal Shading.">
         <p class="fig-caption">
-          <strong>The same comparison, tested properly.</strong> Because every method is scored on
-          the same 30 scenes, the difference can be taken scene by scene, which cancels scene
-          difficulty and resolves what the marginal intervals above leave ambiguous. Our model
-          beats <em>every</em> baseline on lightness stability and on colour calibration, with all
-          eight intervals clear of zero. On hue invariance it loses to CRefNet and Marigold-App,
-          is statistically inseparable from Marigold-Light, and beats Ordinal Shading. On the
-          two colour axes CD-IID beats us significantly, which is the honest headline of this
-          figure.
+          <strong>The same comparison, tested per scene.</strong> An interval clear of zero is a
+          real difference. We beat every baseline on lightness stability; on hue invariance we
+          lose to CRefNet and Marigold-App, tie Marigold-Light, and beat Ordinal Shading; and
+          CD-IID beats us on both colour axes.
         </p>
       </div>
 
@@ -1328,24 +1327,21 @@
         <img src="../../images/research/cari-qualitative.jpg"
              alt="Grid comparing input, ground-truth albedo, and predictions from all seven methods across three lighting conditions of the same scene. Two regions are tracked with coloured boxes across every panel: a mirror-finish calibration sphere in red, and a dark jacket in blue.">
         <p class="fig-caption">
-          <strong>Held-out scene, three lamp settings, all seven methods.</strong> Two regions are
-          boxed and tracked across every panel — a mirror-finish sphere (red) and a dark jacket
-          (blue) — both fixed in the scene, so any change between panels is the model's, not the
-          camera's. At this size the boxes are too small to read; zoomed below.
+          <strong>Held-out scene, three lamp settings, all seven methods.</strong> Two fixed regions
+          are tracked across every panel — a mirror sphere (red) and a dark jacket (blue) — so any
+          change between panels is the model's, not the camera's. Zoomed below.
         </p>
       </div>
 
-      <div class="cari-figure">
+      <div class="cari-figure detail-zoom">
         <img src="../../images/research/cari-qualitative-crops.jpg"
              alt="Full-resolution zoom of the mirror sphere and dark jacket regions, one row per method, one column per lamp setting. Ours, Ordinal Shading and CD-IID keep the sphere's reflection detail across all three lights; CRefNet, Marigold-App and RGB-to-X blow it out to flat white; Marigold-Light swings from near-black to grey to blown white.">
         <p class="fig-caption">
-          <strong>The same two regions, at a size where the difference is legible.</strong>
-          The sphere is the sharper evidence: Ours, Ordinal Shading, and CD-IID keep its
-          reflection detail across all three lights, while CRefNet, Marigold-App, and RGB→X blow
-          it out to flat white, and Marigold-Light swings from near-black to grey to blown
-          white — the least stable prediction on a non-diffuse surface in this comparison. The
-          jacket is more equivocal: ours holds a consistent dark navy, and CD-IID is comparably
-          stable there, which is the same story the numbers already told.
+          <strong>The two regions, enlarged.</strong> The sphere is the sharper evidence: Ours,
+          Ordinal Shading and CD-IID keep its reflection across all three lights, while CRefNet,
+          Marigold-App and RGB→X blow it to flat white and Marigold-Light swings near-black to
+          blown white. The jacket separates less: CD-IID is as stable there as we are — the same
+          story the numbers tell.
         </p>
       </div>
 
@@ -1430,13 +1426,11 @@
       </div>
 
       <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
-        All rows run locally through one harness. We lead dense albedo accuracy (ARAP) and sit
-        within 0.2 ΔE of the best measured-colour score, so constancy is not being bought with
-        accuracy. We do not lead IIW — and <sup>†</sup>CRefNet is trained on the IIW training
-        split, so its WHDR is not zero-shot and is not comparable to ours. WHDR also reduces
-        albedo to a lightness ordering before scoring, making it blind to colour by construction:
-        it cannot validate or refute the constancy claim either way. Ordinal Shading has no local
-        ARAP row; the thesis reports its published figure separately rather than mixing protocols.
+        All rows run locally through one harness. We lead dense albedo accuracy and sit within
+        0.2&nbsp;ΔE of the best measured-colour score, so constancy is not being bought with
+        accuracy. <sup>†</sup>CRefNet trains on the IIW split, so its WHDR is not zero-shot and
+        not comparable to ours; WHDR is in any case blind to colour by construction and cannot
+        settle the constancy claim either way.
       </p>
 
       <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">What it costs to run</h3>
@@ -1491,12 +1485,10 @@
       </div>
 
       <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
-        Roughly <strong>70× fewer trained weights</strong> than the diffusion baselines and 3.6×
-        fewer than CRefNet, at 3–6.6× the speed. To be precise about what this does and does not
-        claim: the saving is in <em>weights that had to be trained</em>, because the DINOv2-L
-        backbone stays frozen. On <em>total</em> parameters we are not the small model — CRefNet
-        is 4.8× smaller. Timings are measured on one GPU at 512×512 through the same interface,
-        with Marigold at its recommended four denoising steps.
+        Roughly <strong>70× fewer trained weights</strong> than the diffusion baselines, at 3–6.6×
+        the speed. The saving is in <em>weights that had to be trained</em> — the DINOv2-L backbone
+        stays frozen — not in deployed size: on total parameters CRefNet is 4.8× smaller than we
+        are. Timed on one GPU at 512×512 through the same interface.
       </p>
     </section>
 
