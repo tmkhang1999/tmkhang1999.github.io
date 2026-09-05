@@ -817,16 +817,18 @@
     .compare-caption strong { color: var(--fg); }
 
 
-    /* Figures break out wider than the text column.
-
-       Text wants ~65-75 characters per line, which is the 1000px column. Wide
-       multi-panel figures do not: the all-methods matrix is 9 columns on a
-       ~3400px canvas, and at the text width its labels rendered around 7px.
-       Letting figures span 1240px lifts every one of them by ~30% and costs the
-       prose nothing. Falls back to full width once the viewport is narrower
-       than the breakout. */
+    /* Breakout is opt-in (.wide-matrix), not automatic, and applies to exactly
+       one figure: the all-methods comparison, which is 9 columns on a
+       ~1900px canvas and needs the extra width for its column labels to stay
+       legible. Every other figure stays at column width -- most are 2-6
+       panels with large captions that don't need it, and several are
+       portrait/near-square (baselines, qualitative-crops), where the extra
+       33% width only makes them 33% taller for no legibility gain. Applying
+       the same breakout to every figure indiscriminately made the page read
+       as figure-heavy relative to its prose; this scopes it back to the one
+       figure that actually earns it. */
     @media (min-width: 1300px) {
-      .cari-figure,
+      .wide-matrix,
       .teaser-wrap,
       .results-table-wrap {
         width: 1240px;
@@ -921,12 +923,10 @@
     <!-- ── Section rail ────────────────────────────── -->
     <nav class="cari-toc">
       <a href="#abstract">Abstract</a>
-      <a href="#problem">Problem</a>
-      <a href="#evidence">Evidence</a>
+      <a href="#demo">See it work</a>
+      <a href="#problem">The idea</a>
       <a href="#method">Method</a>
-      <a href="#metrics">Measuring it</a>
       <a href="#results">Results</a>
-      <a href="#limits">Limitations</a>
       <a href="#bibtex">BibTeX</a>
     </nav>
 
@@ -949,38 +949,52 @@
       </p>
       <p class="cari-text">
         Evaluating that claim meant first repairing how it is measured, because the field's
-        constancy score rewards a model for discarding colour. Under the repaired metrics our
-        model leads lightness stability while training 24× fewer parameters than the strongest
-        baseline — and does not lead the colour axes.
+        constancy score rewards a model for discarding colour entirely — a fully grey albedo
+        scores as perfectly invariant. Under the repaired metric, our model leads lightness
+        stability while training <strong>24× fewer parameters</strong> than the strongest
+        baseline. It does not lead the colour axes, and this page says so.
+      </p>
+    </section>
+
+    <div class="cari-divider"></div>
+
+    <!-- ── Demo (promoted ahead of the explanation — this is the payoff) ── -->
+    <section class="cari-section" id="demo">
+      <div class="sec-eyebrow">See it work</div>
+      <h2 class="cari-section-title">Same scene, three lamps, nine methods</h2>
+      <p class="cari-text">
+        Before the method or the numbers: this is what "the material colour shouldn't change
+        when the light does" looks like in practice, and what happens when a model gets it wrong.
       </p>
 
-      <h3 class="contrib-heading">Contributions</h3>
-      <ol class="contrib-numbered">
-        <li>
-          <strong>A training signal that comes from photographs, not priors.</strong>
-          Constancy is usually pursued by adding a regulariser and hoping it generalises. CARI
-          instead supplies the missing <em>evidence</em>: pairs of real photographs of one scene
-          under different lamps, with the albedo required to agree across the pair. The pairing
-          is a training-time constraint only — deployment is one image, one forward pass,
-          18.5M trainable parameters, 0.148&nbsp;s at 512×512.
-        </li>
-        <li>
-          <strong>A demonstration that the field's constancy metric is gameable, and a fix.</strong>
-          The standard score pools chromaticity across materials before taking its variance, so a
-          model improves it by desaturating — a fully grey albedo is perfectly invariant. We split
-          it into a scale-normalised invariance term and a fidelity term anchored on reference
-          chroma. The correction is not self-serving: applying it <em>reversed the ranking of our
-          own ablation</em>, and it is why this page reports baselines beating us.
-        </li>
-        <li>
-          <strong>An evaluation that scores both axes at once.</strong>
-          Judged on stability alone, the most desaturated model wins; judged on accuracy alone,
-          cross-light drift is invisible. Running eight methods through one harness turns up
-          three distinct failure modes — stable-but-colourless, colourful-but-miscalibrated,
-          and good-at-both — which a single fidelity score would collapse into one number.
-          That is the measurement that the split was necessary, not just reasonable.
-        </li>
-      </ol>
+      <div class="cari-figure wide-matrix">
+        <img src="../../images/research/cari-qualitative.jpg"
+             alt="Grid comparing input, ground-truth albedo, and predictions from all seven methods across three lighting conditions of the same scene. Two regions are tracked with coloured boxes across every panel: a mirror-finish calibration sphere in red, and a dark jacket in blue.">
+        <p class="fig-caption">
+          <strong>Held-out scene, three lamp settings, all seven methods.</strong> Two fixed regions
+          are tracked across every panel — a mirror sphere (red) and a dark jacket (blue) — so any
+          change between panels is the model's, not the camera's.
+        </p>
+      </div>
+
+      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Try it yourself</h3>
+      <p class="cari-text">
+        Pick a baseline, flip between it and Ours, step through four held-out scenes. All nine
+        images per scene are real predictions from the checkpoints below — nothing here is staged.
+      </p>
+
+      <div class="compare-widget" id="compareWidget">
+        <div class="compare-tabs" id="compareTabs"></div>
+        <div class="compare-stage">
+          <button class="compare-nav prev" id="cmpPrev" aria-label="Previous scene">&#8249;</button>
+          <img id="cmpImg" src="" alt="Comparison view">
+          <button class="compare-nav next" id="cmpNext" aria-label="Next scene">&#8250;</button>
+        </div>
+        <div class="compare-caption">
+          <span id="cmpSceneLabel"></span>
+          <span><strong id="cmpModelLabel"></strong></span>
+        </div>
+      </div>
     </section>
 
     <div class="cari-divider"></div>
@@ -1008,34 +1022,10 @@
       </div>
 
       <p class="cari-text">
-        Giving the model RGB shading is necessary but not sufficient. Modern methods that already have
-        three-channel shading still drift when the illuminant changes, and they drift in different
-        ways: some hold still by quietly desaturating everything, others keep colour but land on the
-        wrong one.
-      </p>
-
-      <div class="cari-figure">
-        <img src="../../images/research/cari-baselines.jpg"
-             alt="One scene under two lighting conditions, with albedo predictions from CRefNet and Marigold-App underneath. Both change between the two lighting conditions, in different ways.">
-        <p class="fig-caption">
-          <strong>Two failure modes.</strong> The same shelf under two lamp settings. CRefNet stays
-          comparatively stable partly by reducing colour variation; Marigold-App drifts less in hue but
-          is imperfectly calibrated. Neither is invariant for the right reason.
-        </p>
-      </div>
-    </section>
-
-    <div class="cari-divider"></div>
-
-    <!-- ── Evidence ────────────────────────────────── -->
-    <section class="cari-section" id="evidence">
-      <div class="sec-eyebrow">The missing evidence</div>
-      <h2 class="cari-section-title">One photograph cannot tell you what the light did</h2>
-      <p class="cari-text">
-        From a single image, a warm surface under white light and a white surface under warm light are
-        the same picture. No loss on one photograph can separate them, because the evidence simply is
-        not in the frame. A <strong>second photograph of the same scene under a different lamp</strong>
-        is: whatever changed between the two shots is lighting, and whatever did not is material.
+        Giving the model RGB shading is necessary but not sufficient — it still needs to be told
+        what changed between two shots is <em>lighting</em>, not material. From a single image, a
+        warm surface under white light and a white surface under warm light are the same picture; a
+        <strong>second photograph of the same scene under a different lamp</strong> breaks the tie.
       </p>
 
       <div class="cari-figure">
@@ -1076,53 +1066,13 @@
         </p>
       </div>
 
-      <div class="eq">
-        <span class="eq-name">Invariance &nbsp;— the albedo must not move</span>
-        <var>L</var><sub>inv</sub> <span class="op">=</span>
-        mean<sub>p</sub> <span class="op">‖</span> <var>A</var><sub>1</sub>(<var>p</var>)
-        <span class="op">−</span> <var>A</var><sub>2</sub>(<var>p</var>) <span class="op">‖</span><sub>1</sub>
-        <p class="eq-note">The same pixel, photographed under two lamps, must be assigned the same material colour.</p>
-      </div>
-
-      <div class="eq">
-        <span class="eq-name">Explanation &nbsp;— the shading must account for the change</span>
-        <var>L</var><sub>expl</sub> <span class="op">=</span>
-        mean<sub>p</sub> <span class="op">|</span> log
-        <span class="op">(</span><var>I</var><sub>1</sub>/<var>I</var><sub>2</sub><span class="op">)</span>
-        <span class="op">−</span> log
-        <span class="op">(</span><var>S</var><sub>d,1</sub>/<var>S</var><sub>d,2</sub><span class="op">)</span>
-        <span class="op">|</span>
-        <p class="eq-note">
-          Invariance alone can be satisfied by a lazy model that ignores lighting entirely. This forces
-          the brightness ratio between the two observations to be explained by the shading layer,
-          which is where it belongs.
-        </p>
-      </div>
-
-      <div class="eq">
-        <span class="eq-name">Anchor &nbsp;— agreement still needs to be about the right colour</span>
-        <var>L</var><sub>chroma</sub> <span class="op">=</span>
-        mean<sub>p</sub> <span class="op">‖</span>
-        <var>A</var>/<span class="op">‖</span><var>A</var><span class="op">‖</span>
-        <span class="op">−</span>
-        <var>A</var><sup>★</sup>/<span class="op">‖</span><var>A</var><sup>★</sup><span class="op">‖</span>
-        <span class="op">‖</span>
-        <p class="eq-note">
-          Two predictions can agree perfectly and both be wrong. Normalising to unit length pins the
-          <em>hue</em> against ground truth independently of how bright the surface is.
-        </p>
-      </div>
-
-      <div class="cari-figure">
-        <img src="../../images/research/cari-architecture.jpg"
-             alt="Architecture diagram: a frozen DINOv2-Large encoder feeds a trained DPT decoder, which splits into an albedo head and a shading head; the non-diffuse residual is computed analytically.">
-        <p class="fig-caption">
-          <strong>Thesis Fig. 3.3 — one image, one pass.</strong> A frozen DINOv2-L encoder supplies
-          illumination-invariant material tokens; a DPT decoder feeds an albedo head and an RGB shading
-          head. The non-diffuse residual is derived analytically rather than predicted. A colour-skip
-          path carries input chroma detail past the bottleneck.
-        </p>
-      </div>
+      <p class="cari-text">
+        The pair is required to agree on albedo (<var>L</var><sub>inv</sub>), the shading is
+        required to explain whatever brightness change the pair disagrees on
+        (<var>L</var><sub>expl</sub>), and a synthetic anchor pins the agreed colour to ground
+        truth (<var>L</var><sub>chroma</sub>) — otherwise two predictions could agree and still
+        both be wrong. Full derivations are in the thesis.
+      </p>
 
       <div class="results-grid">
         <div class="result-stat">
@@ -1162,46 +1112,6 @@
         quantity the task exists to recover.
       </div>
 
-      <p class="cari-text">
-        So we score two questions separately, and require a method to answer both.
-      </p>
-
-      <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-name">C<sub>mat</sub> <span class="arrow">↓</span></div>
-          <div class="metric-role">Stability</div>
-          <div class="metric-desc">
-            How much a material's recovered <em>brightness</em> moves when only the lamp changes.
-          </div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-name">Cast<sub>rel</sub> <span class="arrow">↓</span></div>
-          <div class="metric-role">Stability</div>
-          <div class="metric-desc">
-            How far a material's recovered <em>chroma</em> — (R/G, B/G) in the linear albedo,
-            before any gamma encoding — slides along with the lamp colour, normalised per
-            material so scene diversity cannot inflate it.
-          </div>
-        </div>
-        <div class="metric-card fidelity">
-          <div class="metric-name">Chroma<sub>err</sub> <span class="arrow">↓</span></div>
-          <div class="metric-role">Fidelity</div>
-          <div class="metric-desc">
-            Whether that stable colour is the <em>correct</em> one. A prediction can be immovable and
-            still sit on entirely the wrong hue.
-          </div>
-        </div>
-        <div class="metric-card fidelity">
-          <div class="metric-name">Chroma<sub>fid</sub> <span class="arrow">→ 1</span></div>
-          <div class="metric-role">Fidelity &nbsp;· collapse detector</div>
-          <div class="metric-desc">
-            How much of the reference chroma spread survives. Below 1 the prediction is greyed out;
-            above 1 it is over-saturated. This is the guard that catches invariance bought by
-            desaturation.
-          </div>
-        </div>
-      </div>
-
       <div class="cari-figure">
         <img src="../../images/research/cari-chroma-fidelity.jpg"
              alt="Albedo predictions from several methods on the same scene, showing that the most numerically constant ones are visibly the most desaturated.">
@@ -1221,12 +1131,8 @@
       <div class="sec-eyebrow">Results</div>
       <h2 class="cari-section-title">Stability and fidelity, scored together</h2>
       <p class="cari-text">
-        Held-out MIDIntrinsics split, 30 scenes. All methods run through the identical evaluation
-        harness, on raw un-white-balanced input. Bracketed ranges are 95% percentile-bootstrap
-        intervals over scenes, showing scene-to-scene spread; <code>Chroma_fid</code> carries no
-        interval in the thesis table, so none is invented here. These are marginal intervals — the
-        method comparisons are <em>paired</em> (same scenes), and significance is established by a
-        paired bootstrap, not by whether these brackets overlap.
+        Held-out MIDIntrinsics split, 30 scenes, all methods through one evaluation harness on raw
+        un-white-balanced input. Bracketed ranges are 95% bootstrap intervals over scenes.
       </p>
 
       <div class="results-table-wrap">
@@ -1306,299 +1212,21 @@
       </div>
 
 
-      <div class="cari-figure" style="margin-top:34px;">
-        <img src="../../images/research/cari-tradeoff.jpg"
-             alt="Scatter plot of chroma drift against chroma error, with 95% bootstrap confidence intervals on both axes. CRefNet and Marigold-App sit at the lowest drift but with large chroma error and small bubbles indicating collapsed colour. Our models sit at moderate drift with the lowest chroma error and near-reference colour spread.">
-        <p class="fig-caption">
-          <strong>Where the trade-off actually sits.</strong> Bubble area is proportional to the
-          fraction of the reference chroma spread that survives. Error bars are 95%
-          percentile-bootstrap intervals over scenes — they show how much each score varies from
-          scene to scene, which is large here. They are <em>not</em> a significance test: because
-          every method is scored on the same scenes, the comparisons are paired, and a paired
-          bootstrap resolves differences that these marginal intervals leave looking ambiguous.
-          The significance claims below come from that paired test.
-        </p>
+      <div class="caveat-box" style="margin-top:34px;">
+        <strong>We lead one axis, and we say only that.</strong> Lightness stability
+        (C<sub>mat</sub>) is best in the table. CD-IID leads both colour columns without
+        collapsing its own colour to get there — that comparison, its significance, and why
+        it doesn't undercut the stability claim, is in the thesis.
       </div>
 
-      <div class="caveat-box">
-        <strong>We lead one axis, and we should say only that.</strong>
-        On <strong>lightness stability</strong> our model is best in the table
-        (C<sub>mat</sub> 0.130), significantly better than every baseline except RGB→X,
-        from which it is not separable. We do <em>not</em> lead the two colour columns:
-        CD-IID reaches both a lower Chroma<sub>err</sub> (0.090 vs 0.121) and a lower
-        Cast<sub>rel</sub> (0.306 vs 0.421), and both gaps are significant under the paired
-        test. Note what CD-IID does <em>not</em> do: its Chroma<sub>fid</sub> is 0.944,
-        statistically indistinguishable from our 0.941 — so it is not buying invariance by
-        draining colour, and the collapse argument that explains CRefNet and Marigold-App
-        does not explain it. What makes the surviving claim worth stating is its price:
-        that lightness result comes from training <strong>18.5M</strong> parameters against
-        CD-IID's <strong>442.8M</strong>, at 0.148&nbsp;s per image against 0.254&nbsp;s.
-      </div>
-
-      <div class="cari-figure">
-        <img src="../../images/research/cari-paired.jpg"
-             alt="Three panels of paired differences with 95% bootstrap intervals. On lightness stability and colour calibration our model beats all four baselines with intervals clear of zero. On hue invariance CRefNet and Marigold-App beat us significantly, Marigold-Light is not separable, and we beat Ordinal Shading.">
-        <p class="fig-caption">
-          <strong>The same comparison, tested per scene.</strong> An interval clear of zero is a
-          real difference. We beat every baseline on lightness stability; on hue invariance we
-          lose to CRefNet and Marigold-App, tie Marigold-Light, and beat Ordinal Shading; and
-          CD-IID beats us on both colour axes.
-        </p>
-      </div>
-
-      <div class="insight-box" style="margin-top:34px;">
-        <strong style="color:#c4b5fd;">Three failure modes, and why one fidelity number
-        cannot see them.</strong><br>
-        The eight rows contain three genuinely different behaviours.
-        <strong>CRefNet is stable but colourless</strong> — low drift, but
-        Chroma<sub>fid</sub> 0.484 because the colour is gone.
-        <strong>RGB→X is colourful but miscalibrated</strong> — it keeps the spread
-        (0.907) yet puts it on the wrong hues, giving the worst Chroma<sub>err</sub> in the
-        table (0.203). <strong>CD-IID is good at both.</strong>
-        The old pooled score would rank CRefNet well and say nothing about RGB→X's error;
-        Chroma<sub>fid</sub> alone would clear RGB→X and condemn CRefNet. Only the pair
-        separates all three. We argued for splitting these metrics on principle — these rows
-        are the measurement that it was necessary.
-      </div>
-
-      <div class="cari-figure">
-        <img src="../../images/research/cari-qualitative.jpg"
-             alt="Grid comparing input, ground-truth albedo, and predictions from all seven methods across three lighting conditions of the same scene. Two regions are tracked with coloured boxes across every panel: a mirror-finish calibration sphere in red, and a dark jacket in blue.">
-        <p class="fig-caption">
-          <strong>Held-out scene, three lamp settings, all seven methods.</strong> Two fixed regions
-          are tracked across every panel — a mirror sphere (red) and a dark jacket (blue) — so any
-          change between panels is the model's, not the camera's. Zoomed below.
-        </p>
-      </div>
-
-      <div class="cari-figure detail-zoom">
-        <img src="../../images/research/cari-qualitative-crops.jpg"
-             alt="Full-resolution zoom of the mirror sphere and dark jacket regions, one row per method, one column per lamp setting. Ours, Ordinal Shading and CD-IID keep the sphere's reflection detail across all three lights; CRefNet, Marigold-App and RGB-to-X blow it out to flat white; Marigold-Light swings from near-black to grey to blown white.">
-        <p class="fig-caption">
-          <strong>The two regions, enlarged.</strong> The sphere is the sharper evidence: Ours,
-          Ordinal Shading and CD-IID keep its reflection across all three lights, while CRefNet,
-          Marigold-App and RGB→X blow it to flat white and Marigold-Light swings near-black to
-          blown white. The jacket separates less: CD-IID is as stable there as we are — the same
-          story the numbers tell.
-        </p>
-      </div>
-
-      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Try it yourself</h3>
-      <p class="cari-text">
-        Pick a baseline, flip between it and Ours, step through four held-out scenes. All nine
-        images per scene are real predictions from the checkpoints above — nothing here is staged.
+      <p class="cari-text" style="margin-top:34px;">
+        An ablation confirms the gain is CARI's, not incidental: turning the paired cross-render
+        losses on, with everything else matched, drops conventional albedo error (ARAP) by
+        7–14%. Constancy also isn't bought with accuracy elsewhere — the model still leads dense
+        albedo accuracy on ARAP and sits within 0.2&nbsp;ΔE of the best measured-colour score on
+        MAW. All of it — the 2×2 ablation, the IIW/MAW numbers, and the full cost table against
+        every baseline — is in the thesis.
       </p>
-
-      <div class="compare-widget" id="compareWidget">
-        <div class="compare-tabs" id="compareTabs"></div>
-        <div class="compare-stage">
-          <button class="compare-nav prev" id="cmpPrev" aria-label="Previous scene">&#8249;</button>
-          <img id="cmpImg" src="" alt="Comparison view">
-          <button class="compare-nav next" id="cmpNext" aria-label="Next scene">&#8250;</button>
-        </div>
-        <div class="compare-caption">
-          <span id="cmpSceneLabel"></span>
-          <span><strong id="cmpModelLabel"></strong></span>
-        </div>
-      </div>
-
-      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Does CARI cause the gain?</h3>
-      <p class="cari-text">
-        A 2×2 ablation switches the paired CARI losses and the colour-detail path on and off
-        independently, keeping everything else matched. Only the horizontal comparisons
-        (Row&nbsp;1→2 and Row&nbsp;3→4) isolate CARI.
-      </p>
-
-      <div class="cari-figure">
-        <img src="../../images/research/cari-ablation.jpg"
-             alt="Matrix: four lighting conditions as rows, and input, ground-truth albedo and the four ablation configurations as columns, with a tracked object box drawn on every panel.">
-        <p class="fig-caption">
-          <strong>One scene, four lamp settings, four training configurations.</strong> The boxed object
-          group is the same in every panel. Turning CARI on visibly steadies the recovered colour across
-          rows; the colour path restores material detail.
-        </p>
-      </div>
-
-      <p class="cari-text">
-        The paired losses also improve conventional accuracy on raw input, in both matched settings:
-        ARAP LMSE and mn-RMSE both fall by <strong>14%</strong> from Row&nbsp;1→2, and by
-        <strong>7–8%</strong> from Row&nbsp;3→4.
-      </p>
-
-      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Three external benchmarks</h3>
-      <p class="cari-text">
-        Constancy is only worth having if the decomposition is still accurate. We check measured colour
-        (MAW), dense reference albedo (ARAP) and relative reflectance judgements (IIW).
-      </p>
-
-      <div class="results-table-wrap">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>MAW ΔE<sub>00</sub> ↓<br><span class="th-sub">measured colour</span></th>
-              <th>ARAP mn-RMSE ↓<br><span class="th-sub">dense albedo</span></th>
-              <th>IIW WHDR ↓<br><span class="th-sub">relative reflectance</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="row-ours">
-              <td>Ours (full)</td>
-              <td>3.981</td>
-              <td class="best">0.2150</td>
-              <td>0.264</td>
-            </tr>
-            <tr class="row-ours">
-              <td>Ours (base CARI)</td>
-              <td>4.155</td>
-              <td>0.2259</td>
-              <td>0.286</td>
-            </tr>
-            <tr>
-              <td>CRefNet</td>
-              <td>3.970</td>
-              <td>0.2916</td>
-              <td class="best">0.168<sup>†</sup></td>
-            </tr>
-            <tr>
-              <td>Marigold-App</td>
-              <td class="best">3.775</td>
-              <td>0.2529</td>
-              <td>0.193</td>
-            </tr>
-            <tr>
-              <td>Marigold-Light</td>
-              <td>4.214</td>
-              <td class="dim">0.6187</td>
-              <td>0.215</td>
-            </tr>
-            <tr>
-              <td>Ordinal Shading</td>
-              <td class="dim">6.884</td>
-              <td>—</td>
-              <td>0.257</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="rank-legend">
-        <span class="r1"><i></i>Best in column</span>
-        <span class="r4"><i></i>Not leading</span>
-      </div>
-
-
-      <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
-        All rows run locally through one harness. We lead dense albedo accuracy and sit within
-        0.2&nbsp;ΔE of the best measured-colour score, so constancy is not being bought with
-        accuracy. <sup>†</sup>CRefNet trains on the IIW split, so its WHDR is not zero-shot and
-        not comparable to ours; WHDR is in any case blind to colour by construction and cannot
-        settle the constancy claim either way.
-      </p>
-
-      <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">What it costs to run</h3>
-      <p class="cari-text">
-        The constraint is applied during training, so the deployed model is an ordinary
-        single-pass regressor.
-      </p>
-
-      <div class="results-table-wrap">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Trained (M)</th>
-              <th>Total (M)</th>
-              <th>s / image</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="row-ours">
-              <td>Ours (full)</td>
-              <td class="best">18.5</td>
-              <td>322.9</td>
-              <td class="best">0.148</td>
-            </tr>
-            <tr>
-              <td>CRefNet</td>
-              <td>66.6</td>
-              <td class="best">66.6</td>
-              <td>0.447</td>
-            </tr>
-            <tr>
-              <td>Ordinal Shading</td>
-              <td>~337</td>
-              <td>~337</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>Marigold-App</td>
-              <td class="dim">~1290</td>
-              <td class="dim">1290</td>
-              <td>0.805</td>
-            </tr>
-            <tr>
-              <td>Marigold-Light</td>
-              <td class="dim">~1290</td>
-              <td class="dim">1290</td>
-              <td class="dim">0.982</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="rank-legend">
-        <span class="r1"><i></i>Best in column</span>
-        <span class="r4"><i></i>Not leading</span>
-      </div>
-
-
-      <p class="cari-text" style="font-size:0.9rem; color:#94a3b8; margin-top:16px;">
-        Roughly <strong>70× fewer trained weights</strong> than the diffusion baselines, at 3–6.6×
-        the speed. The saving is in <em>weights that had to be trained</em> — the DINOv2-L backbone
-        stays frozen — not in deployed size: on total parameters CRefNet is 4.8× smaller than we
-        are. Timed on one GPU at 512×512 through the same interface.
-      </p>
-    </section>
-
-    <div class="cari-divider"></div>
-
-    <!-- ── Limitations ─────────────────────────────── -->
-    <section class="cari-section" id="limits">
-      <div class="sec-eyebrow">Limitations</div>
-      <h2 class="cari-section-title">What is still broken</h2>
-      <p class="cari-text">
-        CARI reduces coloured-light leakage. It does not resolve the decomposition ambiguity, and the
-        failures are systematic rather than incidental.
-      </p>
-
-      <div class="cari-figure">
-        <img src="../../images/research/cari-limits.jpg"
-             alt="Three failure crops: a hard shadow boundary retained as a material edge in the albedo, an unstable reflective surface, and a region where fine texture has been flattened away.">
-        <p class="fig-caption">
-          <strong>Three failure modes, each pointing at a different fix.</strong>
-          The middle panel is a cross-illuminant variation map, warm where the recovered albedo
-          moves most as the lamp changes: the instability lands squarely on the metal lid, the
-          glass, and the mirror ball, and not on the diffuse surfaces around them. It is a
-          localisation aid rather than a calibrated measurement — the colour scale is relative,
-          so read where it is warm, not how warm.
-        </p>
-      </div>
-
-      <ul class="contrib-list">
-        <li>
-          <strong>Hard shadows are read as material.</strong> A sharp shadow boundary survives into the
-          albedo as if it were a paint edge. Points at needing harder real cross-light pairs, not a
-          different loss.
-        </li>
-        <li>
-          <strong>Non-diffuse surfaces stay unstable.</strong> The diffuse model is simply violated on
-          gloss and metal. Points at spatially varying and non-diffuse illumination modelling.
-        </li>
-        <li>
-          <strong>The flatness prior over-smooths.</strong> It improves benchmark scores while
-          suppressing genuine fine material detail — a real cost, currently paid silently. Points at
-          content-aware weighting.
-        </li>
-      </ul>
     </section>
 
     <div class="cari-divider"></div>
@@ -1621,6 +1249,11 @@
     </section>
 
     <footer class="cari-footer">
+      <p>
+        CARI reduces coloured-light leakage; it does not resolve the decomposition ambiguity. Hard
+        shadows still read as material, non-diffuse surfaces stay unstable, and the flatness prior
+        over-smooths fine detail — full failure analysis in the thesis.
+      </p>
       <p>
         Thesis carried out at the University of Amsterdam and 3DUniversum, within the Erasmus Mundus
         Joint Master in Computational Colour and Spectral Imaging (COSI), hosted by NTNU Gjøvik.
