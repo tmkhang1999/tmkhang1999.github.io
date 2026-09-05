@@ -793,12 +793,24 @@
     }
     .compare-tabs button.active { background: var(--accent-bg); color: var(--accent); }
     .compare-stage {
-      position: relative; border: 1px solid var(--line); border-radius: 12px;
+      position: relative; display: flex; border: 1px solid var(--line); border-radius: 12px;
       overflow: hidden; background: var(--card);
     }
-    .compare-stage img { display: block; width: 100%; height: auto; }
+    .compare-pane { position: relative; flex: 1 1 50%; min-width: 0; }
+    .compare-pane:first-child { border-right: 1px solid var(--line); }
+    .compare-pane img { display: block; width: 100%; height: auto; }
+    .compare-pane-label {
+      position: absolute; top: 10px; left: 10px; z-index: 2;
+      padding: 3px 11px; border-radius: 999px;
+      background: rgba(0,0,0,0.6); color: #fff;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.3px;
+    }
+    @media (max-width: 640px) {
+      .compare-stage { flex-direction: column; }
+      .compare-pane:first-child { border-right: none; border-bottom: 1px solid var(--line); }
+    }
     .compare-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
       width: 38px; height: 38px; border-radius: 50%;
       background: rgba(255,255,255,0.9); border: 1px solid var(--line);
       display: flex; align-items: center; justify-content: center;
@@ -811,7 +823,7 @@
     .compare-nav.prev { left: 14px; }
     .compare-nav.next { right: 14px; }
     .compare-caption {
-      display: flex; justify-content: space-between; align-items: baseline;
+      text-align: center;
       margin-top: 10px; font-size: 0.85rem; color: var(--muted);
     }
     .compare-caption strong { color: var(--fg); }
@@ -979,20 +991,27 @@
 
       <h3 class="cari-section-title" style="font-size:1.05rem; margin-top:44px;">Try it yourself</h3>
       <p class="cari-text">
-        Pick a baseline, flip between it and Ours, step through four held-out scenes. All nine
-        images per scene are real predictions from the checkpoints below — nothing here is staged.
+        Pick a model and see its predicted albedo next to the photograph it came from, then step
+        through four held-out scenes. Every prediction is a real checkpoint output — nothing here
+        is staged.
       </p>
 
       <div class="compare-widget" id="compareWidget">
         <div class="compare-tabs" id="compareTabs"></div>
         <div class="compare-stage">
           <button class="compare-nav prev" id="cmpPrev" aria-label="Previous scene">&#8249;</button>
-          <img id="cmpImg" src="" alt="Comparison view">
+          <div class="compare-pane">
+            <span class="compare-pane-label">Input</span>
+            <img id="cmpInputImg" src="" alt="Input photograph">
+          </div>
+          <div class="compare-pane">
+            <span class="compare-pane-label" id="cmpModelLabel"></span>
+            <img id="cmpImg" src="" alt="Predicted albedo">
+          </div>
           <button class="compare-nav next" id="cmpNext" aria-label="Next scene">&#8250;</button>
         </div>
         <div class="compare-caption">
           <span id="cmpSceneLabel"></span>
-          <span><strong id="cmpModelLabel"></strong></span>
         </div>
       </div>
     </section>
@@ -1297,6 +1316,7 @@
 
     (function () {
       const tabsEl = document.getElementById('compareTabs');
+      const inputImgEl = document.getElementById('cmpInputImg');
       const imgEl = document.getElementById('cmpImg');
       const sceneLbl = document.getElementById('cmpSceneLabel');
       const modelLbl = document.getElementById('cmpModelLabel');
@@ -1306,6 +1326,7 @@
       function render() {
         if (!manifest) return;
         const row = manifest.scenes[sceneIdx];
+        inputImgEl.src = base + row.input;
         imgEl.src = base + row[model];
         sceneLbl.textContent = `${row.scene}  ·  scene ${sceneIdx + 1} of ${manifest.scenes.length}`;
         modelLbl.textContent = model;

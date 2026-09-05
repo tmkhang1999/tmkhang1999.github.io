@@ -1,57 +1,61 @@
 {
- "models": [
-  "Ours",
-  "CD-IID",
-  "CRefNet",
-  "Marigold-App",
-  "Marigold-Light",
-  "Ordinal Shading",
-  "RGB-X"
- ],
- "scenes": [
-  {
-   "scene": "everett_kitchen17",
-   "light": 12,
-   "Ours": "everett_kitchen17_ours.jpg",
-   "CD-IID": "everett_kitchen17_cd-iid.jpg",
-   "CRefNet": "everett_kitchen17_crefnet.jpg",
-   "Marigold-App": "everett_kitchen17_marigold-app.jpg",
-   "Marigold-Light": "everett_kitchen17_marigold-light.jpg",
-   "Ordinal Shading": "everett_kitchen17_ordinal-shading.jpg",
-   "RGB-X": "everett_kitchen17_rgb-x.jpg"
-  },
-  {
-   "scene": "everett_lobby3",
-   "light": 12,
-   "Ours": "everett_lobby3_ours.jpg",
-   "CD-IID": "everett_lobby3_cd-iid.jpg",
-   "CRefNet": "everett_lobby3_crefnet.jpg",
-   "Marigold-App": "everett_lobby3_marigold-app.jpg",
-   "Marigold-Light": "everett_lobby3_marigold-light.jpg",
-   "Ordinal Shading": "everett_lobby3_ordinal-shading.jpg",
-   "RGB-X": "everett_lobby3_rgb-x.jpg"
-  },
-  {
-   "scene": "everett_dining2",
-   "light": 12,
-   "Ours": "everett_dining2_ours.jpg",
-   "CD-IID": "everett_dining2_cd-iid.jpg",
-   "CRefNet": "everett_dining2_crefnet.jpg",
-   "Marigold-App": "everett_dining2_marigold-app.jpg",
-   "Marigold-Light": "everett_dining2_marigold-light.jpg",
-   "Ordinal Shading": "everett_dining2_ordinal-shading.jpg",
-   "RGB-X": "everett_dining2_rgb-x.jpg"
-  },
-  {
-   "scene": "everett_kitchen5",
-   "light": 12,
-   "Ours": "everett_kitchen5_ours.jpg",
-   "CD-IID": "everett_kitchen5_cd-iid.jpg",
-   "CRefNet": "everett_kitchen5_crefnet.jpg",
-   "Marigold-App": "everett_kitchen5_marigold-app.jpg",
-   "Marigold-Light": "everett_kitchen5_marigold-light.jpg",
-   "Ordinal Shading": "everett_kitchen5_ordinal-shading.jpg",
-   "RGB-X": "everett_kitchen5_rgb-x.jpg"
-  }
- ]
+  "models": [
+    "Ours",
+    "CD-IID",
+    "CRefNet",
+    "Marigold-App",
+    "Marigold-Light",
+    "Ordinal Shading",
+    "RGB-X"
+  ],
+  "scenes": [
+    {
+      "scene": "everett_kitchen17",
+      "light": 12,
+      "Ours": "everett_kitchen17_ours.jpg",
+      "CD-IID": "everett_kitchen17_cd-iid.jpg",
+      "CRefNet": "everett_kitchen17_crefnet.jpg",
+      "Marigold-App": "everett_kitchen17_marigold-app.jpg",
+      "Marigold-Light": "everett_kitchen17_marigold-light.jpg",
+      "Ordinal Shading": "everett_kitchen17_ordinal-shading.jpg",
+      "RGB-X": "everett_kitchen17_rgb-x.jpg",
+      "input": "everett_kitchen17_input.jpg"
+    },
+    {
+      "scene": "everett_lobby3",
+      "light": 12,
+      "Ours": "everett_lobby3_ours.jpg",
+      "CD-IID": "everett_lobby3_cd-iid.jpg",
+      "CRefNet": "everett_lobby3_crefnet.jpg",
+      "Marigold-App": "everett_lobby3_marigold-app.jpg",
+      "Marigold-Light": "everett_lobby3_marigold-light.jpg",
+      "Ordinal Shading": "everett_lobby3_ordinal-shading.jpg",
+      "RGB-X": "everett_lobby3_rgb-x.jpg",
+      "input": "everett_lobby3_input.jpg"
+    },
+    {
+      "scene": "everett_dining2",
+      "light": 12,
+      "Ours": "everett_dining2_ours.jpg",
+      "CD-IID": "everett_dining2_cd-iid.jpg",
+      "CRefNet": "everett_dining2_crefnet.jpg",
+      "Marigold-App": "everett_dining2_marigold-app.jpg",
+      "Marigold-Light": "everett_dining2_marigold-light.jpg",
+      "Ordinal Shading": "everett_dining2_ordinal-shading.jpg",
+      "RGB-X": "everett_dining2_rgb-x.jpg",
+      "input": "everett_dining2_input.jpg"
+    },
+    {
+      "scene": "everett_kitchen5",
+      "light": 12,
+      "Ours": "everett_kitchen5_ours.jpg",
+      "CD-IID": "everett_kitchen5_cd-iid.jpg",
+      "CRefNet": "everett_kitchen5_crefnet.jpg",
+      "Marigold-App": "everett_kitchen5_marigold-app.jpg",
+      "Marigold-Light": "everett_kitchen5_marigold-light.jpg",
+      "Ordinal Shading": "everett_kitchen5_ordinal-shading.jpg",
+      "RGB-X": "everett_kitchen5_rgb-x.jpg",
+      "input": "everett_kitchen5_input.jpg"
+    }
+  ]
 }
