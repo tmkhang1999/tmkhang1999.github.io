@@ -901,6 +901,21 @@ a.research-thumb:hover img {
   color: #fbbf24;
 }
 
+.venue-badge.coursework {
+  background: rgba(52,211,153,0.09);
+  border: 1px solid rgba(52,211,153,0.22);
+  color: #34d399;
+}
+
+.coursework-section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
 .venue-badge.award {
   background: rgba(251,191,36,0.13);
   border: 1px solid rgba(251,191,36,0.32);
