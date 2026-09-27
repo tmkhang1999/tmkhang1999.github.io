@@ -52,8 +52,9 @@
       I work at the intersection of computer vision, image processing, and LLM-driven systems.
       My path into AI was self-taught alongside a BSc at SUNY Oswego, and I have since built up
       a research portfolio spanning image compression, quality assessment, 3D reconstruction, and
-      multi-agent LLM systems. Currently pursuing an Erasmus Mundus MSc in Computational Colour
-      and Spectral Imaging (COSI) on a full consortium scholarship (1st / 198 applicants).
+      multi-agent LLM systems. I recently completed an Erasmus Mundus MSc in Computational Colour
+      and Spectral Imaging (COSI) on a full consortium scholarship (1st / 198 applicants), defending
+      my thesis in September 2026.
     </p>
     <div class="hero-links">
       <a href="https://github.com/tmkhang1999" class="hero-social-link" target="_blank" rel="noopener">
@@ -84,7 +85,7 @@
           Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment
         </div>
         <div class="pub-authors">
-          <strong>Minh Khang Tran</strong>, Sira Ferradans
+          Yujin Cho, <strong>Minh Khang Tran</strong>, Benoit Pochon, Jean-Michel Morel, Gabriele Facciolo, Sira Ferradans
         </div>
         <div class="pub-venue">IS&amp;T Electronic Imaging 2026 · Generative AI for Image/Video Synthesis</div>
         <a href="https://library.imaging.org/ei/articles/38/12/GENAI-179" class="pub-link" target="_blank" rel="noopener">
@@ -101,13 +102,14 @@
       <div class="timeline-entry">
         <div class="timeline-header">
           <span class="timeline-role">Master Thesis Intern</span>
-          <span class="timeline-duration">Jan 2026 – Present</span>
+          <span class="timeline-duration">Jan 2026 – Sep 2026</span>
         </div>
         <div class="timeline-org"><strong>University of Amsterdam</strong> &nbsp;·&nbsp; Amsterdam, Netherlands</div>
-        <div class="timeline-project">Physically-Constrained Colorful Intrinsic Image Decomposition for Indoor Environments</div>
+        <div class="timeline-project">Coloured Illumination Constancy in Intrinsic Image Decomposition via Cross-Render Albedo Invariance (CARI)</div>
         <ul class="timeline-details">
-          <li>Investigating Real Estate Image Enhancement via Intrinsic Image Decomposition (IID) through an industry collaboration (3DUniversum), bridging academic research and commercial application.</li>
+          <li>Researched Real Estate Image Enhancement via Intrinsic Image Decomposition (IID) through an industry collaboration (3DUniversum), bridging academic research and commercial application.</li>
           <li>Supervised by <a href="https://staff.fnwi.uva.nl/th.gevers/" class="link-text" target="_blank" rel="noopener">Prof. Dr. Theo Gevers</a> and <a href="https://www.linkedin.com/in/sezer-karaoglu-1650a01a/" class="link-text" target="_blank" rel="noopener">Dr. Sezer Karaoglu</a>.</li>
+          <li>Submitted the thesis in July 2026 and defended it in September 2026 at NTNU. Full write-up on the <a href="/research/cari/" class="link-text">project page</a>.</li>
         </ul>
       </div>
 
@@ -121,8 +123,8 @@
         <ul class="timeline-details">
           <li>Studied the performance of Vision-Language Models (VLMs) DeQA-Score for Image Quality Assessment (IQA) on public (KonIQ, SPAQ, KADID) and internal datasets.</li>
           <li>Adapted model outputs to align with DXOMARK's Just-Objectionable-Difference (JOD) evaluation standards.</li>
-          <li>Investigated inference strategies (cropped face/eye, prompt variations, distortion sensitivity tests) to optimize quality prediction on SRCC, PLCC, and MAE metrics.</li>
-          <li>Designed fine-tuning approaches (regression, vision-only, LoRA) to improve accuracy and capture sub-feature quality scores (contrast, texture, noise).</li>
+          <li>Compared fine-tuning approaches (regression head, vision-only training, LoRA) alongside prompt designs and image-cropping strategies, matching expert ratings with <strong>SRCC 0.91/0.93</strong> and <strong>PLCC 0.91/0.90</strong> on noise/texture.</li>
+          <li>Ablations showed the vision encoder — not the language head — drove most of the improvement.</li>
           <li>Published <a href="https://library.imaging.org/ei/articles/38/12/GENAI-179" class="link-text" target="_blank" rel="noopener">"Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment"</a> — awarded <strong>Best Student Paper</strong> at IS&amp;T Electronic Imaging 2026.</li>
         </ul>
       </div>
@@ -135,9 +137,16 @@
         <div class="timeline-org"><a href="https://vitex.asia/" class="link-text" target="_blank" rel="noopener"><strong>Vitex Software JSC</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam (Remote)</div>
         <div class="timeline-project"><a href="https://planz.ai" class="link-text" target="_blank" rel="noopener">PlanZ — AI-Powered Event Assistant</a></div>
         <ul class="timeline-details">
-          <li>Developed an event-planning multi-agent system using LangGraph, LangChain, FastAPI, PostgreSQL, and integrated various LLM APIs.</li>
-          <li>Applied Chain of Thought (CoT) and Agent-based Prompting via LangGraph to implement workflows for event feature suggestions and schedule generation.</li>
-          <li>Utilized Few-Shot Prompting with Vector Database to generate SQL queries from user requests, enabling natural-language database access through a chatbot interface.</li>
+          <li>Designed and built PlanZ's multi-agent assistant from scratch — event feature suggestions, schedule generation, supplier discovery, and natural-language database access — handling <strong>hundreds of requests per day</strong> using LangGraph, Qdrant-based RAG, text-to-SQL, FastAPI, and PostgreSQL.</li>
+          <li>Routed routine steps to GPT-3.5-turbo and reserved GPT-4o for complex planning and reasoning to control inference cost.</li>
+          <li>Cut the agent failure rate from <strong>~15% to ~5%</strong> by analysing LangSmith traces and adding structured outputs, retries with error feedback, and schema-grounded SQL fallback paths.</li>
+        </ul>
+
+        <div class="timeline-project" style="margin-top: 14px;">VLM OCR Pipeline — Handwritten Japanese Vaccination Forms</div>
+        <ul class="timeline-details">
+          <li>Built an event-driven pipeline that converts handwritten Japanese vaccination forms (予診票) into 14 structured JSON fields, replacing manual data entry at <strong>2,000 images/hour</strong> with <strong>&ge;92% field-level accuracy</strong> and <strong>&le;5.6% CER</strong>, using a self-hosted Qwen3-VL-8B served via vLLM.</li>
+          <li>Fine-tuned the model with LoRA, quantization, and visual grounding on human-verified corrections of its own flagged mistakes.</li>
+          <li>Built reliability into the pipeline: tiered RabbitMQ retries, a Redis-backed circuit breaker, idempotent updates, and HMAC-signed webhooks for downstream delivery.</li>
         </ul>
       </div>
 
@@ -149,8 +158,8 @@
         <div class="timeline-org"><a href="https://viettelhightech.vn/" class="link-text" target="_blank" rel="noopener"><strong>VHT, Viettel Group</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/van-bang-le-aba45068/" class="link-text" target="_blank" rel="noopener">BangLV</a></div>
         <div class="timeline-project">Video Surveillance System</div>
         <ul class="timeline-details">
-          <li>Established a scalable Kubernetes cluster for internal network deployment, streamlining application management.</li>
-          <li>Enhanced AI model inference efficiency by integrating Triton Server with dynamic batching, concurrent model execution, and on-the-fly model load/unload.</li>
+          <li>Deployed face-recognition models (detector + ArcFace, exported to ONNX) on Kubernetes and NVIDIA Triton Inference Server, increasing inference throughput by <strong>~3&times;</strong> through dynamic batching and concurrent execution.</li>
+          <li>Enabled zero-downtime model updates through runtime model load/unload and service discovery.</li>
           <li>Refactored the Controller Block for scalability and developed a Service Discovery/Management Server to check available services and store AI model metadata.</li>
         </ul>
       </div>
@@ -184,7 +193,7 @@
         <div class="timeline-project"><a href="https://github.com/46code/IC_Grating_Defect_Metrology_in_AR_Waveguided_Display" class="link-text" target="_blank" rel="noopener">Multi-Spectral Vision System for Quality Inspection of In-Coupler Gratings in AR Displays</a></div>
         <ul class="timeline-details">
           <li>Built an automated hyperspectral (450–950 nm) measurement pipeline — reflectance computation, fiducial-based homography alignment, and circle-based IC ROI extraction — converting Dispelix's quality requirements into three Critical-to-Quality metrics: RMSE, Spectral Angle Mapper (SAM), and spatial Uniformity.</li>
-          <li>Validated CTQ discriminative power on 14 defect samples spanning five defect categories (Periphery, Mask, Spot, Shape, Homogeneity), then ran a full crossed Gage R&amp;R study (4 operators × 2 trials × 12 samples) — all three CTQs came in under 10% total measurement-system variation, meeting industrial acceptance criteria.</li>
+          <li>Validated CTQ discriminative power on 14 defect samples spanning five defect categories (Periphery, Mask, Spot, Shape, Homogeneity), then ran a full crossed Gage R&amp;R study (4 operators × 2 trials × 12 samples, 96 observations per CTQ) — all three CTQs came in under 12% total measurement-system variation (SRMSE 11.68%, SAM 8.75%, Uniformity 9.61%), with over 99% attributable to real part-to-part differences.</li>
           <li>Team project for the COSI Industrial Project course, with Anirban Das, Kidu Walegerima, and Luel Gebre, in collaboration with Dispelix Oy.</li>
         </ul>
       </div>
@@ -280,8 +289,14 @@
         <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/7M9SRQFRSX3S" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
           <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>IBM Data Science Specialization
         </a>
-        <a href="https://graduation.udacity.com/confirm/e/47a51ae0-5a56-11ed-ad3b-c3b4eafa7648" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
+        <a href="https://www.udacity.com/certificate/e/47a51ae0-5a56-11ed-ad3b-c3b4eafa7648" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
           <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>Udacity Data Scientist Nanodegree
+        </a>
+        <a href="https://www.credly.com/badges/c0d01e0c-0f95-4afc-ab1b-de2e3f60c2ee/linked_in_profile" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
+          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>AWS Academy Cloud Foundations
+        </a>
+        <a href="https://www.credly.com/badges/5571ff3d-14e7-478c-98e8-bd5c7a009d8a/linked_in_profile" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
+          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>AWS Academy Cloud Security Foundations
         </a>
       </div>
     </div>
@@ -305,6 +320,7 @@
         <div class="skill-tags">
           <span class="skill-tag">LangChain</span>
           <span class="skill-tag">LangGraph</span>
+          <span class="skill-tag">Qdrant</span>
           <span class="skill-tag">FastAPI</span>
           <span class="skill-tag">Flask</span>
           <span class="skill-tag">PyTorch</span>
@@ -319,8 +335,12 @@
           <span class="skill-tag">Docker</span>
           <span class="skill-tag">Kubernetes</span>
           <span class="skill-tag">Triton Server</span>
+          <span class="skill-tag">vLLM</span>
+          <span class="skill-tag">ONNX</span>
           <span class="skill-tag">MinIO</span>
           <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">RabbitMQ</span>
           <span class="skill-tag">MongoDB</span>
           <span class="skill-tag">MySQL</span>
           <span class="skill-tag">Git</span>
@@ -414,7 +434,7 @@
     <div style="margin-bottom: 60px;">
       <p class="section-label">Get in Touch</p>
       <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.75; max-width: 500px;">
-        I will complete my master's in September 2026 and am actively seeking
+        I completed my master's in September 2026 and am actively seeking
         <strong style="color: #e2e8f0;">Research Engineer</strong> opportunities.
         Always open to collaboration, research discussions, and ideas that push the boundary
         of intelligent visual systems.
