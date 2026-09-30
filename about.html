@@ -18,279 +18,387 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Khang Tran — CV, experience, research, education">
+  <meta name="description" content="Minh Khang Tran — experience, education, awards, and skills">
   <meta name="author" content="Khang Tran">
 
-  <title>Khang Tran | About</title>
+  <title>Experience | Khang Tran</title>
 
   <link href="css/bootstrap.min.css?v=1.1" rel="stylesheet">
-  <link href="css/styles.css?v=2.0" rel="stylesheet">
+  <link href="css/styles.css?v=3.1" rel="stylesheet">
 
   <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar fixed-top site-navbar">
     <div class="container d-flex justify-content-between align-items-center h-100">
       <a href="/" class="site-nav-brand">kt.</a>
       <div class="site-nav-links">
-        <a href="/index.html" class="site-nav-link">Projects</a>
+        <a href="/index.html" class="site-nav-link">Home</a>
         <a href="/research.html" class="site-nav-link">Research</a>
-        <a href="/blogs.html" class="site-nav-link">Blogs</a>
-        <a href="/about.html" class="site-nav-link active">About</a>
+        <a href="/projects.html" class="site-nav-link">Projects</a>
+        <a href="/about.html" class="site-nav-link active">Experience</a>
+        <a href="/gallery.html" class="site-nav-link">Gallery</a>
       </div>
     </div>
   </nav>
 
-  <!-- Page intro -->
+  <!-- Intro -->
   <div class="about-intro container">
     <h1 class="hero-name" style="font-size: 2.1rem;">Minh Khang Tran</h1>
-    <p class="hero-title" style="margin-bottom: 14px;">Computer Vision Researcher &nbsp;·&nbsp; Applied LLM Engineer &nbsp;·&nbsp; Paris, France</p>
-    <p class="hero-bio" style="max-width: 680px;">
-      I work at the intersection of computer vision, image processing, and LLM-driven systems.
-      My path into AI was self-taught alongside a BSc at SUNY Oswego, and I have since built up
-      a research portfolio spanning image compression, quality assessment, 3D reconstruction, and
-      multi-agent LLM systems. I recently completed an Erasmus Mundus MSc in Computational Colour
-      and Spectral Imaging (COSI) on a full consortium scholarship (1st / 198 applicants), defending
-      my thesis in September 2026.
-    </p>
-    <div class="hero-links">
-      <a href="https://github.com/tmkhang1999" class="hero-social-link" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/khangtm99/" class="hero-social-link" target="_blank" rel="noopener">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-      <a href="https://medium.com/@khangtm99" class="hero-social-link" target="_blank" rel="noopener">
-        <i class="fab fa-medium"></i> Medium
-      </a>
-      <a href="mailto:khangtm99@gmail.com" class="hero-social-link">
-        <i class="fas fa-envelope"></i> khangtm99@gmail.com
-      </a>
+    <p class="hero-title" style="margin-bottom: 10px;">Machine Learning Engineer &nbsp;·&nbsp; Computer Vision &amp; LLM Systems</p>
+    <div class="hero-status"><span class="status-dot"></span>Paris, France &nbsp;·&nbsp; Open to Machine Learning and Research Engineer roles</div>
+    <div class="icon-row">
+      <a href="https://www.linkedin.com/in/khangtm99/" class="icon-link" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/tmkhang1999" class="icon-link" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+      <a href="mailto:khangtm99@gmail.com" class="icon-link"><i class="fas fa-envelope"></i> khangtm99@gmail.com</a>
     </div>
   </div>
 
   <div class="container">
-    <!-- ── Publications ─────────────────────────── -->
+
+    <!-- ── Work Experience ─────────────────────── -->
+    <p class="section-label">Work Experience</p>
+    <div class="xp-timeline">
+
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/uva.png" alt="University of Amsterdam"></div>
+        <div class="xp-card has-photo">
+          <div class="xp-body">
+          <div class="timeline-header">
+            <span class="timeline-role">Master's Thesis Researcher</span>
+            <span class="timeline-duration">Jan 2026 – Sep 2026</span>
+          </div>
+          <div class="timeline-org"><strong>University of Amsterdam</strong> &nbsp;·&nbsp; with 3DUniversum &nbsp;·&nbsp; Amsterdam, Netherlands</div>
+          <div class="timeline-project"><a href="/research/cari/" class="link-text">CARI: Coloured Illumination Constancy in Intrinsic Image Decomposition</a></div>
+          <ul class="timeline-details">
+            <li>Developed Cross-Render Albedo Invariance (CARI), a training strategy that makes the model predict the same material colour for one scene photographed under different lamps.</li>
+            <li>Cut luminance-stability error by <strong>39%</strong> (0.259 &rarr; 0.157 on the Multi-Illumination Dataset) and rendered a synthetic dataset of <strong>5,056</strong> cross-illuminant image pairs with exact ground truth.</li>
+            <li>Came within about 6% of the Marigold diffusion baseline on colour accuracy and beat it on intensity error (MAW), with <strong>about 70&times; fewer</strong> trainable parameters and about 5&times; faster inference.</li>
+            <li>Supervised by <a href="https://staff.fnwi.uva.nl/th.gevers/" class="link-text" target="_blank" rel="noopener">Prof. Theo Gevers</a> and <a href="https://www.linkedin.com/in/sezer-karaoglu-1650a01a/" class="link-text" target="_blank" rel="noopener">Dr. Sezer Karaoglu</a> (UvA), with <a href="https://www.ntnu.edu/employees/s.ali.amirshahi" class="link-text" target="_blank" rel="noopener">Prof. Seyed Ali Amirshahi</a> and Dr. Luis Gomez Robledo (COSI). Submitted July 2026, defended September 2026 at NTNU.</li>
+          </ul>
+          </div>
+          <figure class="xp-photo">
+            <img src="images/experience/thumb/uva-3duniversum.jpg" data-full="images/experience/uva-3duniversum.jpg" data-group="experience" data-caption="With the 3DUniversum team, Amsterdam" alt="With the 3DUniversum team, Amsterdam" loading="lazy">
+            <figcaption>With the 3DUniversum team, Amsterdam</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/dxomark.png" alt="DXOMARK"></div>
+        <div class="xp-card has-photo">
+          <div class="xp-body">
+          <div class="timeline-header">
+            <span class="timeline-role">Machine Learning Intern</span>
+            <span class="timeline-duration">Jun 2025 – Aug 2025</span>
+          </div>
+          <div class="timeline-org"><a href="https://www.dxomark.com/" class="link-text" target="_blank" rel="noopener"><strong>DXOMARK</strong></a> &nbsp;·&nbsp; Paris, France &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/sira-ferradans/" class="link-text" target="_blank" rel="noopener">Dr. Sira Ferradans</a>, AI Scientific Director</div>
+          <div class="timeline-project">Vision-language models for portrait image quality</div>
+          <ul class="timeline-details">
+            <li>Adapted the vision-language model DeQA-Score from one overall quality score to per-attribute portrait scores (noise, texture, contrast) for camera portrait-mode benchmarking.</li>
+            <li>Converted Just-Objectionable-Difference (JOD) annotations, a psychophysical scale built from pairwise expert comparisons, into a MOS-compatible training scheme; evaluated on KonIQ, SPAQ, KADID and internal portrait data.</li>
+            <li>Compared regression-head, vision-only, and LoRA fine-tuning alongside prompt and cropping strategies, matching expert ratings with <strong>SRCC 0.91/0.93</strong> and <strong>PLCC 0.91/0.90</strong> (noise/texture). Ablations showed the vision encoder drove most of the gain.</li>
+            <li>Co-authored <a href="https://library.imaging.org/ei/articles/38/12/GENAI-179" class="link-text" target="_blank" rel="noopener">a paper</a> that won the <strong>Best Student Paper Award</strong> at IS&amp;T Electronic Imaging 2026.</li>
+          </ul>
+          </div>
+          <figure class="xp-photo">
+            <img src="images/experience/thumb/dxomark.jpg" data-full="images/experience/dxomark.jpg" data-group="experience" data-caption="The DXOMARK team, Paris" alt="The DXOMARK team, Paris" loading="lazy">
+            <figcaption>The DXOMARK team, Paris</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="xp-item" id="vitex" style="scroll-margin-top: 80px;">
+        <div class="xp-logo"><img src="images/logos/vitex.png" alt="Vitex Software"></div>
+        <div class="xp-card has-photo">
+          <div class="xp-body">
+          <div class="timeline-header">
+            <span class="timeline-role">AI Engineer</span>
+            <span class="timeline-duration">Oct 2023 – Dec 2025</span>
+          </div>
+          <div class="timeline-org"><a href="https://vitex.asia/" class="link-text" target="_blank" rel="noopener"><strong>Vitex Software JSC</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam (Remote)</div>
+          <div class="xp-note">Full-time until Jul 2024, then part-time remote during the MSc.</div>
+
+          <div class="xp-sub"><a href="https://planz.ai" class="link-text" target="_blank" rel="noopener">PlanZ — AI assistant for event planning</a></div>
+          <ul class="timeline-details">
+            <li>Led development of PlanZ's multi-agent assistant, handling <strong>hundreds of requests per day</strong> for scheduling, supplier discovery, and natural-language questions over live event data (LangGraph, tool calling, Qdrant-based RAG, text-to-SQL, FastAPI, PostgreSQL, deployed on AWS).</li>
+            <li>Routed routine steps to a smaller, cheaper model and kept the larger model for complex planning, to control inference cost.</li>
+            <li>Set up agent evaluation with LangSmith traces and fixed failures through prompt engineering, structured outputs, retries with error feedback, and schema-grounded SQL, cutting the failure rate from <strong>~15% to ~5%</strong>.</li>
+          </ul>
+
+          <div class="xp-sub">VLM OCR pipeline — handwritten Japanese vaccination forms</div>
+          <ul class="timeline-details">
+            <li>Built an event-driven pipeline that turns handwritten Japanese vaccination forms (予診票) into 14 structured fields, replacing manual data entry at <strong>2,000 images/hour</strong> with <strong>&ge;92% field-level accuracy</strong> and <strong>&le;5.6% CER</strong>, using a self-hosted Qwen3-VL-8B on vLLM.</li>
+            <li>Fine-tuned the model with LoRA, quantization, and visual grounding on human-verified corrections of its own flagged mistakes.</li>
+            <li>Built in reliability: tiered RabbitMQ retries, a Redis-backed circuit breaker, idempotent updates, and HMAC-signed webhooks.</li>
+          </ul>
+
+          <div class="xp-sub"><a href="https://github.com/tmkhang1999/CV-JD-Matching" class="link-text" target="_blank" rel="noopener">CV–JD Matching</a> (2025)</div>
+          <ul class="timeline-details">
+            <li>Built an internal tool HR uses to shortlist the top 10 candidates per role: GPT-4o-mini extracts structured profiles from CVs and job descriptions, embeddings in PostgreSQL/pgvector rank them, and an optional LLM rerank explains the matches (FastAPI, Docker, React).</li>
+          </ul>
+          </div>
+          <figure class="xp-photo">
+            <img src="images/experience/thumb/vitex.jpg" data-full="images/experience/vitex.jpg" data-group="experience" data-caption="With the Vitex team" alt="With the Vitex team" loading="lazy">
+            <figcaption>With the Vitex team</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/viettel.png" alt="Viettel High Tech"></div>
+        <div class="xp-card has-photo">
+          <div class="xp-body">
+          <div class="timeline-header">
+            <span class="timeline-role">AI Engineer</span>
+            <span class="timeline-duration">May 2023 – Aug 2023</span>
+          </div>
+          <div class="timeline-org"><a href="https://viettelhightech.vn/" class="link-text" target="_blank" rel="noopener"><strong>Viettel High Tech (VHT), Viettel Group</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/van-bang-le-aba45068/" class="link-text" target="_blank" rel="noopener">BangLV</a></div>
+          <div class="timeline-project">Video surveillance system</div>
+          <ul class="timeline-details">
+            <li>Deployed face-recognition models (detector + ArcFace, exported to ONNX) on Kubernetes and NVIDIA Triton Inference Server, increasing inference throughput by <strong>~3&times;</strong> through dynamic batching and concurrent execution.</li>
+            <li>Enabled zero-downtime model updates through runtime model load/unload and service discovery.</li>
+            <li>Refactored the controller block for scalability and built a service-discovery server that tracks available services and model metadata.</li>
+          </ul>
+          </div>
+          <figure class="xp-photo">
+            <img src="images/experience/thumb/viettel.jpg" data-full="images/experience/viettel.jpg" data-group="experience" data-caption="With the Viettel High Tech team" alt="With the Viettel High Tech team" loading="lazy">
+            <figcaption>With the Viettel High Tech team</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/pionero.png" alt="Pionero"></div>
+        <div class="xp-card has-photo">
+          <div class="xp-body">
+          <div class="timeline-header">
+            <span class="timeline-role">AI Engineer Intern</span>
+            <span class="timeline-duration">Jun 2021 – Dec 2021</span>
+          </div>
+          <div class="timeline-org"><a href="https://www.pionero.io/ja/" class="link-text" target="_blank" rel="noopener"><strong>Pionero JSC</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/vanhuyz/" class="link-text" target="_blank" rel="noopener">Huy Van</a></div>
+          <div class="timeline-project">Facial recognition attendance system</div>
+          <ul class="timeline-details">
+            <li>Built a facial-recognition attendance system on existing office cameras (YOLOv5 + FaceNet + softmax classifier) in a 10-person Scrum team, shipped through CI/CD, cutting check-in waiting time by <strong>70%</strong>.</li>
+            <li>On an internal set of 10,188 annotated frames (7,333 face boxes), reached <strong>F1 0.90</strong> for face detection and <strong>F1 0.92</strong> for recognition, running end-to-end at 30–40 FPS on 512p input.</li>
+            <li>Fine-tuned detection and recognition for masked faces during COVID-19.</li>
+          </ul>
+          </div>
+          <figure class="xp-photo">
+            <img src="images/experience/thumb/pionero.jpg" data-full="images/experience/pionero.jpg" data-group="experience" data-caption="The Pionero team, Hanoi" alt="The Pionero team, Hanoi" loading="lazy">
+            <figcaption>The Pionero team, Hanoi</figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Earlier Research ────────────────────── -->
+    <p class="section-label">Earlier Research</p>
+    <div class="xp-timeline" style="margin-bottom: 18px;">
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/hust.png" alt="Hanoi University of Science and Technology"></div>
+        <div class="xp-card">
+          <div class="timeline-header">
+            <span class="timeline-role">Student Research Assistant</span>
+            <span class="timeline-duration">Oct 2021 – Mar 2022</span>
+          </div>
+          <div class="timeline-org"><strong>International Research Institute MICA (HUST)</strong> &nbsp;·&nbsp; Mentor: <a href="https://scholar.google.com.vn/citations?user=RmM94TIAAAAJ&hl=en" class="link-text" target="_blank" rel="noopener">Dr. Thanh-Hai Tran</a></div>
+          <div class="timeline-project">Polyp segmentation (mentored project)</div>
+          <ul class="timeline-details">
+            <li>Prepared and quality-controlled polyp datasets (Kvasir-SEG, CVC-ClinicDB, ETIS-Larib).</li>
+            <li>Retrained TransFuse with Swin Transformer blocks instead of ViT, improving mDice from 0.733 &rarr; 0.77 and mIoU from 0.659 &rarr; 0.70 on ETIS.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p style="color: #64748b; font-size: 0.86rem; margin-bottom: 52px;">
+      Research projects (HyRES, TextMAE, hyperspectral inspection with Dispelix) and coursework reports are on the
+      <a href="/research.html" class="link-text">Research</a> page.
+    </p>
+
+    <!-- ── Education ───────────────────────────── -->
+    <p class="section-label">Education</p>
+    <div class="xp-timeline">
+
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/cosi.png" alt="COSI Erasmus Mundus"></div>
+        <div class="xp-card">
+          <div class="timeline-header">
+            <span class="timeline-role">MSc Computational Colour and Spectral Imaging</span>
+            <span class="timeline-duration">Aug 2024 – Sep 2026</span>
+          </div>
+          <div class="timeline-org">Erasmus Mundus Joint Master &nbsp;·&nbsp; Norway → France → Finland</div>
+          <div class="edu-wordmarks">
+            <img src="images/logos/ntnu-wordmark.png" alt="NTNU">
+            <img src="images/logos/ujm-wordmark.png" alt="Université Jean Monnet">
+            <img src="images/logos/uef-wordmark.png" alt="University of Eastern Finland">
+          </div>
+          <ul class="timeline-details">
+            <li>Admitted <strong>1st of 198</strong> applicants on a full Erasmus Mundus Consortium Scholarship. Grade: <strong>Very Good</strong>.</li>
+            <li>Relevant coursework: Advanced Image Processing, Advanced Deep Learning, 3D Models in Computer Vision, Light-Matter Interaction and Materials Appearance, Advanced Spectral Imaging Devices, Colour Science Laboratory, From Statistics to Data Mining, Pattern Recognition, Eye Tracking.</li>
+            <li>Thesis at the University of Amsterdam with industry partner 3DUniversum (see above).</li>
+          </ul>
+          <div class="photo-strip">
+            <figure><img src="images/experience/thumb/cosi-ntnu.jpg" data-full="images/experience/cosi-ntnu.jpg" data-group="experience" data-caption="COSI cohort at NTNU, Gjøvik" alt="COSI cohort at NTNU, Gjøvik" loading="lazy"><figcaption>COSI cohort at NTNU, Gjøvik</figcaption></figure>
+            <figure><img src="images/experience/thumb/cosi-ujm.jpg" data-full="images/experience/cosi-ujm.jpg" data-group="experience" data-caption="Université Jean Monnet, Saint-Étienne" alt="Université Jean Monnet, Saint-Étienne" loading="lazy"><figcaption>Université Jean Monnet, Saint-Étienne</figcaption></figure>
+            <figure><img src="images/experience/thumb/cosi-uef.jpg" data-full="images/experience/cosi-uef.jpg" data-group="experience" data-caption="UEF Photonics Center, Joensuu" alt="UEF Photonics Center, Joensuu" loading="lazy"><figcaption>UEF Photonics Center, Joensuu</figcaption></figure>
+            <figure><img src="images/experience/thumb/cosi-graduation.jpg" data-full="images/experience/cosi-graduation.jpg" data-group="experience" data-caption="Graduation day, NTNU" alt="Graduation day, NTNU" loading="lazy"><figcaption>Graduation day, NTNU</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="xp-item">
+        <div class="xp-logo"><img src="images/logos/oswego.png" alt="SUNY Oswego"></div>
+        <div class="xp-card has-photo">
+          <div class="xp-body">
+          <div class="timeline-header">
+            <span class="timeline-role">BSc Computer Science</span>
+            <span class="timeline-duration">Jan 2019 – Dec 2022</span>
+          </div>
+          <div class="timeline-org"><strong>State University of New York at Oswego</strong> &nbsp;·&nbsp; Oswego, NY, USA</div>
+          <ul class="timeline-details">
+            <li>GPA <strong>3.81 / 4.0</strong> (major 3.82), <strong>Summa Cum Laude</strong>; President's List (Spring 2019, Spring 2021, Fall 2022) and Dean's List.</li>
+            <li>Destination Oswego Scholarship and Merit Scholarship.</li>
+          </ul>
+          </div>
+          <figure class="xp-photo">
+            <img src="images/experience/thumb/oswego-graduation.jpg" data-full="images/experience/oswego-graduation.jpg" data-group="experience" data-caption="Graduation, SUNY Oswego" alt="Graduation, SUNY Oswego" loading="lazy">
+            <figcaption>Graduation, SUNY Oswego</figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Honours & Awards ────────────────────── -->
     <div style="margin-bottom: 52px;">
-      <p class="section-label">Publications</p>
-
-      <div class="pub-card">
-        <div class="pub-award-badge">
-          <i class="fas fa-trophy"></i> Best Student Paper — IS&amp;T Electronic Imaging 2026
-        </div>
-        <div class="pub-title">
-          Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment
-        </div>
-        <div class="pub-authors">
-          Yujin Cho, <strong>Minh Khang Tran</strong>, Benoit Pochon, Jean-Michel Morel, Gabriele Facciolo, Sira Ferradans
-        </div>
-        <div class="pub-venue">IS&amp;T Electronic Imaging 2026 · Generative AI for Image/Video Synthesis</div>
-        <a href="https://library.imaging.org/ei/articles/38/12/GENAI-179" class="pub-link" target="_blank" rel="noopener">
-          <i class="fas fa-external-link-alt"></i> View Paper
-        </a>
+      <p class="section-label">Honours &amp; Awards</p>
+      <div class="awards-wrap">
+      <ul class="award-list">
+        <li><span class="yr">2026</span><i class="fas fa-trophy"></i><span><strong>Best Student Paper Award</strong>, IS&amp;T Electronic Imaging 2026, for <a href="https://library.imaging.org/ei/articles/38/12/GENAI-179" class="link-text" target="_blank" rel="noopener">Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment</a> (Yujin Cho, <strong>Minh Khang Tran</strong>, Benoit Pochon, Jean-Michel Morel, Gabriele Facciolo, Sira Ferradans)</span></li>
+        <li><span class="yr">2024</span><i class="fas fa-medal"></i><span><strong>Erasmus Mundus Consortium Scholarship</strong>, full scholarship, ranked 1st of 198 applicants</span></li>
+        <li><span class="yr">2022</span><i class="fas fa-award"></i><span><strong>Summa Cum Laude</strong>, SUNY Oswego; President's List &times;3, Dean's List &times;3</span></li>
+        <li><span class="yr">2019</span><i class="fas fa-award"></i><span><strong>Destination Oswego Scholarship</strong> and <strong>Merit Scholarship</strong>, SUNY Oswego</span></li>
+      </ul>
+        <figure class="award-cert">
+          <img src="images/research/thumb/ei2026-award.jpg" data-full="images/research/ei2026-award.jpg" data-caption="Best Student Paper Award certificate, IS&amp;T Electronic Imaging 2026" alt="Best Student Paper Award certificate, IS&amp;T Electronic Imaging 2026">
+          <figcaption>The award certificate, listing the co-authors</figcaption>
+        </figure>
       </div>
-
     </div>
 
-    <!-- ── Working Experience ───────────────────── -->
-    <div class="timeline-section">
-      <p class="section-label">Working Experience</p>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">Master Thesis Intern</span>
-          <span class="timeline-duration">Jan 2026 – Sep 2026</span>
-        </div>
-        <div class="timeline-org"><strong>University of Amsterdam</strong> &nbsp;·&nbsp; Amsterdam, Netherlands</div>
-        <div class="timeline-project">Coloured Illumination Constancy in Intrinsic Image Decomposition via Cross-Render Albedo Invariance (CARI)</div>
-        <ul class="timeline-details">
-          <li>Researched Real Estate Image Enhancement via Intrinsic Image Decomposition (IID) through an industry collaboration (3DUniversum), bridging academic research and commercial application.</li>
-          <li>Supervised by <a href="https://staff.fnwi.uva.nl/th.gevers/" class="link-text" target="_blank" rel="noopener">Prof. Dr. Theo Gevers</a> and <a href="https://www.linkedin.com/in/sezer-karaoglu-1650a01a/" class="link-text" target="_blank" rel="noopener">Dr. Sezer Karaoglu</a>.</li>
-          <li>Submitted the thesis in July 2026 and defended it in September 2026 at NTNU. Full write-up on the <a href="/research/cari/" class="link-text">project page</a>.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">Machine Learning Intern</span>
-          <span class="timeline-duration">Jun 2025 – Aug 2025</span>
-        </div>
-        <div class="timeline-org"><a href="https://www.dxomark.com/" class="link-text" target="_blank" rel="noopener"><strong>DXOMark</strong></a> &nbsp;·&nbsp; Paris, France &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/sira-ferradans/" class="link-text" target="_blank" rel="noopener">Sira Ferradans</a></div>
-        <div class="timeline-project">MLLMs for Image Quality Evaluation</div>
-        <ul class="timeline-details">
-          <li>Studied the performance of Vision-Language Models (VLMs) DeQA-Score for Image Quality Assessment (IQA) on public (KonIQ, SPAQ, KADID) and internal datasets.</li>
-          <li>Adapted model outputs to align with DXOMARK's Just-Objectionable-Difference (JOD) evaluation standards.</li>
-          <li>Compared fine-tuning approaches (regression head, vision-only training, LoRA) alongside prompt designs and image-cropping strategies, matching expert ratings with <strong>SRCC 0.91/0.93</strong> and <strong>PLCC 0.91/0.90</strong> on noise/texture.</li>
-          <li>Ablations showed the vision encoder — not the language head — drove most of the improvement.</li>
-          <li>Published <a href="https://library.imaging.org/ei/articles/38/12/GENAI-179" class="link-text" target="_blank" rel="noopener">"Adapting DeQA-Score for Attribute-Specific Portrait Quality Assessment"</a> — awarded <strong>Best Student Paper</strong> at IS&amp;T Electronic Imaging 2026.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">AI Engineer</span>
-          <span class="timeline-duration">Oct 2023 – Dec 2024</span>
-        </div>
-        <div class="timeline-org"><a href="https://vitex.asia/" class="link-text" target="_blank" rel="noopener"><strong>Vitex Software JSC</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam (Remote)</div>
-        <div class="timeline-project"><a href="https://planz.ai" class="link-text" target="_blank" rel="noopener">PlanZ — AI-Powered Event Assistant</a></div>
-        <ul class="timeline-details">
-          <li>Designed and built PlanZ's multi-agent assistant from scratch — event feature suggestions, schedule generation, supplier discovery, and natural-language database access — handling <strong>hundreds of requests per day</strong> using LangGraph, Qdrant-based RAG, text-to-SQL, FastAPI, and PostgreSQL.</li>
-          <li>Routed routine steps to GPT-3.5-turbo and reserved GPT-4o for complex planning and reasoning to control inference cost.</li>
-          <li>Cut the agent failure rate from <strong>~15% to ~5%</strong> by analysing LangSmith traces and adding structured outputs, retries with error feedback, and schema-grounded SQL fallback paths.</li>
-        </ul>
-
-        <div class="timeline-project" style="margin-top: 14px;">VLM OCR Pipeline — Handwritten Japanese Vaccination Forms</div>
-        <ul class="timeline-details">
-          <li>Built an event-driven pipeline that converts handwritten Japanese vaccination forms (予診票) into 14 structured JSON fields, replacing manual data entry at <strong>2,000 images/hour</strong> with <strong>&ge;92% field-level accuracy</strong> and <strong>&le;5.6% CER</strong>, using a self-hosted Qwen3-VL-8B served via vLLM.</li>
-          <li>Fine-tuned the model with LoRA, quantization, and visual grounding on human-verified corrections of its own flagged mistakes.</li>
-          <li>Built reliability into the pipeline: tiered RabbitMQ retries, a Redis-backed circuit breaker, idempotent updates, and HMAC-signed webhooks for downstream delivery.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">AI Engineer</span>
-          <span class="timeline-duration">May 2023 – Aug 2023</span>
-        </div>
-        <div class="timeline-org"><a href="https://viettelhightech.vn/" class="link-text" target="_blank" rel="noopener"><strong>VHT, Viettel Group</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/van-bang-le-aba45068/" class="link-text" target="_blank" rel="noopener">BangLV</a></div>
-        <div class="timeline-project">Video Surveillance System</div>
-        <ul class="timeline-details">
-          <li>Deployed face-recognition models (detector + ArcFace, exported to ONNX) on Kubernetes and NVIDIA Triton Inference Server, increasing inference throughput by <strong>~3&times;</strong> through dynamic batching and concurrent execution.</li>
-          <li>Enabled zero-downtime model updates through runtime model load/unload and service discovery.</li>
-          <li>Refactored the Controller Block for scalability and developed a Service Discovery/Management Server to check available services and store AI model metadata.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">AI Engineer Intern</span>
-          <span class="timeline-duration">Jun 2021 – Dec 2021</span>
-        </div>
-        <div class="timeline-org"><a href="https://www.pionero.io/ja/" class="link-text" target="_blank" rel="noopener"><strong>Pionero JSC</strong></a> &nbsp;·&nbsp; Hanoi, Vietnam &nbsp;·&nbsp; Supervisor: <a href="https://www.linkedin.com/in/vanhuyz/" class="link-text" target="_blank" rel="noopener">Huy Van</a></div>
-        <div class="timeline-project">Facial Recognition Attendance System</div>
-        <ul class="timeline-details">
-          <li>Developed a Face Recognition pipeline with a 10-member scrum team, reducing expenses of time-keeper hardware and cutting 70% of employee wait time for attendance check-in.</li>
-          <li>Achieved 88% recall and 89% precision using YOLOv5 (512px frames, confidence 0.8) for face detection.</li>
-          <li>Used pre-trained FaceNet for feature extraction and a fully-connected network with Softmax Regression for classification, reaching 77% recall and 97.5% precision.</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- ── Research Experience ──────────────────── -->
-    <div class="timeline-section">
-      <p class="section-label">Research Experience</p>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">Student Researcher</span>
-          <span class="timeline-duration">Sep 2025 – Dec 2025</span>
-        </div>
-        <div class="timeline-org"><strong>University of Eastern Finland</strong> &nbsp;·&nbsp; Joensuu, Finland &nbsp;·&nbsp; Industry Partner: <a href="https://dispelix.com/" class="link-text" target="_blank" rel="noopener">Dispelix Oy</a></div>
-        <div class="timeline-project"><a href="https://github.com/46code/IC_Grating_Defect_Metrology_in_AR_Waveguided_Display" class="link-text" target="_blank" rel="noopener">Multi-Spectral Vision System for Quality Inspection of In-Coupler Gratings in AR Displays</a></div>
-        <ul class="timeline-details">
-          <li>Built an automated hyperspectral (450–950 nm) measurement pipeline — reflectance computation, fiducial-based homography alignment, and circle-based IC ROI extraction — converting Dispelix's quality requirements into three Critical-to-Quality metrics: RMSE, Spectral Angle Mapper (SAM), and spatial Uniformity.</li>
-          <li>Validated CTQ discriminative power on 14 defect samples spanning five defect categories (Periphery, Mask, Spot, Shape, Homogeneity), then ran a full crossed Gage R&amp;R study (4 operators × 2 trials × 12 samples, 96 observations per CTQ) — all three CTQs came in under 12% total measurement-system variation (SRMSE 11.68%, SAM 8.75%, Uniformity 9.61%), with over 99% attributable to real part-to-part differences.</li>
-          <li>Team project for the COSI Industrial Project course, with Anirban Das, Kidu Walegerima, and Luel Gebre, in collaboration with Dispelix Oy.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">Student Researcher</span>
-          <span class="timeline-duration">Jan 2025 – May 2025</span>
-        </div>
-        <div class="timeline-org"><strong>Jean Monnet University</strong> &nbsp;·&nbsp; Saint-Étienne, France &nbsp;·&nbsp; Mentor: <a href="https://scholar.google.fr/citations?user=TyNSxjQAAAAJ&hl=fr" class="link-text" target="_blank" rel="noopener">Prof. Damien Muselet</a></div>
-        <div class="timeline-project"><a href="https://github.com/tmkhang1999/HyRES-Residual-Enhanced-Hybrid-Image-Compression" class="link-text" target="_blank" rel="noopener">HYRES: Residual-Enhanced Hybrid Image Compression</a></div>
-        <ul class="timeline-details">
-          <li>Designed a pipeline leveraging JPEG compression speed with deep learning perceptual quality, outperforming traditional JPEG while being faster than fully neural methods.</li>
-          <li>Achieved a compact model with only 10.14M parameters and an end-to-end encode-decode time of 0.762s.</li>
-          <li>At 0.6 bpp, the model reached 31.97 PSNR compared to 29.585 for traditional JPEG.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">Research Assistant</span>
-          <span class="timeline-duration">Sep 2023 – Mar 2024</span>
-        </div>
-        <div class="timeline-org"><strong>FPT Software AI Center</strong> &nbsp;·&nbsp; Hanoi, Vietnam &nbsp;·&nbsp; Mentor: <a href="https://www.linkedin.com/in/thang-nguyen-67119a28/" class="link-text" target="_blank" rel="noopener">Dr. Thang Nguyen</a></div>
-        <div class="timeline-project"><a href="https://github.com/tmkhang1999/TextMAE-Image-Compression" class="link-text" target="_blank" rel="noopener">TextMAE Image Compression</a></div>
-        <ul class="timeline-details">
-          <li>Developed a novel masking algorithm using Divide-and-Merge and Laplacian techniques to enhance patch importance scoring, improving video compression performance.</li>
-          <li>Enhanced image reconstruction quality by integrating Stable Diffusion with BLIP-generated text prompts, yielding significant improvements in PSNR and MS-SSIM.</li>
-          <li>Refined research methodology by evaluating percentile vs. random masking — demonstrating random masking improves model robustness while percentile masking suits inference and deployment.</li>
-        </ul>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="timeline-header">
-          <span class="timeline-role">Student Research Assistant</span>
-          <span class="timeline-duration">Oct 2021 – Mar 2022</span>
-        </div>
-        <div class="timeline-org"><strong>MICA Institute, HUST</strong> &nbsp;·&nbsp; Hanoi, Vietnam (Remote) &nbsp;·&nbsp; Mentor: <a href="https://scholar.google.com.vn/citations?user=RmM94TIAAAAJ&hl=en" class="link-text" target="_blank" rel="noopener">Dr. Thanh-Hai Tran</a></div>
-        <div class="timeline-project">Polyp Segmentation</div>
-        <ul class="timeline-details">
-          <li>Prepared, quality-controlled, and mined polyp datasets (Kvasir-SEG, CVC-ClinicDB, ETIS-Larib).</li>
-          <li>Retrained Transfuse using Swin Transformer blocks instead of ViT, improving mDice from 0.733 → 0.77 and mIoU from 0.659 → 0.70 on the ETIS dataset.</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- ── Education ─────────────────────────────── -->
+    <!-- ── Skills ──────────────────────────────── -->
     <div style="margin-bottom: 52px;">
-      <p class="section-label">Education</p>
+      <p class="section-label">Skills</p>
 
-      <div class="edu-card">
-        <div class="edu-degree">MSc. Computational Color and Spectral Imaging (COSI)</div>
-        <div class="edu-institution">Erasmus Mundus Joint Master's Degree</div>
-        <div class="edu-meta">Aug 2024 – Sep 2026 &nbsp;·&nbsp; Norway · France · Finland</div>
-        <div class="edu-detail">
-          <strong>Semesters:</strong> NTNU (Norway) &rarr; Jean Monnet University (France) &rarr; University of Eastern Finland
-        </div>
-        <div class="edu-detail">
-          <strong>Admission:</strong> Ranked 1st / 198 applicants · Full Consortium Scholarship
-        </div>
-        <div class="edu-detail">
-          <strong>Relevant courses:</strong> Advanced Image Processing, Deep Learning &amp; Applications, 3D Models in Computer Vision, Light-Matter Interaction, ML Fundamentals, Statistics &amp; Data Mining
-        </div>
-        <div>
-          <span class="edu-badge"><i class="fas fa-star" style="font-size:0.65rem;"></i> Consortium Scholarship</span>
-          <span class="edu-badge"><i class="fas fa-medal" style="font-size:0.65rem;"></i> 1st / 198</span>
+      <div class="skill-group">
+        <div class="skill-group-label">Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Go</span>
         </div>
       </div>
 
-      <div class="edu-card">
-        <div class="edu-degree">BSc. Computer Science</div>
-        <div class="edu-institution">State University of New York at Oswego (SUNY Oswego)</div>
-        <div class="edu-meta">Jan 2019 – Dec 2022 &nbsp;·&nbsp; Oswego, NY, USA</div>
-        <div class="edu-detail"><strong>GPA:</strong> 3.81 / 4.0 &nbsp;·&nbsp; <strong>Major GPA:</strong> 3.82 / 4.0</div>
-        <div class="edu-detail"><strong>Honors:</strong> Summa Cum Laude · President's List (Spring 2019, Spring 2021, Fall 2022) · Dean's List</div>
-        <div class="edu-detail"><strong>Scholarships:</strong> Destination Oswego Scholarship · Merit Scholarship</div>
-        <div>
-          <span class="edu-badge"><i class="fas fa-star" style="font-size:0.65rem;"></i> Summa Cum Laude</span>
-          <span class="edu-badge">GPA 3.81 / 4.0</span>
+      <div class="skill-group">
+        <div class="skill-group-label">Machine Learning &amp; Vision</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">OpenCV</span>
+          <span class="skill-tag">Transformers / VLMs</span>
+          <span class="skill-tag">LoRA</span>
+          <span class="skill-tag">Diffusion Models</span>
+          <span class="skill-tag">CNN</span>
+          <span class="skill-tag">GAN / VAE</span>
+          <span class="skill-tag">Image Compression</span>
         </div>
       </div>
 
+      <div class="skill-group">
+        <div class="skill-group-label">LLM Applications</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LangGraph</span>
+          <span class="skill-tag">LangChain</span>
+          <span class="skill-tag">LangSmith</span>
+          <span class="skill-tag">RAG</span>
+          <span class="skill-tag">Tool Calling</span>
+          <span class="skill-tag">Text-to-SQL</span>
+          <span class="skill-tag">Qdrant</span>
+          <span class="skill-tag">pgvector</span>
+          <span class="skill-tag">OpenAI API</span>
+          <span class="skill-tag">MCP</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Serving &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Triton Server</span>
+          <span class="skill-tag">vLLM</span>
+          <span class="skill-tag">ONNX</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">RabbitMQ</span>
+          <span class="skill-tag">MinIO</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Practices</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Unit Testing</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Agent Evaluation</span>
+          <span class="skill-tag">Prompt Engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">AI Development Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Claude Code</span>
+          <span class="skill-tag">Codex</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Vietnamese (native)</span>
+          <span class="skill-tag">English (C1)</span>
+          <span class="skill-tag">French (learning)</span>
+        </div>
+      </div>
     </div>
 
-    <!-- ── Certificates ─────────────────────────── -->
+    <!-- ── Certificates ────────────────────────── -->
     <div style="margin-bottom: 52px;">
       <p class="section-label">Certificates</p>
       <div class="skill-tags">
         <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/K6E2EDDZJ378" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
-          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>Machine Learning Specialization
+          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>Machine Learning Specialization (Coursera)
         </a>
         <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/7M9SRQFRSX3S" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
-          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>IBM Data Science Specialization
+          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>IBM Data Science Specialization (Coursera)
         </a>
         <a href="https://www.udacity.com/certificate/e/47a51ae0-5a56-11ed-ad3b-c3b4eafa7648" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
-          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>Udacity Data Scientist Nanodegree
+          <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>Data Scientist Nanodegree (Udacity)
         </a>
         <a href="https://www.credly.com/badges/c0d01e0c-0f95-4afc-ab1b-de2e3f60c2ee/linked_in_profile" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
           <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>AWS Academy Cloud Foundations
@@ -298,170 +406,107 @@
         <a href="https://www.credly.com/badges/5571ff3d-14e7-478c-98e8-bd5c7a009d8a/linked_in_profile" class="skill-tag" target="_blank" rel="noopener" style="text-decoration:none;">
           <i class="fas fa-certificate" style="font-size:0.7rem; margin-right:5px; color:#38bdf8;"></i>AWS Academy Cloud Security Foundations
         </a>
+        <span class="skill-tag">Deep Learning (AI VIETNAM)</span>
       </div>
     </div>
 
-    <!-- ── Skills & Tools ───────────────────────── -->
+    <!-- ── Activities ──────────────────────────── -->
     <div style="margin-bottom: 52px;">
-      <p class="section-label">Skills &amp; Tools</p>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Languages</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Go</span>
-          <span class="skill-tag">SQL</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Frameworks &amp; Libraries</div>
-        <div class="skill-tags">
-          <span class="skill-tag">LangChain</span>
-          <span class="skill-tag">LangGraph</span>
-          <span class="skill-tag">Qdrant</span>
-          <span class="skill-tag">FastAPI</span>
-          <span class="skill-tag">Flask</span>
-          <span class="skill-tag">PyTorch</span>
-          <span class="skill-tag">TensorFlow</span>
-          <span class="skill-tag">Scikit-learn</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Infrastructure &amp; DevOps</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Kubernetes</span>
-          <span class="skill-tag">Triton Server</span>
-          <span class="skill-tag">vLLM</span>
-          <span class="skill-tag">ONNX</span>
-          <span class="skill-tag">MinIO</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">Redis</span>
-          <span class="skill-tag">RabbitMQ</span>
-          <span class="skill-tag">MongoDB</span>
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">Git</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Specialisation</div>
-        <div class="skill-tags">
-          <span class="skill-tag">VLM / LLM</span>
-          <span class="skill-tag">Diffusion Models</span>
-          <span class="skill-tag">CNN</span>
-          <span class="skill-tag">Transformers</span>
-          <span class="skill-tag">VAE</span>
-          <span class="skill-tag">GAN</span>
-          <span class="skill-tag">Image Compression</span>
-          <span class="skill-tag">RAG / MCP</span>
-          <span class="skill-tag">Multi-Agent Systems</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Spoken Languages</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Vietnamese (native)</span>
-          <span class="skill-tag">English (proficient)</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── Self-Driven Learning ──────────────────── -->
-    <div style="margin-bottom: 52px;">
-      <p class="section-label">The Self-Learner Trait</p>
-      <div class="timeline-entry" style="border-color: rgba(56,189,248,0.18);">
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.82; margin-bottom: 16px;">
-          I believe the most important trait of any great engineer is the ability — and the hunger —
-          to <strong style="color: #f1f5f9;">teach yourself</strong>. It's the skill that multiplies every other.
-        </p>
-        <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.78; margin-bottom: 16px;">
-          When I started my BSc at SUNY Oswego in 2019, AI wasn't part of the curriculum. Rather than wait for
-          formal instruction, I went through Coursera, Udacity, papers, and open-source code on my own — building
-          my ML foundation in parallel with my degree. That habit of not waiting for permission to learn has
-          defined my career ever since.
-        </p>
-        <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.78; margin-bottom: 16px;">
-          The same approach extends into keeping up with the field: new architectures, emerging frameworks,
-          research directions I find interesting — I read, implement, and experiment without needing it to be
-          assigned. And I apply the same mindset to <strong style="color: #cbd5e1;">fitness</strong>: tracking
-          my own training, nutrition, and recovery rather than blindly following templates. It's the same
-          feedback loop — observe, adjust, iterate.
-        </p>
-        <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.78; margin: 0;">
-          I got into one of Vietnam's most selective universities on my own, earned scholarships abroad on my own,
-          and taught myself a field that didn't exist in my curriculum — on my own. Not because I had to, but
-          because I genuinely believe that <em style="color: #cbd5e1;">ownership of your own learning is what separates
-          engineers who grow from those who plateau.</em>
-        </p>
+      <p class="section-label">Activities</p>
+      <ul class="award-list">
+        <li><span class="yr">2024</span><i class="fas fa-users" style="color:#38bdf8;"></i><span><strong>Organizing Committee</strong>, EM Sharing 2024 (Jan–Mar 2024), an event helping Vietnamese students apply to Erasmus Mundus</span></li>
+        <li><span class="yr">2020</span><i class="fas fa-flag" style="color:#38bdf8;"></i><span><strong>Team Lead</strong>, FPT Data-centric AI Competition, team of 4: improper-mask detection with extra labelled images, Mosaic/Mixup augmentation, and YOLOv5-based mask superimposition to balance classes</span></li>
+        <li><span class="yr">2019</span><i class="fas fa-chalkboard-teacher" style="color:#38bdf8;"></i><span><strong>Teaching Tutor</strong>, CSC 212, SUNY Oswego (2019–2020)</span></li>
+        <li><span class="yr">2018</span><i class="fas fa-hands-helping" style="color:#38bdf8;"></i><span><strong>Volunteer</strong>, Volunteers for Peace Vietnam summer camp (ICYE)</span></li>
+        <li><span class="yr">2016</span><i class="fas fa-globe" style="color:#38bdf8;"></i><span><strong>Delegate</strong>, VNMUN 2016</span></li>
+      </ul>
+      <div class="em-photos">
+        <figure><img src="images/life/thumb/em-sharing.jpg" data-full="images/life/em-sharing.jpg" data-group="em" data-caption="EM Sharing 2024: helping Vietnamese students apply to Erasmus Mundus" alt="EM Sharing 2024 organisers and participants" loading="lazy"><figcaption>EM Sharing 2024, which I helped organise</figcaption></figure>
+        <figure><img src="images/life/thumb/em-scholars.jpg" data-full="images/life/em-scholars.jpg" data-group="em" data-caption="Erasmus Mundus scholars from Vietnam at the EU Delegation" alt="Erasmus Mundus scholars from Vietnam at the EU Delegation" loading="lazy"><figcaption>With Erasmus Mundus scholars from Vietnam at the EU Delegation</figcaption></figure>
       </div>
     </div>
 
-    <!-- ── Beyond Work ───────────────────────────── -->
+    <!-- ── How I learn ─────────────────────────── -->
     <div style="margin-bottom: 52px;">
+      <p class="section-label">How I Learn</p>
+      <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.78; max-width: 760px; margin: 0;">
+        The trait I value most in an engineer is teaching yourself. AI was not part of my curriculum when I started at
+        SUNY Oswego in 2019, so I learned it through Coursera, Udacity, papers, and open-source code alongside the degree.
+        I still work that way: read a new paper, implement it, and adjust from what the results show. Training in the gym
+        runs on the same loop: observe, adjust, iterate.
+      </p>
+    </div>
+
+    <!-- ── Beyond Work ─────────────────────────── -->
+    <div id="beyond" style="margin-bottom: 20px;">
       <p class="section-label">Beyond Work</p>
-      <div class="row">
-        <div class="col-md-8">
-          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.75;">
-            <strong style="color: #e2e8f0;">Basketball</strong> — a sport I've played since high school and that stays with me.
-            Kobe Bryant and Stephen Curry taught me that relentless work ethic and adaptability
-            matter as much off the court as on it.
-          </p>
-          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.75;">
-            <strong style="color: #e2e8f0;">Fitness</strong> — training at least four times a week is as much about mental discipline
-            as physical. I learn a lot about myself — diet, scheduling, consistency — through this practice.
-          </p>
-          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.75;">
-            <strong style="color: #e2e8f0;">Travel</strong> — studying across Norway, France, and Finland has reinforced how much
-            I value diverse cultures and new environments. My first big dream destination was Yosemite National Park;
-            Europe came next — and keeps surprising me.
-          </p>
+
+      <div class="story">
+        <div class="story-text">
+          <h3><i class="fas fa-basketball-ball" style="color:#fb923c; margin-right:8px;"></i>Basketball</h3>
+          <p>I started playing in high school, joined a school tournament, and never stopped. It is also how I make friends every time I move: teammates at SUNY Oswego, pickup games by the lake in Gjøvik, and games with colleagues from DXOMARK in Paris. I still play today.</p>
+          <p>Kobe Bryant and Stephen Curry taught me that work ethic and adaptability matter off the court as much as on it.</p>
         </div>
-        <div class="col-md-4 mt-3 mt-md-0">
-          <div class="card" style="border-radius: 10px; overflow: hidden;">
-            <img src="images/about/kobe.jpg" alt="Basketball" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-          </div>
+        <div class="story-photos">
+          <img class="tall" src="images/life/thumb/bb-gjovik-layup.jpg" data-full="images/life/bb-gjovik-layup.jpg" data-group="life" data-caption="By Lake Mjøsa, Gjøvik" alt="By Lake Mjøsa, Gjøvik" loading="lazy">
+          <img class="wide" style="object-position: center 15%;" src="images/life/thumb/bb-oswego.jpg" data-full="images/life/bb-oswego.jpg" data-group="life" data-caption="With teammates at SUNY Oswego" alt="With teammates at SUNY Oswego" loading="lazy">
+          <img src="images/life/thumb/bb-gjovik-court.jpg" data-full="images/life/bb-gjovik-court.jpg" data-group="life" data-caption="Pickup game in Gjøvik" alt="Pickup game in Gjøvik" loading="lazy">
+          <img src="images/life/thumb/bb-dxomark.jpg" data-full="images/life/bb-dxomark.jpg" data-group="life" data-caption="With DXOMARK colleagues, Paris" alt="With DXOMARK colleagues, Paris" loading="lazy">
+          <img class="full" src="images/life/thumb/bb-arena.jpg" data-full="images/life/bb-arena.jpg" data-group="life" data-caption="Watching the France vs Monaco final in Paris (France lost)" alt="Watching the France vs Monaco final in Paris" loading="lazy">
+        </div>
+      </div>
+
+      <div class="story reverse">
+        <div class="story-text">
+          <h3><i class="fas fa-birthday-cake" style="color:#f472b6; margin-right:8px;"></i>Cooking</h3>
+          <p>Mostly desserts. Cheesecake is my go-to; I also bake carrot cake and make pizza from scratch, dough included.</p>
+        </div>
+        <div class="story-photos">
+          <img class="tall" src="images/life/thumb/cook-cheesecake.jpg" data-full="images/life/cook-cheesecake.jpg" data-group="life" data-caption="Cheesecake" alt="Cheesecake" loading="lazy">
+          <img class="tall" src="images/life/thumb/cook-carrot-cake.jpg" data-full="images/life/cook-carrot-cake.jpg" data-group="life" data-caption="Carrot cake" alt="Carrot cake" loading="lazy">
+          <img class="tall" src="images/life/thumb/cook-pizza.jpg" data-full="images/life/cook-pizza.jpg" data-group="life" data-caption="Homemade pizza" alt="Homemade pizza" loading="lazy">
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story-text">
+          <h3><i class="fas fa-camera" style="color:#38bdf8; margin-right:8px;"></i>Photography, hiking &amp; fitness</h3>
+          <p>I take photos wherever I go. Studying across Norway, France, and Finland meant a lot of new places, from the northern lights over Gjøvik to Christmas markets in Alsace. My first dream destination was Yosemite; Europe came next.</p>
+          <p>I also hike and train at least four times a week, as much for discipline as for the body.</p>
+          <p><a href="/gallery.html" class="see-all">See the gallery &rarr;</a></p>
+        </div>
+        <div class="story-photos">
+          <img class="tall" style="object-position: 25% center;" src="images/life/thumb/hiking.jpg" data-full="images/life/hiking.jpg" data-group="life" data-caption="Out on a hike" alt="Khang hiking on a mountain trail">
+          <a href="/gallery.html" class="wide" style="grid-column: span 2;"><img src="images/gallery/thumb/gjovik-aurora.jpg" alt="Northern lights, Gjøvik" style="height:100%; cursor:pointer;"></a>
+          <a href="/gallery.html" class="wide" style="grid-column: span 2;"><img src="images/gallery/thumb/budapest.jpg" alt="Hungarian Parliament, Budapest" style="height:100%; cursor:pointer;"></a>
         </div>
       </div>
     </div>
 
-    <!-- ── Contact ───────────────────────────────── -->
+    <!-- ── Contact ─────────────────────────────── -->
     <div style="margin-bottom: 60px;">
       <p class="section-label">Get in Touch</p>
-      <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.75; max-width: 500px;">
-        I completed my master's in September 2026 and am actively seeking
-        <strong style="color: #e2e8f0;">Research Engineer</strong> opportunities.
-        Always open to collaboration, research discussions, and ideas that push the boundary
-        of intelligent visual systems.
+      <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.75; max-width: 540px;">
+        I completed my master's in September 2026 and I'm based in Paris, open to
+        <strong style="color: #e2e8f0;">Machine Learning</strong> and <strong style="color: #e2e8f0;">Research Engineer</strong> roles.
+        The fastest way to reach me is email.
       </p>
-      <div class="hero-links" style="margin-top: 16px;">
-        <a href="mailto:khangtm99@gmail.com" class="hero-social-link">
-          <i class="fas fa-envelope"></i> khangtm99@gmail.com
-        </a>
-        <a href="https://github.com/tmkhang1999" class="hero-social-link" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/khangtm99/" class="hero-social-link" target="_blank" rel="noopener">
-          <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
+      <div class="icon-row" style="margin-top: 16px;">
+        <a href="mailto:khangtm99@gmail.com" class="icon-link primary"><i class="fas fa-envelope"></i> khangtm99@gmail.com</a>
+        <a href="https://www.linkedin.com/in/khangtm99/" class="icon-link" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/tmkhang1999" class="icon-link" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
   </div>
+
+  <script src="js/lightbox.js"></script>
 
   <div class="footer-bottom">
     <p class="m-0 text-center text-muted" style="font-size: 0.82rem;">
       Minh Khang Tran &nbsp;·&nbsp;
       <a class="link-text" href="https://github.com/tmkhang1999" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
       <a class="link-text" href="https://www.linkedin.com/in/khangtm99/" target="_blank" rel="noopener">LinkedIn</a>
-    </p>
-    <p class="m-0 text-center text-muted" style="font-size: 0.78rem; margin-top: 4px !important;">
-      &copy; <script>document.write(new Date().getFullYear())</script>
     </p>
   </div>
 
