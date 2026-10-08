@@ -1602,12 +1602,6 @@ details.earlier > summary:hover {
   .award-cert { max-width: 360px; }
 }
 
-/* CARI results table: scroll inside its box on narrow screens instead of being clipped */
-.results-table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
 /* Two columns of photos on phones so the gallery stays browsable */
 @media (max-width: 576px) {
   .gallery-grid { columns: 2; column-gap: 8px; }
