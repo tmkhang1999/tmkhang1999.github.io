@@ -71,11 +71,11 @@
             <span class="timeline-duration">Jan 2026 – Sep 2026</span>
           </div>
           <div class="timeline-org"><strong>University of Amsterdam</strong> &nbsp;·&nbsp; with 3DUniversum &nbsp;·&nbsp; Amsterdam, Netherlands</div>
-          <div class="timeline-project"><a href="https://tmkhang1999.github.io/CARI/" class="link-text">CARI: Coloured Illumination Constancy in Intrinsic Image Decomposition</a></div>
+          <div class="timeline-project"><a href="https://tmkhang1999.github.io/CARI/" class="link-text">Cross-Illumination Albedo Invariance for intrinsic image decomposition</a></div>
           <ul class="timeline-details">
-            <li>Developed Cross-Render Albedo Invariance (CARI), a training strategy that makes the model predict the same material colour for one scene photographed under different lamps.</li>
-            <li>Cut luminance-stability error by <strong>39%</strong> (0.259 &rarr; 0.157 on the Multi-Illumination Dataset) and rendered a synthetic dataset of <strong>5,056</strong> cross-illuminant image pairs with exact ground truth.</li>
-            <li>Came within about 6% of the Marigold diffusion baseline on colour accuracy and beat it on intensity error (MAW), with <strong>about 70&times; fewer</strong> trainable parameters and about 5&times; faster inference.</li>
+            <li>Developed Cross-Illumination Albedo Invariance (CIAI), a training strategy that requires the albedo predicted from two photographs of one scene under different lighting to agree, and the shading to explain the brightness change between them.</li>
+            <li>Cut material-lightness variation across lighting by <strong>39%</strong> (0.259 &rarr; 0.157 on the Multi-Illumination Dataset) in a matched ablation, and lowered albedo error on unseen coloured-light renderings (ARAP) by 7&ndash;14%. Rendered <strong>5,056</strong> coloured-light image pairs with exact albedo for the colour experiments.</li>
+            <li>Showed through follow-up studies why the method does not reach colour stability (the real pairs vary light direction, not colour; the loss sees only brightness) and designed the next model around a separate shading-chroma factor. It trains <strong>about 70&times; fewer</strong> parameters than the diffusion baselines, with about 5&times; faster inference.</li>
             <li>Supervised by <a href="https://staff.fnwi.uva.nl/th.gevers/" class="link-text" target="_blank" rel="noopener">Prof. Theo Gevers</a> and <a href="https://www.linkedin.com/in/sezer-karaoglu-1650a01a/" class="link-text" target="_blank" rel="noopener">Dr. Sezer Karaoglu</a> (UvA), with <a href="https://www.ntnu.edu/employees/s.ali.amirshahi" class="link-text" target="_blank" rel="noopener">Prof. Seyed Ali Amirshahi</a> and Dr. Luis Gomez Robledo (COSI). Submitted July 2026, defended September 2026 at NTNU.</li>
           </ul>
           </div>
