@@ -6,6 +6,12 @@
       "runtimeExecutable": "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3",
       "runtimeArgs": ["-m", "http.server", "4321"],
       "port": 4321
+    },
+    {
+      "name": "ciai-docs",
+      "runtimeExecutable": "/Library/Frameworks/Python.framework/Versions/3.9/bin/python3",
+      "runtimeArgs": ["-m", "http.server", "4322", "--directory", "/Users/khangtran/Documents/Programming/Research/CIAI/docs"],
+      "port": 4322
     }
   ]
 }
